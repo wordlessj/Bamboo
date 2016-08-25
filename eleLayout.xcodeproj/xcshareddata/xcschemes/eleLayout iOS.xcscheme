@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3BCB1B351D6AAE570027E7D8"
-               BuildableName = "eleLayout iOS.framework"
+               BuildableName = "eleLayout.framework"
                BlueprintName = "eleLayout iOS"
                ReferencedContainer = "container:eleLayout.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3BCB1B351D6AAE570027E7D8"
-            BuildableName = "eleLayout iOS.framework"
+            BuildableName = "eleLayout.framework"
             BlueprintName = "eleLayout iOS"
             ReferencedContainer = "container:eleLayout.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3BCB1B351D6AAE570027E7D8"
-            BuildableName = "eleLayout iOS.framework"
+            BuildableName = "eleLayout.framework"
             BlueprintName = "eleLayout iOS"
             ReferencedContainer = "container:eleLayout.xcodeproj">
          </BuildableReference>
