@@ -16,7 +16,7 @@ public protocol EdgeProtocol {
 }
 
 extension EdgeProtocol {
-    public func edge(edge: LayoutEdge) -> CGFloat {
+    public func edge(_ edge: LayoutEdge) -> CGFloat {
         switch edge {
         case .left: return left
         case .right: return right
@@ -25,7 +25,8 @@ extension EdgeProtocol {
         }
     }
 
-    public mutating func setEdge(edge: LayoutEdge, value: CGFloat) -> Self {
+    @discardableResult
+    public mutating func setEdge(_ edge: LayoutEdge, value: CGFloat) -> Self {
         switch edge {
         case .left: left = value
         case .right: right = value

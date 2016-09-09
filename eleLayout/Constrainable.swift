@@ -31,58 +31,65 @@ public protocol Constrainable {
 }
 
 extension Constrainable {
+    @discardableResult
     public func constrainToPin<C: Constrainable>(
         to attribute: NSLayoutAttribute,
         of constrainable: C,
         offset: CGFloat = 0,
-        relation: NSLayoutRelation = .Equal
+        relation: NSLayoutRelation = .equal
     ) -> ItemConstraint<ConstrainableItem> {
         return constrain(attribute.flipped, to: attribute, of: constrainable.constrainableItem,
                          offset: offset, relation: relation)
     }
 
-    public func constrainSize(size: CGSize) -> ItemConstraints<ConstrainableItem> {
-        return itemConstraints(with: [constrainSize(.Width, to: size.width), constrainSize(.Height, to: size.height)])
+    @discardableResult
+    public func constrainSize(_ size: CGSize) -> ItemConstraints<ConstrainableItem> {
+        return itemConstraints(with: [constrainSize(.width, to: size.width), constrainSize(.height, to: size.height)])
     }
 
-    public func constrainSize(attribute: NSLayoutAttribute, to size: CGFloat,
-                              relation: NSLayoutRelation = .Equal) -> ItemConstraint<ConstrainableItem> {
-        return constrain(attribute, to: .NotAnAttribute, of: nil, multiplier: 0, offset: size, relation: relation)
+    @discardableResult
+    public func constrainSize(_ attribute: NSLayoutAttribute, to size: CGFloat,
+                              relation: NSLayoutRelation = .equal) -> ItemConstraint<ConstrainableItem> {
+        return constrain(attribute, to: .notAnAttribute, of: nil, multiplier: 0, offset: size, relation: relation)
     }
 
+    @discardableResult
     public func constrainSize<C: Constrainable>(to constrainable: C) -> ItemConstraints<ConstrainableItem> {
-        return constrain(to: [.Width, .Height], of: constrainable)
+        return constrain(to: [.width, .height], of: constrainable)
     }
 
+    @discardableResult
     public func constrain<C: Constrainable>(to attributes: [NSLayoutAttribute],
                                             of constrainable: C) -> ItemConstraints<ConstrainableItem> {
         return itemConstraints(with: attributes.map { constrain(to: $0, of: constrainable) })
     }
 
+    @discardableResult
     public func constrain<C: Constrainable>(
         to attribute: NSLayoutAttribute,
         of constrainable: C,
         multiplier: CGFloat = 1,
         offset: CGFloat = 0,
-        relation: NSLayoutRelation = .Equal
+        relation: NSLayoutRelation = .equal
     ) -> ItemConstraint<ConstrainableItem> {
         return constrain(attribute, to: attribute, of: constrainable.constrainableItem,
                          multiplier: multiplier, offset: offset, relation: relation)
     }
 
+    @discardableResult
     public func constrain(
-        attribute: NSLayoutAttribute,
+        _ attribute: NSLayoutAttribute,
         to toAttribute: NSLayoutAttribute,
         of item: AnyObject?,
         multiplier: CGFloat = 1,
         offset: CGFloat = 0,
-        relation: NSLayoutRelation = .Equal
+        relation: NSLayoutRelation = .equal
     ) -> ItemConstraint<ConstrainableItem> {
         if let view = self as? View { view.translatesAutoresizingMaskIntoConstraints = false }
         let constraint = NSLayoutConstraint(item: constrainableItem, attribute: attribute, relatedBy: relation,
                                             toItem: item, attribute: toAttribute,
                                             multiplier: multiplier, constant: offset)
-        constraint.active = true
+        constraint.isActive = true
         return ItemConstraint(constrainableItem: constrainableItem,
                               constraint: constraint,
                               allConstraints: allConstraints + [constraint])
@@ -97,73 +104,80 @@ extension Constrainable {
 }
 
 extension Constrainable where ConstrainableItem: View {
+    @discardableResult
     public func constrainToFillSuperview(
-        attribute: NSLayoutAttribute? = nil,
+        _ attribute: NSLayoutAttribute? = nil,
         insets: EdgeInsets = EdgeInsets()
     ) -> ItemConstraints<ConstrainableItem> {
         var constraints = [ItemConstraint<ConstrainableItem>]()
 
-        if attribute != .Left && attribute != .Leading && attribute != .Height {
-            constraints.append(constrainToSuperview(.Trailing, offset: -insets.right))
+        if attribute != .left && attribute != .leading && attribute != .height {
+            constraints.append(constrainToSuperview(.trailing, offset: -insets.right))
         }
-        if attribute != .Right && attribute != .Trailing && attribute != .Height {
-            constraints.append(constrainToSuperview(.Leading, offset: insets.left))
+        if attribute != .right && attribute != .trailing && attribute != .height {
+            constraints.append(constrainToSuperview(.leading, offset: insets.left))
         }
-        if attribute != .Top && attribute != .Width {
-            constraints.append(constrainToSuperview(.Bottom, offset: -insets.bottom))
+        if attribute != .top && attribute != .width {
+            constraints.append(constrainToSuperview(.bottom, offset: -insets.bottom))
         }
-        if attribute != .Bottom && attribute != .Width {
-            constraints.append(constrainToSuperview(.Top, offset: insets.top))
+        if attribute != .bottom && attribute != .width {
+            constraints.append(constrainToSuperview(.top, offset: insets.top))
         }
 
         return itemConstraints(with: constraints)
     }
 
+    @discardableResult
     public func constrainToPosition(
-        attribute: NSLayoutAttribute,
+        _ attribute: NSLayoutAttribute,
         toSuperviewPercent percent: CGFloat,
         offset: CGFloat = 0,
-        relation: NSLayoutRelation = .Equal
+        relation: NSLayoutRelation = .equal
     ) -> ItemConstraint<ConstrainableItem> {
         let toAttribute: NSLayoutAttribute
 
         switch attribute {
-        case .Left, .Right, .Leading, .Trailing, .CenterX: toAttribute = .Right
-        case .Top, .Bottom, .CenterY: toAttribute = .Bottom
+        case .left, .right, .leading, .trailing, .centerX: toAttribute = .right
+        case .top, .bottom, .centerY: toAttribute = .bottom
         default: toAttribute = attribute
         }
 
         return constrain(attribute, toSuperview: toAttribute, multiplier: percent, offset: offset, relation: relation)
     }
 
+    @discardableResult
     public func constrainCenterToSuperview() -> ItemConstraints<ConstrainableItem> {
-        return constrainToSuperview([.CenterX, .CenterY])
+        return constrainToSuperview([.centerX, .centerY])
     }
 
+    @discardableResult
     public func constrainSizeToSuperview() -> ItemConstraints<ConstrainableItem> {
-        return constrainToSuperview([.Width, .Height])
+        return constrainToSuperview([.width, .height])
     }
 
-    public func constrainToSuperview(attributes: [NSLayoutAttribute]) -> ItemConstraints<ConstrainableItem> {
+    @discardableResult
+    public func constrainToSuperview(_ attributes: [NSLayoutAttribute]) -> ItemConstraints<ConstrainableItem> {
         return itemConstraints(with: attributes.map { constrainToSuperview($0) })
     }
 
+    @discardableResult
     public func constrainToSuperview(
-        attribute: NSLayoutAttribute,
+        _ attribute: NSLayoutAttribute,
         multiplier: CGFloat = 1,
         offset: CGFloat = 0,
-        relation: NSLayoutRelation = .Equal
+        relation: NSLayoutRelation = .equal
     ) -> ItemConstraint<ConstrainableItem> {
         return constrain(attribute.removingMargin, toSuperview: attribute,
                          multiplier: multiplier, offset: offset, relation: relation)
     }
 
+    @discardableResult
     public func constrain(
-        attribute: NSLayoutAttribute,
+        _ attribute: NSLayoutAttribute,
         toSuperview toAttribute: NSLayoutAttribute,
         multiplier: CGFloat = 1,
         offset: CGFloat = 0,
-        relation: NSLayoutRelation = .Equal
+        relation: NSLayoutRelation = .equal
     ) -> ItemConstraint<ConstrainableItem> {
         return constrain(attribute, to: toAttribute, of: constrainableItem.superview,
                          multiplier: multiplier, offset: offset, relation: relation)
@@ -177,47 +191,51 @@ extension View: Constrainable {
 
 #if os(iOS)
     extension Constrainable {
+        @discardableResult
         public func constrainToPinToTopLayoutGuide(
             of viewController: UIViewController,
             inset: CGFloat = 0,
-            relation: NSLayoutRelation = .Equal
+            relation: NSLayoutRelation = .equal
         ) -> ItemConstraint<ConstrainableItem> {
-            return constrain(.Top, to: .Bottom, of: viewController.topLayoutGuide, offset: inset, relation: relation)
+            return constrain(.top, to: .bottom, of: viewController.topLayoutGuide, offset: inset, relation: relation)
         }
 
+        @discardableResult
         public func constrainToPinToBottomLayoutGuide(
             of viewController: UIViewController,
             inset: CGFloat = 0,
-            relation: NSLayoutRelation = .Equal
+            relation: NSLayoutRelation = .equal
         ) -> ItemConstraint<ConstrainableItem> {
-            return constrain(.Bottom, to: .Top, of: viewController.bottomLayoutGuide,
+            return constrain(.bottom, to: .top, of: viewController.bottomLayoutGuide,
                              offset: -inset, relation: relation.reversed)
         }
     }
 
     extension Constrainable where ConstrainableItem: View {
-        public func constrainToFillSuperviewMargins(attribute: NSLayoutAttribute? = nil)
+        @discardableResult
+        public func constrainToFillSuperviewMargins(_ attribute: NSLayoutAttribute? = nil)
             -> ItemConstraints<ConstrainableItem> {
             var constraints = [ItemConstraint<ConstrainableItem>]()
 
-            if attribute != .LeftMargin && attribute != .LeadingMargin && attribute != .Height {
-                constraints.append(constrainToSuperview(.TrailingMargin))
+            if attribute != .leftMargin && attribute != .leadingMargin && attribute != .height {
+                constraints.append(constrainToSuperview(.trailingMargin))
             }
-            if attribute != .RightMargin && attribute != .TrailingMargin && attribute != .Height {
-                constraints.append(constrainToSuperview(.LeadingMargin))
+            if attribute != .rightMargin && attribute != .trailingMargin && attribute != .height {
+                constraints.append(constrainToSuperview(.leadingMargin))
             }
-            if attribute != .TopMargin && attribute != .Width {
-                constraints.append(constrainToSuperview(.BottomMargin))
+            if attribute != .topMargin && attribute != .width {
+                constraints.append(constrainToSuperview(.bottomMargin))
             }
-            if attribute != .BottomMargin && attribute != .Width {
-                constraints.append(constrainToSuperview(.TopMargin))
+            if attribute != .bottomMargin && attribute != .width {
+                constraints.append(constrainToSuperview(.topMargin))
             }
             
             return itemConstraints(with: constraints)
         }
 
+        @discardableResult
         public func constrainCenterToSuperviewMargins() -> ItemConstraints<ConstrainableItem> {
-            return constrainToSuperview([.CenterXWithinMargins, .CenterYWithinMargins])
+            return constrainToSuperview([.centerXWithinMargins, .centerYWithinMargins])
         }
     }
 

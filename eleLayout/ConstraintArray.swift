@@ -13,13 +13,15 @@
 #endif
 
 extension Array where Element: NSLayoutConstraint {
+    @discardableResult
     public func activate() -> [Element] {
-        NSLayoutConstraint.activateConstraints(self)
+        NSLayoutConstraint.activate(self)
         return self
     }
 
+    @discardableResult
     public func deactivate() -> [Element] {
-        NSLayoutConstraint.deactivateConstraints(self)
+        NSLayoutConstraint.deactivate(self)
         return self
     }
 }

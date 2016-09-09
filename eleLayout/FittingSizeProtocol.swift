@@ -13,14 +13,17 @@ public protocol FittingSizeProtocol: FrameProtocol {
 }
 
 extension FittingSizeProtocol {
+    @discardableResult
     public func fitSize() -> Self {
         return setSize(fittingSize)
     }
 
+    @discardableResult
     public func fitWidth() -> Self {
         return setWidth(fittingSize.width)
     }
 
+    @discardableResult
     public func fitHeight() -> Self {
         return setHeight(fittingSize.height)
     }

@@ -16,14 +16,14 @@ extension NSLayoutAttribute {
     var removingMargin: NSLayoutAttribute {
         #if os(iOS)
             switch self {
-            case .LeftMargin:           return .Left
-            case .RightMargin:          return .Right
-            case .TopMargin:            return .Top
-            case .BottomMargin:         return .Bottom
-            case .LeadingMargin:        return .Leading
-            case .TrailingMargin:       return .Trailing
-            case .CenterXWithinMargins: return .CenterX
-            case .CenterYWithinMargins: return .CenterY
+            case .leftMargin:           return .left
+            case .rightMargin:          return .right
+            case .topMargin:            return .top
+            case .bottomMargin:         return .bottom
+            case .leadingMargin:        return .leading
+            case .trailingMargin:       return .trailing
+            case .centerXWithinMargins: return .centerX
+            case .centerYWithinMargins: return .centerY
             default:                    return self
             }
         #else
@@ -33,12 +33,12 @@ extension NSLayoutAttribute {
 
     var flipped: NSLayoutAttribute {
         switch self {
-        case .Left:     return .Right
-        case .Right:    return .Left
-        case .Top:      return .Bottom
-        case .Bottom:   return .Top
-        case .Leading:  return .Trailing
-        case .Trailing: return .Leading
+        case .left:     return .right
+        case .right:    return .left
+        case .top:      return .bottom
+        case .bottom:   return .top
+        case .leading:  return .trailing
+        case .trailing: return .leading
         default:        return self
         }
     }
@@ -47,9 +47,9 @@ extension NSLayoutAttribute {
 extension NSLayoutRelation {
     var reversed: NSLayoutRelation {
         switch self {
-        case .LessThanOrEqual: return .GreaterThanOrEqual
-        case .Equal: return .Equal
-        case .GreaterThanOrEqual: return .LessThanOrEqual
+        case .lessThanOrEqual: return .greaterThanOrEqual
+        case .equal: return .equal
+        case .greaterThanOrEqual: return .lessThanOrEqual
         }
     }
 }

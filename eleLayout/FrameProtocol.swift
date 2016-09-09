@@ -39,45 +39,53 @@ extension FrameProtocol {
         set { center.y = newValue - size.height / 2 }
     }
 
-    public func setSize(size: CGSize) -> Self {
+    @discardableResult
+    public func setSize(_ size: CGSize) -> Self {
         self.size = size
         return self
     }
 
-    public func setWidth(width: CGFloat) -> Self {
+    @discardableResult
+    public func setWidth(_ width: CGFloat) -> Self {
         size.width = width
         return self
     }
 
-    public func setHeight(height: CGFloat) -> Self {
+    @discardableResult
+    public func setHeight(_ height: CGFloat) -> Self {
         size.height = height
         return self
     }
 
-    public func setCenter(center: CGPoint) -> Self {
+    @discardableResult
+    public func setCenter(_ center: CGPoint) -> Self {
         self.center = center
         return self
     }
 
-    public func setCenterX(centerX: CGFloat) -> Self {
+    @discardableResult
+    public func setCenterX(_ centerX: CGFloat) -> Self {
         center.x = centerX
         return self
     }
 
-    public func setCenterY(centerY: CGFloat) -> Self {
+    @discardableResult
+    public func setCenterY(_ centerY: CGFloat) -> Self {
         center.y = centerY
         return self
     }
 
-    public func matchWidthToHeight(multiplier multiplier: CGFloat = 1, offset: CGFloat = 0) -> Self {
-        return setWidth(round(multiplier * size.height) + offset)
+    @discardableResult
+    public func matchWidthToHeight(multiplier: CGFloat = 1, offset: CGFloat = 0) -> Self {
+        return setWidth((multiplier * size.height).rounded() + offset)
     }
 
-    public func matchHeightToWidth(multiplier multiplier: CGFloat = 1, offset: CGFloat = 0) -> Self {
-        return setHeight(round(multiplier * size.width) + offset)
+    @discardableResult
+    public func matchHeightToWidth(multiplier: CGFloat = 1, offset: CGFloat = 0) -> Self {
+        return setHeight((multiplier * size.width).rounded() + offset)
     }
 
-    public func axis(axis: LayoutAxis) -> CGFloat {
+    public func axis(_ axis: LayoutAxis) -> CGFloat {
         switch axis {
         case .left: return left
         case .right: return right
@@ -88,7 +96,8 @@ extension FrameProtocol {
         }
     }
 
-    public func setAxis(axis: LayoutAxis, value: CGFloat) -> Self {
+    @discardableResult
+    public func setAxis(_ axis: LayoutAxis, value: CGFloat) -> Self {
         switch axis {
         case .left: left = value
         case .right: right = value

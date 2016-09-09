@@ -20,7 +20,7 @@ extension SuperFrameProtocol {
     public var superSize: CGSize { return superFrame?.size ?? .zero }
     public var superCenter: CGPoint { return CGPoint(x: superSize.width / 2, y: superSize.height / 2) }
 
-    public func superAxis(axis: LayoutAxis, inset: CGFloat = 0) -> CGFloat {
+    public func superAxis(_ axis: LayoutAxis, inset: CGFloat = 0) -> CGFloat {
         switch axis {
         case .left: return inset
         case .right: return superSize.width - inset
@@ -31,11 +31,13 @@ extension SuperFrameProtocol {
         }
     }
 
+    @discardableResult
     public func fillSuper(with insets: EdgeInsets = EdgeInsets()) -> Self {
         return fillSuper(.width, insets: insets).fillSuper(.height, insets: insets)
     }
 
-    public func fillSuper(edge: LayoutEdge, otherSize: CGFloat, insets: EdgeInsets = EdgeInsets()) -> Self {
+    @discardableResult
+    public func fillSuper(_ edge: LayoutEdge, otherSize: CGFloat, insets: EdgeInsets = EdgeInsets()) -> Self {
         switch edge {
         case .left, .right: fillSuper(.height, insets: insets).setWidth(otherSize)
         case .top, .bottom: fillSuper(.width, insets: insets).setHeight(otherSize)
@@ -44,7 +46,8 @@ extension SuperFrameProtocol {
         return pinToSuper(LayoutAxis(edge), inset: insets.edge(edge))
     }
 
-    public func fillSuper(dimension: LayoutDimension, insets: EdgeInsets = EdgeInsets()) -> Self {
+    @discardableResult
+    public func fillSuper(_ dimension: LayoutDimension, insets: EdgeInsets = EdgeInsets()) -> Self {
         switch dimension {
         case .width:
             size.width = superSize.width - insets.left - insets.right
@@ -57,32 +60,39 @@ extension SuperFrameProtocol {
         return self
     }
 
-    public func pinToSuper(axis: LayoutAxis, with selfAxis: LayoutAxis? = nil, inset: CGFloat = 0) -> Self {
+    @discardableResult
+    public func pinToSuper(_ axis: LayoutAxis, with selfAxis: LayoutAxis? = nil, inset: CGFloat = 0) -> Self {
         return setAxis(selfAxis ?? axis, value: superAxis(axis, inset: inset))
     }
 
+    @discardableResult
     public func centerInSuper() -> Self {
         return setCenter(superCenter)
     }
 
-    public func centerInSuperX(offset offset: CGFloat = 0) -> Self {
+    @discardableResult
+    public func centerInSuperX(offset: CGFloat = 0) -> Self {
         return setCenterX(superCenter.x + offset)
     }
 
-    public func centerInSuperY(offset offset: CGFloat = 0) -> Self {
+    @discardableResult
+    public func centerInSuperY(offset: CGFloat = 0) -> Self {
         return setCenterY(superCenter.y + offset)
     }
 
-    public func matchToSuper(multiplier multiplier: CGFloat = 1) -> Self {
+    @discardableResult
+    public func matchToSuper(multiplier: CGFloat = 1) -> Self {
         return matchToSuperWidth(multiplier: multiplier).matchToSuperHeight(multiplier: multiplier)
     }
 
-    public func matchToSuperWidth(multiplier multiplier: CGFloat = 1) -> Self {
-        return setWidth(round(multiplier * superSize.width))
+    @discardableResult
+    public func matchToSuperWidth(multiplier: CGFloat = 1) -> Self {
+        return setWidth((multiplier * superSize.width).rounded())
     }
 
-    public func matchToSuperHeight(multiplier multiplier: CGFloat = 1) -> Self {
-        return setHeight(round(multiplier * superSize.height))
+    @discardableResult
+    public func matchToSuperHeight(multiplier: CGFloat = 1) -> Self {
+        return setHeight((multiplier * superSize.height).rounded())
     }
 }
 
