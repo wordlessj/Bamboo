@@ -32,7 +32,7 @@ extension SuperFrameProtocol {
     }
 
     @discardableResult
-    public func fillSuper(with insets: EdgeInsets = EdgeInsets()) -> Self {
+    public func fillSuper(insets: EdgeInsets = EdgeInsets()) -> Self {
         return fillSuper(.width, insets: insets).fillSuper(.height, insets: insets)
     }
 
@@ -81,17 +81,17 @@ extension SuperFrameProtocol {
     }
 
     @discardableResult
-    public func matchToSuper(multiplier: CGFloat = 1) -> Self {
-        return matchToSuperWidth(multiplier: multiplier).matchToSuperHeight(multiplier: multiplier)
+    public func sizeToSuper(multiplier: CGFloat = 1) -> Self {
+        return sizeToSuperWidth(multiplier: multiplier).sizeToSuperHeight(multiplier: multiplier)
     }
 
     @discardableResult
-    public func matchToSuperWidth(multiplier: CGFloat = 1) -> Self {
+    public func sizeToSuperWidth(multiplier: CGFloat = 1) -> Self {
         return setWidth((multiplier * superSize.width).rounded())
     }
 
     @discardableResult
-    public func matchToSuperHeight(multiplier: CGFloat = 1) -> Self {
+    public func sizeToSuperHeight(multiplier: CGFloat = 1) -> Self {
         return setHeight((multiplier * superSize.height).rounded())
     }
 }

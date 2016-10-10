@@ -76,13 +76,13 @@ extension FrameProtocol {
     }
 
     @discardableResult
-    public func matchWidthToHeight(multiplier: CGFloat = 1, offset: CGFloat = 0) -> Self {
-        return setWidth((multiplier * size.height).rounded() + offset)
+    public func sizeToSelf(widthToHeightRatio: CGFloat, offset: CGFloat = 0) -> Self {
+        return sizeToSelf(heightToWidthRatio: 1 / widthToHeightRatio, offset: -offset)
     }
 
     @discardableResult
-    public func matchHeightToWidth(multiplier: CGFloat = 1, offset: CGFloat = 0) -> Self {
-        return setHeight((multiplier * size.width).rounded() + offset)
+    public func sizeToSelf(heightToWidthRatio: CGFloat = 1, offset: CGFloat = 0) -> Self {
+        return setHeight((heightToWidthRatio * size.width).rounded() + offset)
     }
 
     public func axis(_ axis: LayoutAxis) -> CGFloat {

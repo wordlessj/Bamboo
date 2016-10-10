@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B79F72C1DA7AB41004FD44B /* Constrainables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B79F72B1DA7AB41004FD44B /* Constrainables.swift */; };
+		3B79F72D1DA7AB41004FD44B /* Constrainables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B79F72B1DA7AB41004FD44B /* Constrainables.swift */; };
 		3BCB1B631D6AB22E0027E7D8 /* eleLayout Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BCB1B621D6AB22E0027E7D8 /* eleLayout Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3BCB1B691D6AB3630027E7D8 /* Constrainable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCB1B681D6AB3630027E7D8 /* Constrainable.swift */; };
 		3BCB1B6A1D6AB3630027E7D8 /* Constrainable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCB1B681D6AB3630027E7D8 /* Constrainable.swift */; };
@@ -30,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B79F72B1DA7AB41004FD44B /* Constrainables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constrainables.swift; sourceTree = "<group>"; };
 		3BCB1B361D6AAE570027E7D8 /* eleLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = eleLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BCB1B391D6AAE570027E7D8 /* eleLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = eleLayout.h; sourceTree = "<group>"; };
 		3BCB1B3B1D6AAE570027E7D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -108,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				3BCB1B681D6AB3630027E7D8 /* Constrainable.swift */,
+				3B79F72B1DA7AB41004FD44B /* Constrainables.swift */,
 				3BCB1B6C1D6AE4A20027E7D8 /* ConstraintArray.swift */,
 				3BCB1B6F1D6AE5350027E7D8 /* Helper.swift */,
 			);
@@ -247,6 +251,7 @@
 				3BCB1B7E1D6AEA3B0027E7D8 /* SuperFrameProtocol.swift in Sources */,
 				3BCB1B841D6AEC690027E7D8 /* FittingSizeProtocol.swift in Sources */,
 				3BCB1B811D6AEAD20027E7D8 /* Types.swift in Sources */,
+				3B79F72C1DA7AB41004FD44B /* Constrainables.swift in Sources */,
 				3BCB1B751D6AE77D0027E7D8 /* LayoutAttributes.swift in Sources */,
 				3BCB1B701D6AE5350027E7D8 /* Helper.swift in Sources */,
 				3BCB1B781D6AE86A0027E7D8 /* EdgeProtocol.swift in Sources */,
@@ -263,6 +268,7 @@
 				3BCB1B7F1D6AEA3B0027E7D8 /* SuperFrameProtocol.swift in Sources */,
 				3BCB1B851D6AEC690027E7D8 /* FittingSizeProtocol.swift in Sources */,
 				3BCB1B821D6AEAD20027E7D8 /* Types.swift in Sources */,
+				3B79F72D1DA7AB41004FD44B /* Constrainables.swift in Sources */,
 				3BCB1B761D6AE77D0027E7D8 /* LayoutAttributes.swift in Sources */,
 				3BCB1B711D6AE5350027E7D8 /* Helper.swift in Sources */,
 				3BCB1B791D6AE86A0027E7D8 /* EdgeProtocol.swift in Sources */,
