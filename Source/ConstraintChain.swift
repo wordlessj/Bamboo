@@ -1,5 +1,5 @@
 //
-//  Chain.swift
+//  ConstraintChain.swift
 //  Bamboo
 //
 //  Created by Javier on 8/22/16.
