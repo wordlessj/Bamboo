@@ -85,7 +85,7 @@ extension ConstraintChain {
         let constraintOne: ConstraintOne<Item>
 
         if let parameter = expression?.constraintParameter {
-            if (attribute == .width || attribute == .height) && parameter.item == nil {
+            if (attribute == .width || attribute == .height) && parameter.item == nil && parameter.attribute == nil {
                 constraintOne = raw(attribute,
                                     to: nil,
                                     attribute: .notAnAttribute,
