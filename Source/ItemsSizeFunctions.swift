@@ -8,34 +8,34 @@
 
 import Foundation
 
-extension ConstraintItemsChain {
+extension ItemsConstraintChain {
     @discardableResult
-    public func width(_ w: CGFloat) -> ConstraintItemsMany<Item> {
+    public func width(_ w: CGFloat) -> ItemsChain<Item> {
         return each { $0.constrain.width(w) }
     }
 
     @discardableResult
-    public func height(_ h: CGFloat) -> ConstraintItemsMany<Item> {
+    public func height(_ h: CGFloat) -> ItemsChain<Item> {
         return each { $0.constrain.height(h) }
     }
 
     @discardableResult
-    public func size() -> ConstraintItemsMany<Item> {
-        return constraintItemsMany(width().constraints + height().constraints)
+    public func size() -> ItemsChain<Item> {
+        return merge([width(), height()])
     }
 
     @discardableResult
-    public func size(_ s: CGFloat) -> ConstraintItemsMany<Item> {
+    public func size(_ s: CGFloat) -> ItemsChain<Item> {
         return size(width: s, height: s)
     }
 
     @discardableResult
-    public func size(_ cgSize: CGSize) -> ConstraintItemsMany<Item> {
+    public func size(_ cgSize: CGSize) -> ItemsChain<Item> {
         return size(width: cgSize.width, height: cgSize.height)
     }
 
     @discardableResult
-    public func size(width w: CGFloat, height h: CGFloat) -> ConstraintItemsMany<Item> {
-        return each { $0.constrain.size(width: w, height: h).constraints }
+    public func size(width w: CGFloat, height h: CGFloat) -> ItemsChain<Item> {
+        return each { $0.constrain.size(width: w, height: h) }
     }
 }

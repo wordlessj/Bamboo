@@ -10,36 +10,34 @@ import Foundation
 
 extension ConstraintChain {
     @discardableResult
-    public func center(_ expression: ConstraintExpression? = nil) -> ConstraintMany<Item> {
-        return constraintMany([centerX(expression), centerY(expression)])
+    public func center() -> MultipleChain<Item> {
+        return center(BasicParameter<View>())
     }
 
     @discardableResult
-    public func size(_ expression: ConstraintExpression? = nil) -> ConstraintMany<Item> {
-        return constraintMany([width(expression), height(expression)])
+    public func center<Expression: ParameterExpression>(_ expression: Expression) -> MultipleChain<Item>
+        where Expression.Parameter.Item: XAxisItem & YAxisItem, Expression.Parameter: BasicParameterProtocol {
+            return merge([centerX(expression), centerY(expression)])
     }
 
     @discardableResult
-    public func size(_ cgSize: CGSize) -> ConstraintMany<Item> {
+    public func size() -> MultipleChain<Item> {
+        return size(BasicParameter<View>(item: item.superview!))
+    }
+
+    @discardableResult
+    public func size<Expression: ParameterExpression>(_ expression: Expression) -> MultipleChain<Item>
+        where Expression.Parameter.Item: DimensionItem {
+            return merge([width(expression), height(expression)])
+    }
+
+    @discardableResult
+    public func size(_ cgSize: CGSize) -> MultipleChain<Item> {
         return size(width: cgSize.width, height: cgSize.height)
     }
 
     @discardableResult
-    public func size(width w: CGFloat, height h: CGFloat) -> ConstraintMany<Item> {
-        return constraintMany([width(w), height(h)])
-    }
-
-    func constraintMany(_ array: [ConstraintOne<Item>]) -> ConstraintMany<Item> {
-        let constraints = array.map { $0.constraint }
-        return ConstraintMany(item: item, constraints: constraints, allConstraints: allConstraints + constraints)
+    public func size(width w: CGFloat, height h: CGFloat) -> MultipleChain<Item> {
+        return merge([width(w), height(h)])
     }
 }
-
-#if os(iOS)
-    extension ConstraintChain {
-        @discardableResult
-        public func centerWithinMargins(_ expression: ConstraintExpression? = nil) -> ConstraintMany<Item> {
-            return constraintMany([centerXWithinMargins(expression), centerYWithinMargins(expression)])
-        }
-    }
-#endif

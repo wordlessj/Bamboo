@@ -13,8 +13,6 @@
 		3B8054831DC1AB0100815533 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8054811DC1AB0100815533 /* Expression.swift */; };
 		3B8054851DC1CCFB00815533 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8054841DC1CCFB00815533 /* Operators.swift */; };
 		3B8054861DC1CCFB00815533 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8054841DC1CCFB00815533 /* Operators.swift */; };
-		3B8054881DC1D04A00815533 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8054871DC1D04A00815533 /* Attributes.swift */; };
-		3B8054891DC1D04A00815533 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8054871DC1D04A00815533 /* Attributes.swift */; };
 		3B80548B1DC1D55600815533 /* AttributeFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B80548A1DC1D55600815533 /* AttributeFunctions.swift */; };
 		3B80548C1DC1D55600815533 /* AttributeFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B80548A1DC1D55600815533 /* AttributeFunctions.swift */; };
 		3B80548E1DC1E21C00815533 /* FillFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B80548D1DC1E21C00815533 /* FillFunctions.swift */; };
@@ -41,7 +39,6 @@
 		3BE4C4701DF6973B00A04F82 /* LayoutSuper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4C46D1DF692AE00A04F82 /* LayoutSuper.swift */; };
 		3BE4C4721DF6A35E00A04F82 /* LayoutAround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4C4711DF6A35E00A04F82 /* LayoutAround.swift */; };
 		3BE4C4731DF6A35E00A04F82 /* LayoutAround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE4C4711DF6A35E00A04F82 /* LayoutAround.swift */; };
-		3BEDF70C1DC3355A003AC731 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEDF70B1DC3355A003AC731 /* ViewController.swift */; };
 		3BEDF70E1DC3406B003AC731 /* AroundFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEDF70D1DC3406B003AC731 /* AroundFunctions.swift */; };
 		3BEDF70F1DC3406B003AC731 /* AroundFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEDF70D1DC3406B003AC731 /* AroundFunctions.swift */; };
 		3BEDF7141DC35639003AC731 /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEDF7131DC35639003AC731 /* ConstraintItem.swift */; };
@@ -62,7 +59,6 @@
 		3B79F72B1DA7AB41004FD44B /* ItemsChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsChain.swift; sourceTree = "<group>"; };
 		3B8054811DC1AB0100815533 /* Expression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
 		3B8054841DC1CCFB00815533 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
-		3B8054871DC1D04A00815533 /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
 		3B80548A1DC1D55600815533 /* AttributeFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributeFunctions.swift; sourceTree = "<group>"; };
 		3B80548D1DC1E21C00815533 /* FillFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillFunctions.swift; sourceTree = "<group>"; };
 		3B8054901DC2465000815533 /* CompoundFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompoundFunctions.swift; sourceTree = "<group>"; };
@@ -79,7 +75,6 @@
 		3BE4C46A1DF691E200A04F82 /* LayoutFill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutFill.swift; sourceTree = "<group>"; };
 		3BE4C46D1DF692AE00A04F82 /* LayoutSuper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutSuper.swift; sourceTree = "<group>"; };
 		3BE4C4711DF6A35E00A04F82 /* LayoutAround.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutAround.swift; sourceTree = "<group>"; };
-		3BEDF70B1DC3355A003AC731 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3BEDF70D1DC3406B003AC731 /* AroundFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AroundFunctions.swift; sourceTree = "<group>"; };
 		3BEDF7131DC35639003AC731 /* ConstraintItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintItem.swift; sourceTree = "<group>"; };
 		3BEDF7161DC3586B003AC731 /* EdgeInsetsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeInsetsExtensions.swift; sourceTree = "<group>"; };
@@ -194,8 +189,6 @@
 			isa = PBXGroup;
 			children = (
 				3BEDF7131DC35639003AC731 /* ConstraintItem.swift */,
-				3B8054871DC1D04A00815533 /* Attributes.swift */,
-				3BEDF70B1DC3355A003AC731 /* ViewController.swift */,
 			);
 			name = Attributes;
 			sourceTree = "<group>";
@@ -285,7 +278,7 @@
 		3BCB1B2D1D6AAE570027E7D8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Javier;
 				TargetAttributes = {
 					3BCB1B351D6AAE570027E7D8 = {
@@ -354,10 +347,8 @@
 				3BEDF7221DC397D0003AC731 /* ItemsAttributeFunctions.swift in Sources */,
 				3B8054851DC1CCFB00815533 /* Operators.swift in Sources */,
 				3BEDF7251DC3A114003AC731 /* ItemsSizeFunctions.swift in Sources */,
-				3BEDF70C1DC3355A003AC731 /* ViewController.swift in Sources */,
 				3BEDF7281DC3A9A2003AC731 /* ItemsDistributeFunctions.swift in Sources */,
 				3B79F72C1DA7AB41004FD44B /* ItemsChain.swift in Sources */,
-				3B8054881DC1D04A00815533 /* Attributes.swift in Sources */,
 				3B8054821DC1AB0100815533 /* Expression.swift in Sources */,
 				3BEDF7171DC3586B003AC731 /* EdgeInsetsExtensions.swift in Sources */,
 				3BCB1B7B1D6AE8D10027E7D8 /* LayoutItem.swift in Sources */,
@@ -385,7 +376,6 @@
 				3BEDF7151DC35639003AC731 /* ConstraintItem.swift in Sources */,
 				3B8054861DC1CCFB00815533 /* Operators.swift in Sources */,
 				3B79F72D1DA7AB41004FD44B /* ItemsChain.swift in Sources */,
-				3B8054891DC1D04A00815533 /* Attributes.swift in Sources */,
 				3BEDF7201DC39586003AC731 /* ItemsFunctions.swift in Sources */,
 				3BEDF70F1DC3406B003AC731 /* AroundFunctions.swift in Sources */,
 				3B8054831DC1AB0100815533 /* Expression.swift in Sources */,
@@ -406,14 +396,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -437,7 +433,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -457,14 +454,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -482,7 +485,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -546,12 +550,12 @@
 				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wordlessj.Bamboo;
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -569,11 +573,11 @@
 				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wordlessj.Bamboo;
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -6,11 +6,7 @@
 //  Copyright © 2016 Javier. All rights reserved.
 //
 
-#if os(iOS)
-    import UIKit
-#else
-    import AppKit
-#endif
+import Foundation
 
 public protocol LayoutItem: class {
     var bounds: CGRect { get set }

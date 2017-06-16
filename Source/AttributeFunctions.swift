@@ -6,168 +6,231 @@
 //  Copyright © 2016 Javier. All rights reserved.
 //
 
-#if os(iOS)
-    import UIKit
-#else
-    import AppKit
-#endif
+import Foundation
 
 extension ConstraintChain {
     @discardableResult
-    public func left(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-        return raw(.left, expression: expression)
+    public func left() -> NextChain {
+        return left(BasicParameter<View>())
     }
 
     @discardableResult
-    public func right(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-        return raw(.right, expression: expression)
+    public func left<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
+        where Expression.Parameter.Item: XAxisItem, Expression.Parameter: BasicParameterProtocol {
+            return solve(expression) { $0.leftAnchor }
     }
 
     @discardableResult
-    public func top(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-        return raw(.top, expression: expression)
+    public func right() -> NextChain {
+        return right(BasicParameter<View>())
     }
 
     @discardableResult
-    public func bottom(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-        return raw(.bottom, expression: expression)
+    public func right<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
+        where Expression.Parameter.Item: XAxisItem, Expression.Parameter: BasicParameterProtocol {
+            return solve(expression) { $0.rightAnchor }
     }
 
     @discardableResult
-    public func leading(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-        return raw(.leading, expression: expression)
+    public func top() -> NextChain {
+        return top(BasicParameter<View>())
     }
 
     @discardableResult
-    public func trailing(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-        return raw(.trailing, expression: expression)
+    public func top<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
+        where Expression.Parameter.Item: YAxisItem, Expression.Parameter: BasicParameterProtocol {
+            return solve(expression) { $0.topAnchor }
     }
 
     @discardableResult
-    public func width(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-        return raw(.width, expression: expression)
+    public func bottom() -> NextChain {
+        return bottom(BasicParameter<View>())
     }
 
     @discardableResult
-    public func height(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-        return raw(.height, expression: expression)
+    public func bottom<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
+        where Expression.Parameter.Item: YAxisItem, Expression.Parameter: BasicParameterProtocol {
+            return solve(expression) { $0.bottomAnchor }
     }
 
     @discardableResult
-    public func centerX(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-        return raw(.centerX, expression: expression)
+    public func leading() -> NextChain {
+        return leading(BasicParameter<View>())
     }
 
     @discardableResult
-    public func centerY(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-        return raw(.centerY, expression: expression)
+    public func leading<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
+        where Expression.Parameter.Item: XAxisItem, Expression.Parameter: BasicParameterProtocol {
+            return solve(expression) { $0.leadingAnchor }
     }
 
     @discardableResult
-    public func lastBaseline(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-        return raw(.lastBaseline, expression: expression)
+    public func trailing() -> NextChain {
+        return trailing(BasicParameter<View>())
     }
 
     @discardableResult
-    public func firstBaseline(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-        return raw(.firstBaseline, expression: expression)
+    public func trailing<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
+        where Expression.Parameter.Item: XAxisItem, Expression.Parameter: BasicParameterProtocol {
+            return solve(expression) { $0.trailingAnchor }
     }
 
     @discardableResult
-    public func aspectRatio(_ ratio: CGFloat = 1) -> ConstraintOne<Item> {
-        return width(ratio * height)
+    public func width() -> NextChain {
+        return width(BasicParameter<View>(item: item.superview!))
     }
 
-    fileprivate func raw(
-        _ attribute: NSLayoutAttribute,
-        expression: ConstraintExpression?
-    ) -> ConstraintOne<Item> {
-        let constraintOne: ConstraintOne<Item>
+    @discardableResult
+    public func width<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
+        where Expression.Parameter.Item: DimensionItem {
+            return solve(expression) { $0.widthAnchor }
+    }
 
-        if let parameter = expression?.constraintParameter {
-            if (attribute == .width || attribute == .height) && parameter.item == nil && parameter.attribute == nil {
-                constraintOne = raw(attribute,
-                                    to: nil,
-                                    attribute: .notAnAttribute,
-                                    multiplier: 1,
-                                    constant: parameter.constant,
-                                    relation: parameter.relation,
-                                    priority: parameter.priority)
+    @discardableResult
+    public func height() -> NextChain {
+        return height(BasicParameter<View>(item: item.superview!))
+    }
+
+    @discardableResult
+    public func height<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
+        where Expression.Parameter.Item: DimensionItem {
+            return solve(expression) { $0.heightAnchor }
+    }
+
+    @discardableResult
+    public func centerX() -> NextChain {
+        return centerX(BasicParameter<View>())
+    }
+
+    @discardableResult
+    public func centerX<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
+        where Expression.Parameter.Item: XAxisItem, Expression.Parameter: BasicParameterProtocol {
+            return solve(expression) { $0.centerXAnchor }
+    }
+
+    @discardableResult
+    public func centerY() -> NextChain {
+        return centerY(BasicParameter<View>())
+    }
+
+    @discardableResult
+    public func centerY<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
+        where Expression.Parameter.Item: YAxisItem, Expression.Parameter: BasicParameterProtocol {
+            return solve(expression) { $0.centerYAnchor }
+    }
+
+    @discardableResult
+    public func firstBaseline() -> NextChain {
+        return firstBaseline(BasicParameter<View>())
+    }
+
+    @discardableResult
+    public func firstBaseline<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
+        where Expression.Parameter.Item: YAxisItem, Expression.Parameter: BasicParameterProtocol {
+            return solve(expression) { $0.firstBaselineAnchor }
+    }
+
+    @discardableResult
+    public func lastBaseline() -> NextChain {
+        return lastBaseline(BasicParameter<View>())
+    }
+
+    @discardableResult
+    public func lastBaseline<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
+        where Expression.Parameter.Item: YAxisItem, Expression.Parameter: BasicParameterProtocol {
+            return solve(expression) { $0.lastBaselineAnchor }
+    }
+
+    @discardableResult
+    public func aspectRatio(_ ratio: CGFloat = 1) -> NextChain {
+        return width(ratio * item.heightAnchor)
+    }
+
+    private func solve<Expression: ParameterExpression, AnchorType>(
+        _ expression: Expression,
+        anchorOf: (ConstraintItem) -> NSLayoutAnchor<AnchorType>
+    ) -> NextChain {
+        let parameter = expression.constraintParameter
+        let anchor = anchorOf(item)
+        let toAnchor: NSLayoutAnchor<AnchorType>?
+
+        if let anchor = parameter.item as? NSLayoutAnchor<AnchorType> {
+            toAnchor = anchor
+        } else if let parameterItem = parameter.item as? ConstraintItem? {
+            if anchor is NSLayoutDimension && parameterItem == nil {
+                toAnchor = nil
             } else {
-                constraintOne = raw(attribute,
-                                    to: parameter.item ?? item.superview,
-                                    attribute: parameter.attribute ?? attribute,
-                                    multiplier: parameter.multiplier,
-                                    constant: parameter.constant,
-                                    relation: parameter.relation,
-                                    priority: parameter.priority)
+                let toItem = parameterItem ?? item.superview!
+                toAnchor = anchorOf(toItem)
             }
         } else {
-            constraintOne = raw(attribute, to: item.superview, attribute: attribute)
+            fatalError("Unsupported expression item.")
         }
 
-        return constraintOne
+        let c = constraint(anchor, to: toAnchor, parameter: parameter)
+        activate(c, priority: parameter.priority)
+        return nextChain(c)
     }
 
-    private func raw(
-        _ attribute: NSLayoutAttribute,
-        to toItem: AnyObject?,
-        attribute toAttribute: NSLayoutAttribute,
-        multiplier: CGFloat = 1,
-        constant: CGFloat = 0,
-        relation: NSLayoutRelation = .equal,
-        priority: UILayoutPriority = UILayoutPriorityRequired
-    ) -> ConstraintOne<Item> {
+    private func constraint<AnchorType, Parameter: ParameterProtocol>(
+        _ anchor: NSLayoutAnchor<AnchorType>,
+        to toAnchor: NSLayoutAnchor<AnchorType>?,
+        parameter: Parameter
+    ) -> NSLayoutConstraint {
+        let constant = parameter.constant
+        let constraint: NSLayoutConstraint
+
+        if let anchor = anchor as? NSLayoutDimension, let toAnchor = toAnchor as? NSLayoutDimension? {
+            if let toAnchor = toAnchor {
+                let multiplier: CGFloat
+
+                if let parameter = parameter as? MultiplierParameter<Parameter.Item> {
+                    multiplier = parameter.multiplier
+                } else {
+                    multiplier = 1
+                }
+
+                switch parameter.relation {
+                case .equal:
+                    constraint = anchor.constraint(equalTo: toAnchor, multiplier: multiplier, constant: constant)
+                case .greaterThanOrEqual:
+                    constraint = anchor.constraint(greaterThanOrEqualTo: toAnchor,
+                                                   multiplier: multiplier,
+                                                   constant: constant)
+                case .lessThanOrEqual:
+                    constraint = anchor.constraint(lessThanOrEqualTo: toAnchor,
+                                                   multiplier: multiplier,
+                                                   constant: constant)
+                }
+            } else {
+                switch parameter.relation {
+                case .equal:
+                    constraint = anchor.constraint(equalToConstant: constant)
+                case .greaterThanOrEqual:
+                    constraint = anchor.constraint(greaterThanOrEqualToConstant: constant)
+                case .lessThanOrEqual:
+                    constraint = anchor.constraint(lessThanOrEqualToConstant: constant)
+                }
+            }
+        } else if let toAnchor = toAnchor {
+            switch parameter.relation {
+            case .equal:
+                constraint = anchor.constraint(equalTo: toAnchor, constant: constant)
+            case .greaterThanOrEqual:
+                constraint = anchor.constraint(greaterThanOrEqualTo: toAnchor, constant: constant)
+            case .lessThanOrEqual:
+                constraint = anchor.constraint(lessThanOrEqualTo: toAnchor, constant: constant)
+            }
+        } else {
+            fatalError("Axis anchor without second anchor.")
+        }
+
+        return constraint
+    }
+
+    private func activate(_ constraint: NSLayoutConstraint, priority: LayoutPriority) {
         if let view = item as? View { view.translatesAutoresizingMaskIntoConstraints = false }
-        let constraint = NSLayoutConstraint(item: item, attribute: attribute, relatedBy: relation,
-                                            toItem: toItem, attribute: toAttribute,
-                                            multiplier: multiplier, constant: constant)
         constraint.priority = priority
         constraint.isActive = true
-        return ConstraintOne(item: item, constraint: constraint, allConstraints: allConstraints + [constraint])
     }
 }
-
-#if os(iOS)
-    extension ConstraintChain {
-        @discardableResult
-        public func leftMargin(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-            return raw(.leftMargin, expression: expression)
-        }
-
-        @discardableResult
-        public func rightMargin(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-            return raw(.rightMargin, expression: expression)
-        }
-
-        @discardableResult
-        public func topMargin(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-            return raw(.topMargin, expression: expression)
-        }
-
-        @discardableResult
-        public func bottomMargin(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-            return raw(.bottomMargin, expression: expression)
-        }
-
-        @discardableResult
-        public func leadingMargin(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-            return raw(.leadingMargin, expression: expression)
-        }
-
-        @discardableResult
-        public func trailingMargin(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-            return raw(.trailingMargin, expression: expression)
-        }
-
-        @discardableResult
-        public func centerXWithinMargins(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-            return raw(.centerXWithinMargins, expression: expression)
-        }
-
-        @discardableResult
-        public func centerYWithinMargins(_ expression: ConstraintExpression? = nil) -> ConstraintOne<Item> {
-            return raw(.centerYWithinMargins, expression: expression)
-        }
-    }
-#endif

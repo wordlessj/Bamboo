@@ -6,34 +6,37 @@
 //  Copyright © 2016 Javier. All rights reserved.
 //
 
-#if os(iOS)
-    import UIKit
-#else
-    import AppKit
-#endif
+import Foundation
 
 extension ConstraintChain {
     @discardableResult
-    public func before(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> ConstraintOne<Item> {
-        let parameter = ConstraintParameter(item: item, attribute: .left)
-        return right(parameter - spacing)
+    public func before(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> NextChain {
+        let p = parameter(item) { $0.leftAnchor }
+        return right(p - spacing)
     }
 
     @discardableResult
-    public func after(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> ConstraintOne<Item> {
-        let parameter = ConstraintParameter(item: item, attribute: .right)
-        return left(parameter + spacing)
+    public func after(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> NextChain {
+        let p = parameter(item) { $0.rightAnchor }
+        return left(p + spacing)
     }
 
     @discardableResult
-    public func above(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> ConstraintOne<Item> {
-        let parameter = ConstraintParameter(item: item, attribute: .top)
-        return bottom(parameter - spacing)
+    public func above(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> NextChain {
+        let p = parameter(item) { $0.topAnchor }
+        return bottom(p - spacing)
     }
 
     @discardableResult
-    public func below(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> ConstraintOne<Item> {
-        let parameter = ConstraintParameter(item: item, attribute: .bottom)
-        return top(parameter + spacing)
+    public func below(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> NextChain {
+        let p = parameter(item) { $0.bottomAnchor }
+        return top(p + spacing)
+    }
+
+    private func parameter<Anchor>(
+        _ parameterItem: ConstraintItem?,
+        anchorOf: (ConstraintItem) -> Anchor
+    ) -> BasicParameter<Anchor> {
+        return BasicParameter(item: anchorOf(parameterItem ?? item.superview!))
     }
 }

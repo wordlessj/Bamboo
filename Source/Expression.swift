@@ -6,71 +6,137 @@
 //  Copyright © 2016 Javier. All rights reserved.
 //
 
-#if os(iOS)
-    import UIKit
-#else
-    import AppKit
-#endif
+import Foundation
 
-public struct ConstraintParameter {
-    var item: AnyObject?
-    var attribute: NSLayoutAttribute?
-    var multiplier: CGFloat = 1
-    var constant: CGFloat = 0
-    var relation: NSLayoutRelation = .equal
-    var priority: UILayoutPriority = UILayoutPriorityRequired
+public protocol XAxisItem {}
+public protocol YAxisItem {}
+public protocol DimensionItem {}
 
-    init(constant: CGFloat) { self.constant = constant }
+extension NSLayoutXAxisAnchor: XAxisItem {}
+extension NSLayoutYAxisAnchor: YAxisItem {}
+extension NSLayoutDimension: DimensionItem {}
 
-    init(item: AnyObject?, attribute: NSLayoutAttribute? = nil) {
-        self.item = item
-        self.attribute = attribute
-    }
+public protocol ParameterProtocol {
+    associatedtype Item
+    var item: Item? { get set }
+    var constant: CGFloat { get set }
+    var relation: NSLayoutRelation { get set }
+    var priority: LayoutPriority { get set }
 
-    func modified(_ modify: (inout ConstraintParameter) -> ()) -> ConstraintParameter {
+    func multiplied(_ multiplier: CGFloat) -> MultiplierParameter<Item>
+}
+
+extension ParameterProtocol {
+    func modified(_ modify: (inout Self) -> ()) -> Self {
         var parameter = self
         modify(&parameter)
         return parameter
     }
 }
 
-public protocol ConstraintExpression {
-    var constraintParameter: ConstraintParameter { get }
-}
+public protocol BasicParameterProtocol: ParameterProtocol {}
 
-extension ConstraintParameter: ConstraintExpression {
-    public var constraintParameter: ConstraintParameter { return self }
-}
+public struct BasicParameter<Item>: BasicParameterProtocol {
+    public var item: Item?
+    public var constant: CGFloat = 0
+    public var relation: NSLayoutRelation = .equal
+    public var priority: LayoutPriority = LayoutPriorityRequired
 
-extension Int: ConstraintExpression {
-    public var constraintParameter: ConstraintParameter {
-        return ConstraintParameter(constant: CGFloat(self))
+    init() {}
+    init(item: Item?) { self.item = item }
+    init(constant: CGFloat) { self.constant = constant }
+
+    public func multiplied(_ multiplier: CGFloat) -> MultiplierParameter<Item> {
+        return MultiplierParameter(self, multiplier: multiplier)
     }
 }
 
-extension Double: ConstraintExpression {
-    public var constraintParameter: ConstraintParameter {
-        return ConstraintParameter(constant: CGFloat(self))
+public protocol MultiplierParameterProtocol: ParameterProtocol {
+    var multiplier: CGFloat { get set }
+}
+
+public struct MultiplierParameter<Item>: MultiplierParameterProtocol {
+    public var item: Item?
+    public var constant: CGFloat = 0
+    public var relation: NSLayoutRelation = .equal
+    public var priority: LayoutPriority = LayoutPriorityRequired
+    public var multiplier: CGFloat = 1
+
+    init(_ parameter: BasicParameter<Item>, multiplier: CGFloat) {
+        item = parameter.item
+        constant = parameter.constant
+        relation = parameter.relation
+        priority = parameter.priority
+        self.multiplier = multiplier
+    }
+
+    public func multiplied(_ multiplier: CGFloat) -> MultiplierParameter<Item> {
+        return modified {
+            $0.multiplier *= multiplier
+            $0.constant *= multiplier
+        }
     }
 }
 
-extension CGFloat: ConstraintExpression {
-    public var constraintParameter: ConstraintParameter {
-        return ConstraintParameter(constant: self)
+public protocol ParameterExpression {
+    associatedtype Parameter: ParameterProtocol
+    var constraintParameter: Parameter { get }
+}
+
+extension BasicParameter: ParameterExpression {
+    public var constraintParameter: BasicParameter { return self }
+}
+
+extension MultiplierParameter: ParameterExpression {
+    public var constraintParameter: MultiplierParameter { return self }
+}
+
+extension Int: ParameterExpression {
+    public var constraintParameter: BasicParameter<View> {
+        return BasicParameter(constant: CGFloat(self))
     }
 }
 
-extension View: ConstraintExpression {
-    public var constraintParameter: ConstraintParameter {
-        return ConstraintParameter(item: self)
+extension Double: ParameterExpression {
+    public var constraintParameter: BasicParameter<View> {
+        return BasicParameter(constant: CGFloat(self))
+    }
+}
+
+extension CGFloat: ParameterExpression {
+    public var constraintParameter: BasicParameter<View> {
+        return BasicParameter(constant: self)
+    }
+}
+
+extension View: ParameterExpression {
+    public var constraintParameter: BasicParameter<View> {
+        return BasicParameter(item: self)
+    }
+}
+
+extension NSLayoutXAxisAnchor: ParameterExpression {
+    public var constraintParameter: BasicParameter<NSLayoutXAxisAnchor> {
+        return BasicParameter(item: self)
+    }
+}
+
+extension NSLayoutYAxisAnchor: ParameterExpression {
+    public var constraintParameter: BasicParameter<NSLayoutYAxisAnchor> {
+        return BasicParameter(item: self)
+    }
+}
+
+extension NSLayoutDimension: ParameterExpression {
+    public var constraintParameter: BasicParameter<NSLayoutDimension> {
+        return BasicParameter(item: self)
     }
 }
 
 #if os(iOS)
-    @available(iOS 9.0, *)
-    extension UILayoutGuide: ConstraintExpression {
-        public var constraintParameter: ConstraintParameter {
-            return ConstraintParameter(item: self)
+    extension UILayoutGuide: ParameterExpression {
+        public var constraintParameter: BasicParameter<UILayoutGuide> {
+            return BasicParameter(item: self)
         }
     }
 #endif

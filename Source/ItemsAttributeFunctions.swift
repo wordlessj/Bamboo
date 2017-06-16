@@ -8,70 +8,70 @@
 
 import Foundation
 
-extension ConstraintItemsChain {
+extension ItemsConstraintChain {
     @discardableResult
-    public func left() -> ConstraintItemsMany<Item> {
-        return attribute { $0.left }
+    public func left() -> ItemsChain<Item> {
+        return attribute { $0.left($1) }
     }
 
     @discardableResult
-    public func right() -> ConstraintItemsMany<Item> {
-        return attribute { $0.right }
+    public func right() -> ItemsChain<Item> {
+        return attribute { $0.right($1) }
     }
 
     @discardableResult
-    public func top() -> ConstraintItemsMany<Item> {
-        return attribute { $0.top }
+    public func top() -> ItemsChain<Item> {
+        return attribute { $0.top($1) }
     }
 
     @discardableResult
-    public func bottom() -> ConstraintItemsMany<Item> {
-        return attribute { $0.bottom }
+    public func bottom() -> ItemsChain<Item> {
+        return attribute { $0.bottom($1) }
     }
 
     @discardableResult
-    public func leading() -> ConstraintItemsMany<Item> {
-        return attribute { $0.leading }
+    public func leading() -> ItemsChain<Item> {
+        return attribute { $0.leading($1) }
     }
 
     @discardableResult
-    public func trailing() -> ConstraintItemsMany<Item> {
-        return attribute { $0.trailing }
+    public func trailing() -> ItemsChain<Item> {
+        return attribute { $0.trailing($1) }
     }
 
     @discardableResult
-    public func width() -> ConstraintItemsMany<Item> {
-        return attribute { $0.width }
+    public func width() -> ItemsChain<Item> {
+        return attribute { $0.width($1) }
     }
 
     @discardableResult
-    public func height() -> ConstraintItemsMany<Item> {
-        return attribute { $0.height }
+    public func height() -> ItemsChain<Item> {
+        return attribute { $0.height($1) }
     }
 
     @discardableResult
-    public func centerX() -> ConstraintItemsMany<Item> {
-        return attribute { $0.centerX }
+    public func centerX() -> ItemsChain<Item> {
+        return attribute { $0.centerX($1) }
     }
 
     @discardableResult
-    public func centerY() -> ConstraintItemsMany<Item> {
-        return attribute { $0.centerY }
+    public func centerY() -> ItemsChain<Item> {
+        return attribute { $0.centerY($1) }
     }
 
     @discardableResult
-    public func lastBaseline() -> ConstraintItemsMany<Item> {
-        return attribute { $0.lastBaseline }
+    public func firstBaseline() -> ItemsChain<Item> {
+        return attribute { $0.firstBaseline($1) }
     }
 
     @discardableResult
-    public func firstBaseline() -> ConstraintItemsMany<Item> {
-        return attribute { $0.firstBaseline }
+    public func lastBaseline() -> ItemsChain<Item> {
+        return attribute { $0.lastBaseline($1) }
     }
 
     private func attribute(
-        _ attributeFunction: (ConstraintNone<Item>) -> (ConstraintExpression) -> ConstraintOne<Item>
-    ) -> ConstraintItemsMany<Item> {
-        return between { attributeFunction($1.constrain)(ConstraintParameter(item: $0)) }
+        _ closure: (InitialChain<Item>, BasicParameter<Item>) -> InitialChain<Item>.NextChain
+    ) -> ItemsChain<Item> {
+        return between { closure($0.constrain, BasicParameter(item: $1)) }
     }
 }

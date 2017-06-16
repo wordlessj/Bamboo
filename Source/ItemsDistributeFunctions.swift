@@ -8,14 +8,14 @@
 
 import Foundation
 
-extension ConstraintItemsChain {
+extension ItemsConstraintChain {
     @discardableResult
-    public func distributeHorizontally(spacing: CGFloat = 0) -> ConstraintItemsMany<Item> {
+    public func distributeHorizontally(spacing: CGFloat = 0) -> ItemsChain<Item> {
         return between { $1.constrain.after($0, spacing: spacing) }
     }
 
     @discardableResult
-    public func distributeVertically(spacing: CGFloat = 0) -> ConstraintItemsMany<Item> {
+    public func distributeVertically(spacing: CGFloat = 0) -> ItemsChain<Item> {
         return between { $1.constrain.below($0, spacing: spacing) }
     }
 }

@@ -6,7 +6,11 @@
 //  Copyright © 2016 Javier. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+    #import <UIKit/UIKit.h>
+#else
+    #import <AppKit/AppKit.h>
+#endif
 
 //! Project version number for Bamboo.
 FOUNDATION_EXPORT double BambooVersionNumber;

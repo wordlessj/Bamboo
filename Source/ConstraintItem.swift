@@ -6,40 +6,38 @@
 //  Copyright © 2016 Javier. All rights reserved.
 //
 
-#if os(iOS)
-    import UIKit
-#else
-    import AppKit
-#endif
+import Foundation
 
-public protocol ConstraintItem: AnyObject {
+public protocol ConstraintItem: XAxisItem, YAxisItem, DimensionItem {
     var superview: View? { get }
+
+    var leftAnchor: NSLayoutXAxisAnchor { get }
+    var rightAnchor: NSLayoutXAxisAnchor { get }
+    var topAnchor: NSLayoutYAxisAnchor { get }
+    var bottomAnchor: NSLayoutYAxisAnchor { get }
+    var leadingAnchor: NSLayoutXAxisAnchor { get }
+    var trailingAnchor: NSLayoutXAxisAnchor { get }
+    var widthAnchor: NSLayoutDimension { get }
+    var heightAnchor: NSLayoutDimension { get }
+    var centerXAnchor: NSLayoutXAxisAnchor { get }
+    var centerYAnchor: NSLayoutYAxisAnchor { get }
+    var firstBaselineAnchor: NSLayoutYAxisAnchor { get }
+    var lastBaselineAnchor: NSLayoutYAxisAnchor { get }
 }
 
 extension ConstraintItem {
-    public var constrain: ConstraintNone<Self> {
-        return ConstraintNone(item: self, allConstraints: [])
+    public var constrain: InitialChain<Self> {
+        return InitialChain(item: self)
     }
 }
 
 extension View: ConstraintItem {}
 
-public protocol ItemContainer {
-    associatedtype Item: ConstraintItem
-    var optionalItem: Item? { get }
-}
-
-public struct SuperviewConstrain: ItemContainer {
-    public var optionalItem: View? { return nil }
-}
-
-public struct Superview {
-    public static var constrain: SuperviewConstrain { return SuperviewConstrain() }
-}
-
 #if os(iOS)
-    @available(iOS 9.0, *)
     extension UILayoutGuide: ConstraintItem {
         public var superview: View? { return owningView }
+
+        public var firstBaselineAnchor: NSLayoutYAxisAnchor { return topAnchor }
+        public var lastBaselineAnchor: NSLayoutYAxisAnchor { return bottomAnchor }
     }
 #endif

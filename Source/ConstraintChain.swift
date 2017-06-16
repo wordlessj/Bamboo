@@ -6,36 +6,64 @@
 //  Copyright © 2016 Javier. All rights reserved.
 //
 
-#if os(iOS)
-    import UIKit
-#else
-    import AppKit
-#endif
+import Foundation
 
-public protocol ConstraintChain: ItemContainer {
+public protocol ConstraintsContainer {
+    var constraints: [NSLayoutConstraint] { get }
+}
+
+extension ConstraintsContainer {
+    func merge<Container: ConstraintsContainer>(_ containers: [Container]) -> [NSLayoutConstraint] {
+        return constraints + containers.flatMap { $0.constraints.dropFirst(constraints.count) }
+    }
+}
+
+public protocol ConstraintChainBase: ConstraintsContainer {
+    associatedtype Item: ConstraintItem
     var item: Item { get }
-    var allConstraints: [NSLayoutConstraint] { get }
 }
 
-public struct ConstraintNone<Item: ConstraintItem>: ConstraintChain {
-    public var item: Item
-    public var allConstraints: [NSLayoutConstraint]
-
-    public var optionalItem: Item? { return item }
+public protocol ConstraintChain: ConstraintChainBase {
+    associatedtype NextChain: ConstraintChainBase
+    func nextChain(_ c: NSLayoutConstraint) -> NextChain
 }
 
-public struct ConstraintOne<Item: ConstraintItem>: ConstraintChain {
-    public var item: Item
-    public var constraint: NSLayoutConstraint
-    public var allConstraints: [NSLayoutConstraint]
-
-    public var optionalItem: Item? { return item }
+extension ConstraintChain {
+    func merge<Container: ConstraintsContainer>(_ containers: [Container]) -> MultipleChain<Item> {
+        return MultipleChain(item: item, constraints: merge(containers))
+    }
 }
 
-public struct ConstraintMany<Item: ConstraintItem>: ConstraintChain {
+public struct InitialChain<Item: ConstraintItem>: ConstraintChain {
     public var item: Item
     public var constraints: [NSLayoutConstraint]
-    public var allConstraints: [NSLayoutConstraint]
 
-    public var optionalItem: Item? { return item }
+    init(item: Item) {
+        self.item = item
+        constraints = []
+    }
+
+    public func nextChain(_ c: NSLayoutConstraint) -> SingleChain<Item> {
+        return SingleChain(item: item, constraint: c)
+    }
+}
+
+public struct SingleChain<Item: ConstraintItem>: ConstraintChain {
+    public var item: Item
+    public var constraint: NSLayoutConstraint
+
+    public var constraints: [NSLayoutConstraint] { return [constraint] }
+
+    public func nextChain(_ c: NSLayoutConstraint) -> MultipleChain<Item> {
+        return MultipleChain(item: item, constraints: [constraint, c])
+    }
+}
+
+public struct MultipleChain<Item: ConstraintItem>: ConstraintChain {
+    public var item: Item
+    public var constraints: [NSLayoutConstraint]
+
+    public func nextChain(_ c: NSLayoutConstraint) -> MultipleChain<Item> {
+        return MultipleChain(item: item, constraints: constraints + [c])
+    }
 }

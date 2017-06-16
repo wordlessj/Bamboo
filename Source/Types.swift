@@ -7,11 +7,13 @@
 //
 
 #if os(iOS)
-    import UIKit
     public typealias View = UIView
+    public typealias LayoutPriority = UILayoutPriority
     public typealias EdgeInsets = UIEdgeInsets
+    public let LayoutPriorityRequired = UILayoutPriorityRequired
 #else
-    import AppKit
     public typealias View = NSView
+    public typealias LayoutPriority = NSLayoutPriority
     public typealias EdgeInsets = NSEdgeInsets
+    public let LayoutPriorityRequired = NSLayoutPriorityRequired
 #endif

@@ -8,43 +8,43 @@
 
 import Foundation
 
-public func + (constant: CGFloat, expression: ConstraintExpression) -> ConstraintExpression {
-        return expression.constraintParameter.modified { $0.constant += constant }
+public func + <Expression: ParameterExpression>(constant: CGFloat, expression: Expression) -> Expression.Parameter {
+    return expression.constraintParameter.modified { $0.constant += constant }
 }
 
-public func + (expression: ConstraintExpression, constant: CGFloat) -> ConstraintExpression {
-        return constant + expression
+public func + <Expression: ParameterExpression>(expression: Expression, constant: CGFloat) -> Expression.Parameter {
+    return constant + expression
 }
 
-public func - (expression: ConstraintExpression, constant: CGFloat) -> ConstraintExpression {
-        return -constant + expression
+public func - <Expression: ParameterExpression>(expression: Expression, constant: CGFloat) -> Expression.Parameter {
+    return -constant + expression
 }
 
-public func * (multiplier: CGFloat, expression: ConstraintExpression) -> ConstraintExpression {
-        return expression.constraintParameter.modified {
-            $0.multiplier *= multiplier
-            $0.constant *= multiplier
-        }
+public func * <Expression: ParameterExpression>(multiplier: CGFloat, expression: Expression)
+    -> MultiplierParameter<Expression.Parameter.Item> {
+        return expression.constraintParameter.multiplied(multiplier)
 }
 
-public func * (expression: ConstraintExpression, multiplier: CGFloat) -> ConstraintExpression {
+public func * <Expression: ParameterExpression>(expression: Expression, multiplier: CGFloat)
+    -> MultiplierParameter<Expression.Parameter.Item> {
         return multiplier * expression
 }
 
-public func / (expression: ConstraintExpression, multiplier: CGFloat) -> ConstraintExpression {
+public func / <Expression: ParameterExpression>(expression: Expression, multiplier: CGFloat)
+    -> MultiplierParameter<Expression.Parameter.Item> {
         return 1 / multiplier * expression
 }
 
 prefix operator >=
 
-public prefix func >= (expression: ConstraintExpression) -> ConstraintExpression {
-        return expression.constraintParameter.modified { $0.relation = .greaterThanOrEqual }
+public prefix func >= <Expression: ParameterExpression>(expression: Expression) -> Expression.Parameter {
+    return expression.constraintParameter.modified { $0.relation = .greaterThanOrEqual }
 }
 
 prefix operator <=
 
-public prefix func <= (expression: ConstraintExpression) -> ConstraintExpression {
-        return expression.constraintParameter.modified { $0.relation = .lessThanOrEqual }
+public prefix func <= <Expression: ParameterExpression>(expression: Expression) -> Expression.Parameter {
+    return expression.constraintParameter.modified { $0.relation = .lessThanOrEqual }
 }
 
 infix operator ~ : PriorityPrecedence
@@ -53,6 +53,7 @@ precedencegroup PriorityPrecedence {
     lowerThan: AdditionPrecedence
 }
 
-public func ~ (expression: ConstraintExpression, priority: UILayoutPriority) -> ConstraintExpression {
-        return expression.constraintParameter.modified { $0.priority = priority }
+public func ~ <Expression: ParameterExpression>
+    (expression: Expression, priority: LayoutPriority) -> Expression.Parameter {
+    return expression.constraintParameter.modified { $0.priority = priority }
 }
