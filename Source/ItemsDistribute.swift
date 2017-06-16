@@ -1,5 +1,5 @@
 //
-//  EdgeInsetsExtensions.swift
+//  ItemsDistribute.swift
 //  Bamboo
 //
 //  Copyright (c) 2017 Javier Zhang (https://wordlessj.github.io/)
@@ -25,16 +25,14 @@
 
 import Foundation
 
-extension EdgeInsets: ExpressibleByIntegerLiteral {
-    public init(integerLiteral value: Int) {
-        let floatValue = CGFloat(value)
-        self.init(top: floatValue, left: floatValue, bottom: floatValue, right: floatValue)
+extension ItemsConstraintChain {
+    @discardableResult
+    public func distributeHorizontally(spacing: CGFloat = 0) -> ItemsChain<Item> {
+        return between { $1.constrain.after($0, spacing: spacing) }
     }
-}
 
-extension EdgeInsets: ExpressibleByFloatLiteral {
-    public init(floatLiteral value: Double) {
-        let floatValue = CGFloat(value)
-        self.init(top: floatValue, left: floatValue, bottom: floatValue, right: floatValue)
+    @discardableResult
+    public func distributeVertically(spacing: CGFloat = 0) -> ItemsChain<Item> {
+        return between { $1.constrain.below($0, spacing: spacing) }
     }
 }

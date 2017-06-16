@@ -1,5 +1,5 @@
 //
-//  LayoutFill.swift
+//  ItemsSize.swift
 //  Bamboo
 //
 //  Copyright (c) 2017 Javier Zhang (https://wordlessj.github.io/)
@@ -25,39 +25,34 @@
 
 import Foundation
 
-extension LayoutChain {
+extension ItemsConstraintChain {
     @discardableResult
-    public func fill(insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
-        return fillWidth(insets: insets).fillHeight(insets: insets)
+    public func width(_ w: CGFloat) -> ItemsChain<Item> {
+        return each { $0.constrain.width(w) }
     }
 
     @discardableResult
-    public func fillLeft(width: CGFloat, insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
-        return fillHeight(insets: insets).width(width).left(inset: insets.left)
+    public func height(_ h: CGFloat) -> ItemsChain<Item> {
+        return each { $0.constrain.height(h) }
     }
 
     @discardableResult
-    public func fillRight(width: CGFloat, insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
-        return fillHeight(insets: insets).width(width).right(inset: insets.right)
+    public func size() -> ItemsChain<Item> {
+        return merge([width(), height()])
     }
 
     @discardableResult
-    public func fillTop(height: CGFloat, insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
-        return fillWidth(insets: insets).height(height).top(inset: insets.top)
+    public func size(_ s: CGFloat) -> ItemsChain<Item> {
+        return size(width: s, height: s)
     }
 
     @discardableResult
-    public func fillBottom(height: CGFloat, insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
-        return fillWidth(insets: insets).height(height).bottom(inset: insets.bottom)
+    public func size(_ cgSize: CGSize) -> ItemsChain<Item> {
+        return size(width: cgSize.width, height: cgSize.height)
     }
 
     @discardableResult
-    public func fillWidth(insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
-        return width(superSize.width - insets.left - insets.right).left(insets.left)
-    }
-
-    @discardableResult
-    public func fillHeight(insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
-        return height(superSize.height - insets.top - insets.bottom).top(insets.top)
+    public func size(width w: CGFloat, height h: CGFloat) -> ItemsChain<Item> {
+        return each { $0.constrain.size(width: w, height: h) }
     }
 }

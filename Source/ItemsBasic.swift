@@ -1,5 +1,5 @@
 //
-//  EdgeInsetsExtensions.swift
+//  ItemsBasic.swift
 //  Bamboo
 //
 //  Copyright (c) 2017 Javier Zhang (https://wordlessj.github.io/)
@@ -25,16 +25,17 @@
 
 import Foundation
 
-extension EdgeInsets: ExpressibleByIntegerLiteral {
-    public init(integerLiteral value: Int) {
-        let floatValue = CGFloat(value)
-        self.init(top: floatValue, left: floatValue, bottom: floatValue, right: floatValue)
+extension ItemsConstraintChain {
+    @discardableResult
+    public func each<Chain: ConstraintChain>(constrain: (Item) -> Chain) -> ItemsChain<Item> {
+        return add(items.map { constrain($0) })
     }
-}
 
-extension EdgeInsets: ExpressibleByFloatLiteral {
-    public init(floatLiteral value: Double) {
-        let floatValue = CGFloat(value)
-        self.init(top: floatValue, left: floatValue, bottom: floatValue, right: floatValue)
+    @discardableResult
+    public func between<Chain: ConstraintChain>(
+        constrain: (_ first: Item, _ second: Item) -> Chain
+    ) -> ItemsChain<Item> {
+        let chains = zip(items, items.dropFirst()).map { constrain($0, $1) }
+        return add(chains)
     }
 }

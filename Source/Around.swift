@@ -1,5 +1,5 @@
 //
-//  LayoutFill.swift
+//  Around.swift
 //  Bamboo
 //
 //  Copyright (c) 2017 Javier Zhang (https://wordlessj.github.io/)
@@ -25,39 +25,35 @@
 
 import Foundation
 
-extension LayoutChain {
+extension ConstraintChain {
     @discardableResult
-    public func fill(insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
-        return fillWidth(insets: insets).fillHeight(insets: insets)
+    public func before(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> NextChain {
+        let p = parameter(item) { $0.leftAnchor }
+        return right(p - spacing)
     }
 
     @discardableResult
-    public func fillLeft(width: CGFloat, insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
-        return fillHeight(insets: insets).width(width).left(inset: insets.left)
+    public func after(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> NextChain {
+        let p = parameter(item) { $0.rightAnchor }
+        return left(p + spacing)
     }
 
     @discardableResult
-    public func fillRight(width: CGFloat, insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
-        return fillHeight(insets: insets).width(width).right(inset: insets.right)
+    public func above(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> NextChain {
+        let p = parameter(item) { $0.topAnchor }
+        return bottom(p - spacing)
     }
 
     @discardableResult
-    public func fillTop(height: CGFloat, insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
-        return fillWidth(insets: insets).height(height).top(inset: insets.top)
+    public func below(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> NextChain {
+        let p = parameter(item) { $0.bottomAnchor }
+        return top(p + spacing)
     }
 
-    @discardableResult
-    public func fillBottom(height: CGFloat, insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
-        return fillWidth(insets: insets).height(height).bottom(inset: insets.bottom)
-    }
-
-    @discardableResult
-    public func fillWidth(insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
-        return width(superSize.width - insets.left - insets.right).left(insets.left)
-    }
-
-    @discardableResult
-    public func fillHeight(insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
-        return height(superSize.height - insets.top - insets.bottom).top(insets.top)
+    private func parameter<Anchor>(
+        _ parameterItem: ConstraintItem?,
+        anchorOf: (ConstraintItem) -> Anchor
+    ) -> BasicParameter<Anchor> {
+        return BasicParameter(item: anchorOf(parameterItem ?? item.superview!))
     }
 }
