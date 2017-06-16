@@ -23,18 +23,13 @@
 //  THE SOFTWARE.
 //
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#import <TargetConditionals.h>
+
+#if TARGET_OS_IOS || TARGET_OS_TV
     #import <UIKit/UIKit.h>
-#else
+#elif TARGET_OS_OSX
     #import <AppKit/AppKit.h>
 #endif
 
-//! Project version number for Bamboo.
 FOUNDATION_EXPORT double BambooVersionNumber;
-
-//! Project version string for Bamboo.
 FOUNDATION_EXPORT const unsigned char BambooVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <Bamboo/PublicHeader.h>
-
-

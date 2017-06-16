@@ -23,14 +23,13 @@
 //  THE SOFTWARE.
 //
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
     public typealias View = UIView
     public typealias LayoutPriority = UILayoutPriority
     public typealias EdgeInsets = UIEdgeInsets
     public let LayoutPriorityRequired = UILayoutPriorityRequired
-#else
+#elseif os(macOS)
     public typealias View = NSView
     public typealias LayoutPriority = NSLayoutPriority
-    public typealias EdgeInsets = NSEdgeInsets
     public let LayoutPriorityRequired = NSLayoutPriorityRequired
 #endif
