@@ -150,7 +150,7 @@ extension NSLayoutDimension: ParameterExpression {
     }
 }
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
     extension UILayoutGuide: ParameterExpression {
         public var constraintParameter: BasicParameter<UILayoutGuide> {
             return BasicParameter(item: self)

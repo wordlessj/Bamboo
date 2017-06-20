@@ -1,5 +1,5 @@
 //
-//  LayoutFit.swift
+//  ItemsDistributeTests.swift
 //  Bamboo
 //
 //  Copyright (c) 2017 Javier Zhang (https://wordlessj.github.io/)
@@ -23,31 +23,25 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import XCTest
+import Bamboo
 
-public protocol FittingSizeContainer {
-    var fittingSize: CGSize { get }
-}
-
-#if os(iOS) || os(tvOS)
-    extension UIView: FittingSizeContainer {
-        public var fittingSize: CGSize { return sizeThatFits(layout.superSize) }
-    }
-#endif
-
-extension LayoutChain where Item: FittingSizeContainer {
-    @discardableResult
-    public func fitSize() -> LayoutChain {
-        return size(item.fittingSize)
+class ItemsDistributeTests: BaseTestCase {
+    func testDistributeHorizontally() {
+        let constraints = subviews.constrain.distributeHorizontally(spacing: value).constraints
+        let testConstraints = [
+            NSLayoutConstraint(item: view2, attribute: .left, toItem: view1, toAttribute: .right, constant: value),
+            NSLayoutConstraint(item: view3, attribute: .left, toItem: view2, toAttribute: .right, constant: value)
+        ]
+        XCTAssertEqual(constraints, testConstraints)
     }
 
-    @discardableResult
-    public func fitWidth() -> LayoutChain {
-        return width(item.fittingSize.width)
-    }
-
-    @discardableResult
-    public func fitHeight() -> LayoutChain {
-        return height(item.fittingSize.height)
+    func testDistributeVertically() {
+        let constraints = subviews.constrain.distributeVertically(spacing: value).constraints
+        let testConstraints = [
+            NSLayoutConstraint(item: view2, attribute: .top, toItem: view1, toAttribute: .bottom, constant: value),
+            NSLayoutConstraint(item: view3, attribute: .top, toItem: view2, toAttribute: .bottom, constant: value)
+        ]
+        XCTAssertEqual(constraints, testConstraints)
     }
 }

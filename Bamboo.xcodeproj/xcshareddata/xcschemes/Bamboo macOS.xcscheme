@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3BC05C531EF3E212009F2295"
+               BuildableName = "Bamboo macOS Tests.xctest"
+               BlueprintName = "Bamboo macOS Tests"
+               ReferencedContainer = "container:Bamboo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "3BCB1B5F1D6AB22E0027E7D8"
+            BuildableName = "Bamboo.framework"
+            BlueprintName = "Bamboo macOS"
+            ReferencedContainer = "container:Bamboo.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

@@ -72,7 +72,7 @@ extension CALayer: LayoutItem {
 extension View: LayoutItem {
     public var superItem: LayoutItem? { return superview }
 
-    #if os(OSX)
+    #if os(macOS)
         public var center: CGPoint {
             get { return CGPoint(x: frame.midX, y: frame.midY) }
             set { setFrameOrigin(CGPoint(x: newValue.x - frame.width / 2, y: newValue.y - frame.height / 2)) }

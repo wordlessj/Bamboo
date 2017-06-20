@@ -50,7 +50,7 @@ extension ConstraintItem {
 
 extension View: ConstraintItem {}
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
     extension UILayoutGuide: ConstraintItem {
         public var superview: View? { return owningView }
 

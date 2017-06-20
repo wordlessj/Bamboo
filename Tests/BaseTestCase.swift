@@ -1,6 +1,6 @@
 //
-//  LayoutFit.swift
-//  Bamboo
+//  BaseTestCase.swift
+//  Tests
 //
 //  Copyright (c) 2017 Javier Zhang (https://wordlessj.github.io/)
 //
@@ -23,31 +23,44 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-
-public protocol FittingSizeContainer {
-    var fittingSize: CGSize { get }
-}
+import XCTest
+import Bamboo
 
 #if os(iOS) || os(tvOS)
-    extension UIView: FittingSizeContainer {
-        public var fittingSize: CGSize { return sizeThatFits(layout.superSize) }
-    }
+    public let LayoutPriorityDefaultHigh = UILayoutPriorityDefaultHigh
+#elseif os(macOS)
+    public let LayoutPriorityDefaultHigh = NSLayoutPriorityDefaultHigh
 #endif
 
-extension LayoutChain where Item: FittingSizeContainer {
-    @discardableResult
-    public func fitSize() -> LayoutChain {
-        return size(item.fittingSize)
+class BaseTestCase: XCTestCase {
+    let value: CGFloat = 3
+
+    let superview = View()
+    let view1 = View()
+    let view2 = View()
+    let view3 = View()
+
+    var subviews: [View] { return [view1, view2, view3] }
+
+    override func setUp() {
+        super.setUp()
+
+        superview.addSubview(view1)
+        superview.addSubview(view2)
+        superview.addSubview(view3)
     }
 
-    @discardableResult
-    public func fitWidth() -> LayoutChain {
-        return width(item.fittingSize.width)
+    override func tearDown() {
+        super.tearDown()
+
+        superview.removeConstraints(superview.constraints)
+        view1.removeConstraints(view1.constraints)
+        view2.removeConstraints(view2.constraints)
+        view3.removeConstraints(view3.constraints)
     }
 
-    @discardableResult
-    public func fitHeight() -> LayoutChain {
-        return height(item.fittingSize.height)
+    func betweenConstraints(_ attribute: NSLayoutAttribute) -> [NSLayoutConstraint] {
+        return [NSLayoutConstraint(item: view1, attribute: attribute, toItem: view2),
+                NSLayoutConstraint(item: view2, attribute: attribute, toItem: view3)]
     }
 }
