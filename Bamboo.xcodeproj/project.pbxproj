@@ -307,7 +307,7 @@
 				3BEDF71C1DC394F0003AC731 /* ItemsChain */,
 				3BEDF71D1DC39506003AC731 /* Extensions */,
 			);
-			name = Auto;
+			path = Auto;
 			sourceTree = "<group>";
 		};
 		3BCB1B731D6AE6E40027E7D8 /* Manual */ = {
@@ -320,7 +320,7 @@
 				3BE4C4711DF6A35E00A04F82 /* LayoutAround.swift */,
 				3BCB1B831D6AEC690027E7D8 /* LayoutFit.swift */,
 			);
-			name = Manual;
+			path = Manual;
 			sourceTree = "<group>";
 		};
 		3BCBDD421EF41F7F00503D15 /* Auto */ = {
@@ -359,7 +359,7 @@
 				3B8054841DC1CCFB00815533 /* Operators.swift */,
 				3BEDF7131DC35639003AC731 /* ConstraintItem.swift */,
 			);
-			name = Expression;
+			path = Expression;
 			sourceTree = "<group>";
 		};
 		3BEDF71A1DC39212003AC731 /* Chain */ = {
@@ -371,7 +371,7 @@
 				3B80548D1DC1E21C00815533 /* Fill.swift */,
 				3BEDF70D1DC3406B003AC731 /* Around.swift */,
 			);
-			name = Chain;
+			path = Chain;
 			sourceTree = "<group>";
 		};
 		3BEDF71C1DC394F0003AC731 /* ItemsChain */ = {
@@ -383,7 +383,7 @@
 				3BEDF7241DC3A114003AC731 /* ItemsSize.swift */,
 				3BEDF7271DC3A9A2003AC731 /* ItemsDistribute.swift */,
 			);
-			name = ItemsChain;
+			path = ItemsChain;
 			sourceTree = "<group>";
 		};
 		3BEDF71D1DC39506003AC731 /* Extensions */ = {
@@ -392,7 +392,7 @@
 				3BCB1B6C1D6AE4A20027E7D8 /* ConstraintArray.swift */,
 				3BEDF7161DC3586B003AC731 /* EdgeInsetsExtensions.swift */,
 			);
-			name = Extensions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
