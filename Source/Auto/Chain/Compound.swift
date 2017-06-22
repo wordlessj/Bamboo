@@ -34,7 +34,7 @@ extension ConstraintChain {
     @discardableResult
     public func center<Expression: ParameterExpression>(_ expression: Expression) -> MultipleChain<Item>
         where Expression.Parameter.Item: XAxisItem & YAxisItem, Expression.Parameter: BasicParameterProtocol {
-            return merge([centerX(expression), centerY(expression)])
+            return toMultipleChain.centerX(expression).centerY(expression)
     }
 
     @discardableResult
@@ -45,7 +45,7 @@ extension ConstraintChain {
     @discardableResult
     public func size<Expression: ParameterExpression>(_ expression: Expression) -> MultipleChain<Item>
         where Expression.Parameter.Item: DimensionItem {
-            return merge([width(expression), height(expression)])
+            return toMultipleChain.width(expression).height(expression)
     }
 
     @discardableResult
@@ -55,6 +55,6 @@ extension ConstraintChain {
 
     @discardableResult
     public func size(width w: CGFloat, height h: CGFloat) -> MultipleChain<Item> {
-        return merge([width(w), height(h)])
+        return toMultipleChain.width(w).height(h)
     }
 }

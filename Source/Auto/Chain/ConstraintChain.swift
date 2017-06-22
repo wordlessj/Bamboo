@@ -25,19 +25,10 @@
 
 import Foundation
 
-public protocol ConstraintsContainer {
-    var constraints: [NSLayoutConstraint] { get }
-}
-
-extension ConstraintsContainer {
-    func merge<Container: ConstraintsContainer>(_ containers: [Container]) -> [NSLayoutConstraint] {
-        return constraints + containers.flatMap { $0.constraints.dropFirst(constraints.count) }
-    }
-}
-
-public protocol ConstraintChainBase: ConstraintsContainer {
+public protocol ConstraintChainBase {
     associatedtype Item: ConstraintItem
     var item: Item { get }
+    var constraints: [NSLayoutConstraint] { get }
 }
 
 public protocol ConstraintChain: ConstraintChainBase {
@@ -46,8 +37,8 @@ public protocol ConstraintChain: ConstraintChainBase {
 }
 
 extension ConstraintChain {
-    func merge<Container: ConstraintsContainer>(_ containers: [Container]) -> MultipleChain<Item> {
-        return MultipleChain(item: item, constraints: merge(containers))
+    var toMultipleChain: MultipleChain<Item> {
+        return MultipleChain(item: item, constraints: constraints)
     }
 }
 

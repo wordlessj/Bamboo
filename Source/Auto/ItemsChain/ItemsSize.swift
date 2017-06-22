@@ -38,7 +38,7 @@ extension ItemsConstraintChain {
 
     @discardableResult
     public func size() -> ItemsChain<Item> {
-        return merge([width(), height()])
+        return width().height()
     }
 
     @discardableResult

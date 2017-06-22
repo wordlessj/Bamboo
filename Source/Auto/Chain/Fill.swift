@@ -124,27 +124,27 @@ extension ConstraintChain {
             attribute == .leading || attribute == .trailing || attribute == .height
 
         let parameter = BasicParameter(item: item)
-        var chains = [NextChain]()
+        var chain = toMultipleChain
 
         if attribute == .left {
-            chains.append(left(parameter + insets.left))
+            chain = chain.left(parameter + insets.left)
         }
         if attribute == .right {
-            chains.append(right(parameter - insets.right))
+            chain = chain.right(parameter - insets.right)
         }
         if attribute == .top || hasVertical {
-            chains.append(top(parameter + insets.top))
+            chain = chain.top(parameter + insets.top)
         }
         if attribute == .bottom || hasVertical {
-            chains.append(bottom(parameter - insets.bottom))
+            chain = chain.bottom(parameter - insets.bottom)
         }
         if attribute == .leading || hasHorizontal {
-            chains.append(leading(parameter + insets.left))
+            chain = chain.leading(parameter + insets.left)
         }
         if attribute == .trailing || hasHorizontal {
-            chains.append(trailing(parameter - insets.right))
+            chain = chain.trailing(parameter - insets.right)
         }
 
-        return merge(chains)
+        return chain
     }
 }

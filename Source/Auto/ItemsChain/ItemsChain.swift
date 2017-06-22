@@ -25,19 +25,16 @@
 
 import Foundation
 
-public protocol ItemsConstraintChain: ConstraintsContainer {
+public protocol ItemsConstraintChain {
     associatedtype Item: ConstraintItem
     var items: [Item] { get }
+    var constraints: [NSLayoutConstraint] { get }
 }
 
 extension ItemsConstraintChain {
-    func add<Container: ConstraintsContainer>(_ containers: [Container]) -> ItemsChain<Item> {
-        let c = containers.flatMap { $0.constraints }
+    func add<Chain: ConstraintChain>(_ chains: [Chain]) -> ItemsChain<Item> {
+        let c = chains.flatMap { $0.constraints }
         return ItemsChain(items: items, constraints: constraints + c)
-    }
-
-    func merge<Container: ConstraintsContainer>(_ containers: [Container]) -> ItemsChain<Item> {
-        return ItemsChain(items: items, constraints: merge(containers))
     }
 }
 
