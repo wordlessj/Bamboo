@@ -30,60 +30,70 @@ public struct LayoutChain<Item: LayoutItem> {
 }
 
 extension LayoutChain {
+    /// Set left value.
     @discardableResult
     public func left(_ value: CGFloat) -> LayoutChain {
         item.left = value
         return self
     }
 
+    /// Set right value.
     @discardableResult
     public func right(_ value: CGFloat) -> LayoutChain {
         item.right = value
         return self
     }
 
+    /// Set top value.
     @discardableResult
     public func top(_ value: CGFloat) -> LayoutChain {
         item.top = value
         return self
     }
 
+    /// Set bottom value.
     @discardableResult
     public func bottom(_ value: CGFloat) -> LayoutChain {
         item.bottom = value
         return self
     }
 
+    /// Set width value.
     @discardableResult
     public func width(_ value: CGFloat) -> LayoutChain {
         item.size.width = value
         return self
     }
 
+    /// Set height value.
     @discardableResult
     public func height(_ value: CGFloat) -> LayoutChain {
         item.size.height = value
         return self
     }
 
+    /// Set size value.
     @discardableResult
     public func size(_ value: CGSize) -> LayoutChain {
         item.size = value
         return self
     }
 
+    /// Set centerX value.
     @discardableResult
     public func centerX(_ value: CGFloat) -> LayoutChain {
         item.center.x = value
         return self
     }
 
+    /// Set centerY value.
     @discardableResult
     public func centerY(_ value: CGFloat) -> LayoutChain {
         item.center.y = value
         return self
     }
 
+    /// Set center value.
     @discardableResult
     public func center(_ value: CGPoint) -> LayoutChain {
         item.center = value

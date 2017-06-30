@@ -25,6 +25,7 @@
 
 import Foundation
 
+/// Item which has `layout` extensions, namely `UIView` and `CALayer`.
 public protocol LayoutItem: class {
     var bounds: CGRect { get set }
     var center: CGPoint { get set }
@@ -32,28 +33,34 @@ public protocol LayoutItem: class {
 }
 
 extension LayoutItem {
+    /// Start a layout chain for manual layout.
     public var layout: LayoutChain<Self> { return LayoutChain(item: self) }
 
+    /// Equals to `bounds.size`.
     public var size: CGSize {
         get { return bounds.size }
         set { bounds.size = newValue }
     }
 
+    /// Calculated using `center` and `bounds`, not affected by `transform`.
     public var left: CGFloat {
         get { return center.x - size.width / 2 }
         set { center.x = newValue + size.width / 2 }
     }
 
+    /// Calculated using `center` and `bounds`, not affected by `transform`.
     public var right: CGFloat {
         get { return center.x + size.width / 2 }
         set { center.x = newValue - size.width / 2 }
     }
 
+    /// Calculated using `center` and `bounds`, not affected by `transform`.
     public var top: CGFloat {
         get { return center.y - size.height / 2 }
         set { center.y = newValue + size.height / 2 }
     }
 
+    /// Calculated using `center` and `bounds`, not affected by `transform`.
     public var bottom: CGFloat {
         get { return center.y + size.height / 2 }
         set { center.y = newValue - size.height / 2 }

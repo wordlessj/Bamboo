@@ -26,36 +26,43 @@
 import Foundation
 
 extension LayoutChain {
+    /// Fill superview/layer with `insets`.
     @discardableResult
     public func fill(insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
         return fillWidth(insets: insets).fillHeight(insets: insets)
     }
 
+    /// Fill left of superview/layer with `insets` and set width.
     @discardableResult
     public func fillLeft(width: CGFloat, insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
         return fillHeight(insets: insets).width(width).left(inset: insets.left)
     }
 
+    /// Fill right of superview/layer with `insets` and set width.
     @discardableResult
     public func fillRight(width: CGFloat, insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
         return fillHeight(insets: insets).width(width).right(inset: insets.right)
     }
 
+    /// Fill top of superview/layer with `insets` and set height.
     @discardableResult
     public func fillTop(height: CGFloat, insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
         return fillWidth(insets: insets).height(height).top(inset: insets.top)
     }
 
+    /// Fill bottom of superview/layer with `insets` and set height.
     @discardableResult
     public func fillBottom(height: CGFloat, insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
         return fillWidth(insets: insets).height(height).bottom(inset: insets.bottom)
     }
 
+    /// Fill width of superview/layer with `insets`.
     @discardableResult
     public func fillWidth(insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
         return width(superSize.width - insets.left - insets.right).left(insets.left)
     }
 
+    /// Fill height of superview/layer with `insets`.
     @discardableResult
     public func fillHeight(insets: EdgeInsets = EdgeInsets()) -> LayoutChain {
         return height(superSize.height - insets.top - insets.bottom).top(insets.top)

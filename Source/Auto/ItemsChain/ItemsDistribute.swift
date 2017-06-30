@@ -26,11 +26,13 @@
 import Foundation
 
 extension ItemsConstraintChain {
+    /// Pin each item's left to previous item's right with `spacing`.
     @discardableResult
     public func distributeHorizontally(spacing: CGFloat = 0) -> ItemsChain<Item> {
         return between { $1.constrain.after($0, spacing: spacing) }
     }
 
+    /// Pin each item's top to previous item's bottom with `spacing`.
     @discardableResult
     public func distributeVertically(spacing: CGFloat = 0) -> ItemsChain<Item> {
         return between { $1.constrain.below($0, spacing: spacing) }

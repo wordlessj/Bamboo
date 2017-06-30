@@ -26,31 +26,37 @@
 import Foundation
 
 extension ItemsConstraintChain {
+    /// Set all items' width.
     @discardableResult
     public func width(_ w: CGFloat) -> ItemsChain<Item> {
         return each { $0.constrain.width(w) }
     }
 
+    /// Set all items' height.
     @discardableResult
     public func height(_ h: CGFloat) -> ItemsChain<Item> {
         return each { $0.constrain.height(h) }
     }
 
+    /// Match all items' size.
     @discardableResult
     public func size() -> ItemsChain<Item> {
         return width().height()
     }
 
+    /// Set all items' size.
     @discardableResult
     public func size(_ s: CGFloat) -> ItemsChain<Item> {
         return size(width: s, height: s)
     }
 
+    /// Set all items' size with `CGSize`.
     @discardableResult
     public func size(_ cgSize: CGSize) -> ItemsChain<Item> {
         return size(width: cgSize.width, height: cgSize.height)
     }
 
+    /// Set all items' size with width and height.
     @discardableResult
     public func size(width w: CGFloat, height h: CGFloat) -> ItemsChain<Item> {
         return each { $0.constrain.size(width: w, height: h) }

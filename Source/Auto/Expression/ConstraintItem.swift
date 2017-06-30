@@ -25,6 +25,7 @@
 
 import Foundation
 
+/// Item which has `constrain` extensions, namely `UIView` and `UILayoutGuide`.
 public protocol ConstraintItem: XAxisItem, YAxisItem, DimensionItem {
     var superview: View? { get }
 
@@ -43,6 +44,7 @@ public protocol ConstraintItem: XAxisItem, YAxisItem, DimensionItem {
 }
 
 extension ConstraintItem {
+    /// Start a constraint chain for auto layout.
     public var constrain: InitialChain<Self> {
         return InitialChain(item: self)
     }

@@ -26,138 +26,201 @@
 import Foundation
 
 extension ConstraintChain {
+    /// Pin left to superview.
     @discardableResult
     public func left() -> NextChain {
         return left(BasicParameter<View>())
     }
 
+    /// Pin left to `expression`.
+    ///
+    /// - parameter expression: Expression with optional `UIView`, `UILayoutGuide` or `NSLayoutXAxisAnchor`,
+    ///     no multiplier.
     @discardableResult
     public func left<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
         where Expression.Parameter.Item: XAxisItem, Expression.Parameter: BasicParameterProtocol {
             return solve(expression) { $0.leftAnchor }
     }
 
+    /// Pin right to superview.
     @discardableResult
     public func right() -> NextChain {
         return right(BasicParameter<View>())
     }
 
+    /// Pin right to `expression`.
+    ///
+    /// - parameter expression: Expression with optional `UIView`, `UILayoutGuide` or `NSLayoutXAxisAnchor`,
+    ///     no multiplier.
     @discardableResult
     public func right<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
         where Expression.Parameter.Item: XAxisItem, Expression.Parameter: BasicParameterProtocol {
             return solve(expression) { $0.rightAnchor }
     }
 
+    /// Pin top to superview.
     @discardableResult
     public func top() -> NextChain {
         return top(BasicParameter<View>())
     }
 
+    /// Pin top to `expression`.
+    ///
+    /// - parameter expression: Expression with optional `UIView`, `UILayoutGuide` or `NSLayoutYAxisAnchor`,
+    ///     no multiplier.
     @discardableResult
     public func top<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
         where Expression.Parameter.Item: YAxisItem, Expression.Parameter: BasicParameterProtocol {
             return solve(expression) { $0.topAnchor }
     }
 
+    /// Pin bottom to superview.
     @discardableResult
     public func bottom() -> NextChain {
         return bottom(BasicParameter<View>())
     }
 
+    /// Pin bottom to `expression`.
+    ///
+    /// - parameter expression: Expression with optional `UIView`, `UILayoutGuide` or `NSLayoutYAxisAnchor`,
+    ///     no multiplier.
     @discardableResult
     public func bottom<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
         where Expression.Parameter.Item: YAxisItem, Expression.Parameter: BasicParameterProtocol {
             return solve(expression) { $0.bottomAnchor }
     }
 
+    /// Pin leading to superview.
     @discardableResult
     public func leading() -> NextChain {
         return leading(BasicParameter<View>())
     }
 
+    /// Pin leading to `expression`.
+    ///
+    /// - parameter expression: Expression with optional `UIView`, `UILayoutGuide` or `NSLayoutXAxisAnchor`,
+    ///     no multiplier.
     @discardableResult
     public func leading<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
         where Expression.Parameter.Item: XAxisItem, Expression.Parameter: BasicParameterProtocol {
             return solve(expression) { $0.leadingAnchor }
     }
 
+    /// Pin trailing to superview.
     @discardableResult
     public func trailing() -> NextChain {
         return trailing(BasicParameter<View>())
     }
 
+    /// Pin trailing to `expression`.
+    ///
+    /// - parameter expression: Expression with optional `UIView`, `UILayoutGuide` or `NSLayoutXAxisAnchor`,
+    ///     no multiplier.
     @discardableResult
     public func trailing<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
         where Expression.Parameter.Item: XAxisItem, Expression.Parameter: BasicParameterProtocol {
             return solve(expression) { $0.trailingAnchor }
     }
 
+    /// Match width to superview.
     @discardableResult
     public func width() -> NextChain {
         return width(BasicParameter<View>(item: item.superview!))
     }
 
+    /// Match width to `expression`.
+    ///
+    /// - parameter expression: Expression with optional `UIView`, `UILayoutGuide` or `NSLayoutDimension`,
+    ///     optional multiplier.
     @discardableResult
     public func width<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
         where Expression.Parameter.Item: DimensionItem {
             return solve(expression) { $0.widthAnchor }
     }
 
+    /// Match height to superview.
     @discardableResult
     public func height() -> NextChain {
         return height(BasicParameter<View>(item: item.superview!))
     }
 
+    /// Match height to `expression`.
+    ///
+    /// - parameter expression: Expression with optional `UIView`, `UILayoutGuide` or `NSLayoutDimension`,
+    ///     optional multiplier.
     @discardableResult
     public func height<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
         where Expression.Parameter.Item: DimensionItem {
             return solve(expression) { $0.heightAnchor }
     }
 
+    /// Align centerX to superview.
     @discardableResult
     public func centerX() -> NextChain {
         return centerX(BasicParameter<View>())
     }
 
+    /// Align centerX to `expression`.
+    ///
+    /// - parameter expression: Expression with optional `UIView`, `UILayoutGuide` or `NSLayoutXAxisAnchor`,
+    ///     no multiplier.
     @discardableResult
     public func centerX<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
         where Expression.Parameter.Item: XAxisItem, Expression.Parameter: BasicParameterProtocol {
             return solve(expression) { $0.centerXAnchor }
     }
 
+    /// Align centerY to superview.
     @discardableResult
     public func centerY() -> NextChain {
         return centerY(BasicParameter<View>())
     }
 
+    /// Align centerY to `expression`.
+    ///
+    /// - parameter expression: Expression with optional `UIView`, `UILayoutGuide` or `NSLayoutYAxisAnchor`,
+    ///     no multiplier.
     @discardableResult
     public func centerY<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
         where Expression.Parameter.Item: YAxisItem, Expression.Parameter: BasicParameterProtocol {
             return solve(expression) { $0.centerYAnchor }
     }
 
+    /// Pin firstBaseline to superview.
     @discardableResult
     public func firstBaseline() -> NextChain {
         return firstBaseline(BasicParameter<View>())
     }
 
+    /// Pin firstBaseline to `expression`.
+    ///
+    /// - parameter expression: Expression with optional `UIView`, `UILayoutGuide` or `NSLayoutYAxisAnchor`,
+    ///     no multiplier.
     @discardableResult
     public func firstBaseline<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
         where Expression.Parameter.Item: YAxisItem, Expression.Parameter: BasicParameterProtocol {
             return solve(expression) { $0.firstBaselineAnchor }
     }
 
+    /// Pin lastBaseline to superview.
     @discardableResult
     public func lastBaseline() -> NextChain {
         return lastBaseline(BasicParameter<View>())
     }
 
+    /// Pin lastBaseline to `expression`.
+    ///
+    /// - parameter expression: Expression with optional `UIView`, `UILayoutGuide` or `NSLayoutYAxisAnchor`,
+    ///     no multiplier.
     @discardableResult
     public func lastBaseline<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
         where Expression.Parameter.Item: YAxisItem, Expression.Parameter: BasicParameterProtocol {
             return solve(expression) { $0.lastBaselineAnchor }
     }
 
+    /// Set aspect ratio.
+    ///
+    /// - parameter ratio: Aspect ratio, defaults to 1.
     @discardableResult
     public func aspectRatio(_ ratio: CGFloat = 1) -> NextChain {
         return width(ratio * item.heightAnchor)

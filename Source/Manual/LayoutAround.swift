@@ -26,21 +26,41 @@
 import Foundation
 
 extension LayoutChain {
+    /// Pin right to `item`'s left with `spacing`.
+    ///
+    /// - parameters:
+    ///     - item: `UIView` or `CALayer`.
+    ///     - spacing: Spacing between `self` and `item`.
     @discardableResult
     public func before(_ item: LayoutItem, spacing: CGFloat = 0) -> LayoutChain {
         return right(item.left - spacing)
     }
 
+    /// Pin left to `item`'s right with `spacing`.
+    ///
+    /// - parameters:
+    ///     - item: `UIView` or `CALayer`.
+    ///     - spacing: Spacing between `self` and `item`.
     @discardableResult
     public func after(_ item: LayoutItem, spacing: CGFloat = 0) -> LayoutChain {
         return left(item.right + spacing)
     }
 
+    /// Pin bottom to `item`'s top with `spacing`.
+    ///
+    /// - parameters:
+    ///     - item: `UIView` or `CALayer`.
+    ///     - spacing: Spacing between `self` and `item`.
     @discardableResult
     public func above(_ item: LayoutItem, spacing: CGFloat = 0) -> LayoutChain {
         return bottom(item.top - spacing)
     }
 
+    /// Pin top to `item`'s bottom with `spacing`.
+    ///
+    /// - parameters:
+    ///     - item: `UIView` or `CALayer`.
+    ///     - spacing: Spacing between `self` and `item`.
     @discardableResult
     public func below(_ item: LayoutItem, spacing: CGFloat = 0) -> LayoutChain {
         return top(item.bottom + spacing)

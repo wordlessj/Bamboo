@@ -26,12 +26,18 @@
 import Foundation
 
 extension Array where Element: NSLayoutConstraint {
+    /// Activate all constraints.
+    ///
+    /// - returns: Array itself.
     @discardableResult
     public func activate() -> [Element] {
         NSLayoutConstraint.activate(self)
         return self
     }
 
+    /// Deactivate all constraints.
+    ///
+    /// - returns: Array itself.
     @discardableResult
     public func deactivate() -> [Element] {
         NSLayoutConstraint.deactivate(self)

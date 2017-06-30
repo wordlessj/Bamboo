@@ -36,16 +36,19 @@ public protocol FittingSizeContainer {
 #endif
 
 extension LayoutChain where Item: FittingSizeContainer {
+    /// Set size to the result of `sizeThatFits()`.
     @discardableResult
     public func fitSize() -> LayoutChain {
         return size(item.fittingSize)
     }
 
+    /// Set width to the result of `sizeThatFits()`.
     @discardableResult
     public func fitWidth() -> LayoutChain {
         return width(item.fittingSize.width)
     }
 
+    /// Set height to the result of `sizeThatFits()`.
     @discardableResult
     public func fitHeight() -> LayoutChain {
         return height(item.fittingSize.height)

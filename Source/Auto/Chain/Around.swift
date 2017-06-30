@@ -26,24 +26,44 @@
 import Foundation
 
 extension ConstraintChain {
+    /// Pin right to `item`'s left with `spacing`.
+    ///
+    /// - parameters:
+    ///     - item: `UIView` or `UILayoutGuide`, if `nil`, it'll be superview.
+    ///     - spacing: Spacing between `self` and `item`.
     @discardableResult
     public func before(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> NextChain {
         let p = parameter(item) { $0.leftAnchor }
         return right(p - spacing)
     }
 
+    /// Pin left to `item`'s right with `spacing`.
+    ///
+    /// - parameters:
+    ///     - item: `UIView` or `UILayoutGuide`, if `nil`, it'll be superview.
+    ///     - spacing: Spacing between `self` and `item`.
     @discardableResult
     public func after(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> NextChain {
         let p = parameter(item) { $0.rightAnchor }
         return left(p + spacing)
     }
 
+    /// Pin bottom to `item`'s top with `spacing`.
+    ///
+    /// - parameters:
+    ///     - item: `UIView` or `UILayoutGuide`, if `nil`, it'll be superview.
+    ///     - spacing: Spacing between `self` and `item`.
     @discardableResult
     public func above(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> NextChain {
         let p = parameter(item) { $0.topAnchor }
         return bottom(p - spacing)
     }
 
+    /// Pin top to `item`'s bottom with `spacing`.
+    ///
+    /// - parameters:
+    ///     - item: `UIView` or `UILayoutGuide`, if `nil`, it'll be superview.
+    ///     - spacing: Spacing between `self` and `item`.
     @discardableResult
     public func below(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> NextChain {
         let p = parameter(item) { $0.bottomAnchor }

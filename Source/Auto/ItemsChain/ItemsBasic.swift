@@ -26,11 +26,27 @@
 import Foundation
 
 extension ItemsConstraintChain {
+    /// Create constraints for each item. For example:
+    ///
+    /// ```
+    /// [a, b, c].constrain.each {
+    ///     $0.constrain.width(10)
+    /// }
+    /// ```
     @discardableResult
     public func each<Chain: ConstraintChain>(constrain: (Item) -> Chain) -> ItemsChain<Item> {
         return add(items.map { constrain($0) })
     }
 
+    /// Create constraints between every two items. For example:
+    ///
+    /// ```
+    /// [a, b, c].constrain.between {
+    ///     $0.constrain.left($1)
+    /// }
+    /// ```
+    ///
+    /// It creates constraints between `a` and `b`, `b` and `c`.
     @discardableResult
     public func between<Chain: ConstraintChain>(
         constrain: (_ first: Item, _ second: Item) -> Chain

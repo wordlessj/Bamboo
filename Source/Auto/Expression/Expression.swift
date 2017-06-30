@@ -25,14 +25,20 @@
 
 import Foundation
 
+/// Item which contains x-axis, used as a type constraint in expressions.
 public protocol XAxisItem {}
+
+/// Item which contains y-axis, used as a type constraint in expressions.
 public protocol YAxisItem {}
+
+/// Item which contains dimension, used as a type constraint in expressions.
 public protocol DimensionItem {}
 
 extension NSLayoutXAxisAnchor: XAxisItem {}
 extension NSLayoutYAxisAnchor: YAxisItem {}
 extension NSLayoutDimension: DimensionItem {}
 
+/// Parameters constructed from an expression.
 public protocol ParameterProtocol {
     associatedtype Item
     var item: Item? { get set }
@@ -51,8 +57,10 @@ extension ParameterProtocol {
     }
 }
 
+/// Used as a type constraint in expressions.
 public protocol BasicParameterProtocol: ParameterProtocol {}
 
+/// Parameters without multiplier.
 public struct BasicParameter<Item>: BasicParameterProtocol {
     public var item: Item?
     public var constant: CGFloat = 0
@@ -68,10 +76,12 @@ public struct BasicParameter<Item>: BasicParameterProtocol {
     }
 }
 
+/// Used as a type constraint in expressions.
 public protocol MultiplierParameterProtocol: ParameterProtocol {
     var multiplier: CGFloat { get set }
 }
 
+/// Parameters with multiplier.
 public struct MultiplierParameter<Item>: MultiplierParameterProtocol {
     public var item: Item?
     public var constant: CGFloat = 0
@@ -95,6 +105,12 @@ public struct MultiplierParameter<Item>: MultiplierParameterProtocol {
     }
 }
 
+/// Full form of an expression:
+///
+/// `( >= or <= ) item * multiplier + constant ~ priority`
+///
+/// `item` can be `UIView`, `UILayoutGuide` or `NSLayoutAnchor`.
+/// Instead of using `*` and `+`, you can use `/` and `-`.
 public protocol ParameterExpression {
     associatedtype Parameter: ParameterProtocol
     var constraintParameter: Parameter { get }

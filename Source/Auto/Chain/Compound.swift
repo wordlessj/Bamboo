@@ -26,33 +26,44 @@
 import Foundation
 
 extension ConstraintChain {
+    /// Align center to superview.
     @discardableResult
     public func center() -> MultipleChain<Item> {
         return center(BasicParameter<View>())
     }
 
+    /// Align center to `expression`.
+    ///
+    /// - parameter expression: Expression with optional `UIView` or `UILayoutGuide`, no multiplier.
     @discardableResult
     public func center<Expression: ParameterExpression>(_ expression: Expression) -> MultipleChain<Item>
         where Expression.Parameter.Item: XAxisItem & YAxisItem, Expression.Parameter: BasicParameterProtocol {
             return toMultipleChain.centerX(expression).centerY(expression)
     }
 
+    /// Match size to superview.
     @discardableResult
     public func size() -> MultipleChain<Item> {
         return size(BasicParameter<View>(item: item.superview!))
     }
 
+    /// Match size to `expression`.
+    ///
+    /// - parameter expression: Expression with optional `UIView`, `UILayoutGuide` or `NSLayoutDimension`,
+    ///     optional multiplier.
     @discardableResult
     public func size<Expression: ParameterExpression>(_ expression: Expression) -> MultipleChain<Item>
         where Expression.Parameter.Item: DimensionItem {
             return toMultipleChain.width(expression).height(expression)
     }
 
+    /// Set size with `CGSize`.
     @discardableResult
     public func size(_ cgSize: CGSize) -> MultipleChain<Item> {
         return size(width: cgSize.width, height: cgSize.height)
     }
 
+    /// Set size with width and height.
     @discardableResult
     public func size(width w: CGFloat, height h: CGFloat) -> MultipleChain<Item> {
         return toMultipleChain.width(w).height(h)

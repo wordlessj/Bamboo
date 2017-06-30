@@ -27,17 +27,23 @@ import Foundation
 
 public protocol ItemsConstraintChain {
     associatedtype Item: ConstraintItem
+
+    /// Items to be constrained.
     var items: [Item] { get }
+
+    /// All constraints accumulated in a chain.
     var constraints: [NSLayoutConstraint] { get }
 }
 
 extension ItemsConstraintChain {
+    /// Add constraints in `chains`.
     func add<Chain: ConstraintChain>(_ chains: [Chain]) -> ItemsChain<Item> {
         let c = chains.flatMap { $0.constraints }
         return ItemsChain(items: items, constraints: constraints + c)
     }
 }
 
+/// Chain with multiple items.
 public struct ItemsChain<Item: ConstraintItem>: ItemsConstraintChain {
     public var items: [Item]
     public var constraints: [NSLayoutConstraint]
@@ -49,6 +55,7 @@ public struct ItemsChain<Item: ConstraintItem>: ItemsConstraintChain {
 }
 
 extension Array where Element: ConstraintItem {
+    /// Start a constraint chain.
     public var constrain: ItemsChain<Element> {
         return ItemsChain(items: self)
     }
