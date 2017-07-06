@@ -1,8 +1,10 @@
 ![Bamboo](https://raw.githubusercontent.com/wordlessj/Bamboo/master/Assets/Logo.png)
 
+<br>
+
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](#carthage)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Bamboo.svg)](#cocoapods)
-![Platform](https://img.shields.io/cocoapods/p/Bamboo.svg?style=flat)
+[![Platform](https://img.shields.io/cocoapods/p/Bamboo.svg?style=flat)](#installation)
 [![Build Status](https://travis-ci.org/wordlessj/Bamboo.svg)](https://travis-ci.org/wordlessj/Bamboo)
 
 Bamboo makes Auto Layout (and manual layout) elegant and concise.
@@ -43,12 +45,6 @@ github "wordlessj/Bamboo" ~> 1.0
 
 ```
 pod 'Bamboo', '~> 1.0'
-```
-
-### Swift Package Manager
-
-```swift
-.Package(url: "https://github.com/wordlessj/Bamboo.git", majorVersion: 1)
 ```
 
 ## Usage
@@ -240,13 +236,13 @@ You can constrain on multiple items at once. There are two fundamental methods o
 // Constrain on each item.
 // e.g., Set each item's width to 10.
 [view1, view2, view3].constrain.each {
-	$0.constrain.width(10)
+    $0.constrain.width(10)
 }
 
 // Constrain between every two items.
 // e.g., view1.left == view2.left, view2.left == view3.left
 [view1, view2, view3].constrain.between {
-	$0.constrain.left($1)
+    $0.constrain.left($1)
 }
 ```
 
