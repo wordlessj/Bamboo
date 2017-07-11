@@ -4,8 +4,9 @@
 
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](#carthage)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Bamboo.svg)](#cocoapods)
-[![Platform](https://img.shields.io/cocoapods/p/Bamboo.svg?style=flat)](#installation)
-[![Build Status](https://travis-ci.org/wordlessj/Bamboo.svg)](https://travis-ci.org/wordlessj/Bamboo)
+![Swift 3](https://img.shields.io/badge/Swift-3-orange.svg)
+![Platform](https://img.shields.io/badge/platform-iOS%209.0%2B%20%7C%20macOS%2010.11%2B%20%7C%20tvOS%209.0%2B-lightgrey.svg)
+[![Build Status](https://travis-ci.org/wordlessj/Bamboo.svg?branch=master)](https://travis-ci.org/wordlessj/Bamboo)
 
 Bamboo makes Auto Layout (and manual layout) elegant and concise.
 
@@ -18,10 +19,10 @@ view.constrain.centerX().below(view2).size(100)
 It’s equivalent to iOS 9 API:
 
 ```swift
-view.centerXAnchor.constraint(equalTo: view.superview!.centerXAnchor)
-view.topAnchor.constraint(equalTo: view2.bottomAnchor)
-view.widthAnchor.constraint(equalToConstant: 100)
-view.heightAnchor.constraint(equalToConstant: 100)
+view.centerXAnchor.constraint(equalTo: view.superview!.centerXAnchor).isActive = true
+view.topAnchor.constraint(equalTo: view2.bottomAnchor).isActive = true
+view.widthAnchor.constraint(equalToConstant: 100).isActive = true
+view.heightAnchor.constraint(equalToConstant: 100).isActive = true
 ```
 
 As you can see, Bamboo eliminated a lot of redundant code.
@@ -32,8 +33,6 @@ As you can see, Bamboo eliminated a lot of redundant code.
 - More higher level methods like `below()` and `size()` make things easier.
 
 ## Installation
-
-Bamboo supports iOS 9.0+, macOS 10.11+ and tvOS 9.0+, it’s compatible with Swift 3.
 
 ### Carthage
 
