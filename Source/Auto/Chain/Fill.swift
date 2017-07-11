@@ -172,7 +172,7 @@ extension ConstraintChain {
     }
 
     private func fill<CI: ConstraintItem>
-        (_ attribute: NSLayoutAttribute?, of item: CI?, insets: EdgeInsets) -> MultipleChain<Item> {
+        (_ attribute: LayoutAttribute?, of item: CI?, insets: EdgeInsets) -> MultipleChain<Item> {
         let hasHorizontal = attribute == nil || attribute == .top || attribute == .bottom || attribute == .width
         let hasVertical = attribute == nil || attribute == .left || attribute == .right ||
             attribute == .leading || attribute == .trailing || attribute == .height

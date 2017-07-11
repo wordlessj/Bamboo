@@ -114,7 +114,7 @@ class AttributesTests: BaseTestCase {
     }
 
     func testAxisWithFullExpression() {
-        let priority = LayoutPriorityDefaultHigh
+        let priority = LayoutPriority.defaultHigh
         let constraint = view1.constrain.left(>=view2 + value ~ priority).constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .left,
                                                 toItem: view2, toAttribute: .left,
@@ -131,7 +131,7 @@ class AttributesTests: BaseTestCase {
 
     func testDimensionWithFullExpression() {
         let multiplier: CGFloat = 2
-        let priority = LayoutPriorityDefaultHigh
+        let priority = LayoutPriority.defaultHigh
         let constraint = view1.constrain.width(>=view2 * multiplier + value ~ priority).constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .width,
                                                 toItem: view2, toAttribute: .width,

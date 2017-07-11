@@ -43,7 +43,7 @@ public protocol ParameterProtocol {
     associatedtype Item
     var item: Item? { get set }
     var constant: CGFloat { get set }
-    var relation: NSLayoutRelation { get set }
+    var relation: LayoutRelation { get set }
     var priority: LayoutPriority { get set }
 
     func multiplied(_ multiplier: CGFloat) -> MultiplierParameter<Item>
@@ -64,8 +64,8 @@ public protocol BasicParameterProtocol: ParameterProtocol {}
 public struct BasicParameter<Item>: BasicParameterProtocol {
     public var item: Item?
     public var constant: CGFloat = 0
-    public var relation: NSLayoutRelation = .equal
-    public var priority: LayoutPriority = LayoutPriorityRequired
+    public var relation: LayoutRelation = .equal
+    public var priority: LayoutPriority = .required
 
     init() {}
     init(item: Item?) { self.item = item }
@@ -85,8 +85,8 @@ public protocol MultiplierParameterProtocol: ParameterProtocol {
 public struct MultiplierParameter<Item>: MultiplierParameterProtocol {
     public var item: Item?
     public var constant: CGFloat = 0
-    public var relation: NSLayoutRelation = .equal
-    public var priority: LayoutPriority = LayoutPriorityRequired
+    public var relation: LayoutRelation = .equal
+    public var priority: LayoutPriority = .required
     public var multiplier: CGFloat = 1
 
     init(_ parameter: BasicParameter<Item>, multiplier: CGFloat) {

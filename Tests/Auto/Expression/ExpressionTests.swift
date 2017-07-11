@@ -127,7 +127,7 @@ class ExpressionTests: XCTestCase {
     }
 
     func testPriority() {
-        let priority = LayoutPriorityDefaultHigh
+        let priority = LayoutPriority.defaultHigh
         let p = parameter(view ~ priority)
         XCTAssertEqual(p.item, view)
         XCTAssertEqual(p.priority, priority)
@@ -135,7 +135,7 @@ class ExpressionTests: XCTestCase {
 
     func testFull() {
         let multiplier: CGFloat = 2
-        let priority = LayoutPriorityDefaultHigh
+        let priority = LayoutPriority.defaultHigh
         let p = parameter(>=view * multiplier + value ~ priority)
         XCTAssertEqual(p.item, view)
         XCTAssertEqual(p.multiplier, multiplier)

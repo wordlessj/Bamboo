@@ -26,12 +26,6 @@
 import XCTest
 import Bamboo
 
-#if os(iOS) || os(tvOS)
-    public let LayoutPriorityDefaultHigh = UILayoutPriorityDefaultHigh
-#elseif os(macOS)
-    public let LayoutPriorityDefaultHigh = NSLayoutPriorityDefaultHigh
-#endif
-
 class BaseTestCase: XCTestCase {
     let value: CGFloat = 3
 
@@ -59,7 +53,7 @@ class BaseTestCase: XCTestCase {
         view3.removeConstraints(view3.constraints)
     }
 
-    func betweenConstraints(_ attribute: NSLayoutAttribute) -> [NSLayoutConstraint] {
+    func betweenConstraints(_ attribute: LayoutAttribute) -> [NSLayoutConstraint] {
         return [NSLayoutConstraint(item: view1, attribute: attribute, toItem: view2),
                 NSLayoutConstraint(item: view2, attribute: attribute, toItem: view3)]
     }
