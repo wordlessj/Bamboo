@@ -25,30 +25,51 @@
 
 import Foundation
 
-public func + <Expression: ParameterExpression>(constant: CGFloat, expression: Expression) -> Expression.Parameter {
-    return expression.constraintParameter.modified { $0.constant += constant }
+/// System spacing placeholder.
+public struct SystemSpacing {
+    public var multiplier: CGFloat
+
+    public init(_ multiplier: CGFloat = 1) {
+        self.multiplier = multiplier
+    }
 }
 
-public func + <Expression: ParameterExpression>(expression: Expression, constant: CGFloat) -> Expression.Parameter {
-    return constant + expression
+public func + <Expression: ParameterExpression>(constant: CGFloat, expression: Expression)
+    -> Expression.Parameter.AddedParameter {
+        return expression.constraintParameter.added(constant)
 }
 
-public func - <Expression: ParameterExpression>(expression: Expression, constant: CGFloat) -> Expression.Parameter {
-    return -constant + expression
+public func + <Expression: ParameterExpression>(expression: Expression, constant: CGFloat)
+    -> Expression.Parameter.AddedParameter {
+        return constant + expression
+}
+
+#if os(iOS) || os(tvOS)
+@available(iOS 11.0, tvOS 11.0, *)
+public func + <Expression: ParameterExpression>(expression: Expression, spacing: SystemSpacing)
+    -> SystemSpacingParameter<Expression.Parameter.Item>
+    where Expression.Parameter: SystemSpacingParameterConvertible {
+        return SystemSpacingParameter(expression.constraintParameter, multiplier: spacing.multiplier)
+}
+#endif
+
+public func - <Expression: ParameterExpression>(expression: Expression, constant: CGFloat)
+    -> Expression.Parameter.AddedParameter {
+        return -constant + expression
 }
 
 public func * <Expression: ParameterExpression>(multiplier: CGFloat, expression: Expression)
-    -> MultiplierParameter<Expression.Parameter.Item> {
+    -> Expression.Parameter.MultipliedParameter {
         return expression.constraintParameter.multiplied(multiplier)
 }
 
 public func * <Expression: ParameterExpression>(expression: Expression, multiplier: CGFloat)
-    -> MultiplierParameter<Expression.Parameter.Item> {
+    -> Expression.Parameter.MultipliedParameter {
         return multiplier * expression
 }
 
 public func / <Expression: ParameterExpression>(expression: Expression, multiplier: CGFloat)
-    -> MultiplierParameter<Expression.Parameter.Item> {
+    -> Expression.Parameter.MultipliedParameter {
         return 1 / multiplier * expression
 }
 
@@ -68,6 +89,11 @@ infix operator ~ : PriorityPrecedence
 
 precedencegroup PriorityPrecedence {
     lowerThan: AdditionPrecedence
+}
+
+public func ~ <Expression: ParameterExpression>
+    (expression: Expression, priority: Float) -> Expression.Parameter {
+    return expression ~ LayoutPriority(rawValue: priority)
 }
 
 public func ~ <Expression: ParameterExpression>

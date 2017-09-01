@@ -38,7 +38,7 @@ extension ConstraintChain {
     ///     no multiplier.
     @discardableResult
     public func left<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
-        where Expression.Parameter.Item: XAxisItem, Expression.Parameter: BasicParameterProtocol {
+        where Expression.Parameter.Item: XAxisItem, Expression.Parameter: AxisParameterProtocol {
             return solve(expression) { $0.leftAnchor }
     }
 
@@ -54,7 +54,7 @@ extension ConstraintChain {
     ///     no multiplier.
     @discardableResult
     public func right<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
-        where Expression.Parameter.Item: XAxisItem, Expression.Parameter: BasicParameterProtocol {
+        where Expression.Parameter.Item: XAxisItem, Expression.Parameter: AxisParameterProtocol {
             return solve(expression) { $0.rightAnchor }
     }
 
@@ -70,7 +70,7 @@ extension ConstraintChain {
     ///     no multiplier.
     @discardableResult
     public func top<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
-        where Expression.Parameter.Item: YAxisItem, Expression.Parameter: BasicParameterProtocol {
+        where Expression.Parameter.Item: YAxisItem, Expression.Parameter: AxisParameterProtocol {
             return solve(expression) { $0.topAnchor }
     }
 
@@ -86,7 +86,7 @@ extension ConstraintChain {
     ///     no multiplier.
     @discardableResult
     public func bottom<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
-        where Expression.Parameter.Item: YAxisItem, Expression.Parameter: BasicParameterProtocol {
+        where Expression.Parameter.Item: YAxisItem, Expression.Parameter: AxisParameterProtocol {
             return solve(expression) { $0.bottomAnchor }
     }
 
@@ -102,7 +102,7 @@ extension ConstraintChain {
     ///     no multiplier.
     @discardableResult
     public func leading<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
-        where Expression.Parameter.Item: XAxisItem, Expression.Parameter: BasicParameterProtocol {
+        where Expression.Parameter.Item: XAxisItem, Expression.Parameter: AxisParameterProtocol {
             return solve(expression) { $0.leadingAnchor }
     }
 
@@ -118,7 +118,7 @@ extension ConstraintChain {
     ///     no multiplier.
     @discardableResult
     public func trailing<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
-        where Expression.Parameter.Item: XAxisItem, Expression.Parameter: BasicParameterProtocol {
+        where Expression.Parameter.Item: XAxisItem, Expression.Parameter: AxisParameterProtocol {
             return solve(expression) { $0.trailingAnchor }
     }
 
@@ -134,7 +134,7 @@ extension ConstraintChain {
     ///     optional multiplier.
     @discardableResult
     public func width<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
-        where Expression.Parameter.Item: DimensionItem {
+        where Expression.Parameter.Item: DimensionItem, Expression.Parameter: DimensionParameterProtocol {
             return solve(expression) { $0.widthAnchor }
     }
 
@@ -150,7 +150,7 @@ extension ConstraintChain {
     ///     optional multiplier.
     @discardableResult
     public func height<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
-        where Expression.Parameter.Item: DimensionItem {
+        where Expression.Parameter.Item: DimensionItem, Expression.Parameter: DimensionParameterProtocol {
             return solve(expression) { $0.heightAnchor }
     }
 
@@ -166,7 +166,7 @@ extension ConstraintChain {
     ///     no multiplier.
     @discardableResult
     public func centerX<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
-        where Expression.Parameter.Item: XAxisItem, Expression.Parameter: BasicParameterProtocol {
+        where Expression.Parameter.Item: XAxisItem, Expression.Parameter: AxisParameterProtocol {
             return solve(expression) { $0.centerXAnchor }
     }
 
@@ -182,7 +182,7 @@ extension ConstraintChain {
     ///     no multiplier.
     @discardableResult
     public func centerY<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
-        where Expression.Parameter.Item: YAxisItem, Expression.Parameter: BasicParameterProtocol {
+        where Expression.Parameter.Item: YAxisItem, Expression.Parameter: AxisParameterProtocol {
             return solve(expression) { $0.centerYAnchor }
     }
 
@@ -198,7 +198,7 @@ extension ConstraintChain {
     ///     no multiplier.
     @discardableResult
     public func firstBaseline<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
-        where Expression.Parameter.Item: YAxisItem, Expression.Parameter: BasicParameterProtocol {
+        where Expression.Parameter.Item: YAxisItem, Expression.Parameter: AxisParameterProtocol {
             return solve(expression) { $0.firstBaselineAnchor }
     }
 
@@ -214,7 +214,7 @@ extension ConstraintChain {
     ///     no multiplier.
     @discardableResult
     public func lastBaseline<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
-        where Expression.Parameter.Item: YAxisItem, Expression.Parameter: BasicParameterProtocol {
+        where Expression.Parameter.Item: YAxisItem, Expression.Parameter: AxisParameterProtocol {
             return solve(expression) { $0.lastBaselineAnchor }
     }
 
@@ -257,55 +257,97 @@ extension ConstraintChain {
         to toAnchor: NSLayoutAnchor<AnchorType>?,
         parameter: Parameter
     ) -> NSLayoutConstraint {
-        let constant = parameter.constant
+        let relation = parameter.relation
+        let multiplier = parameter.optionalMultiplier ?? 1
+        let constant = parameter.optionalConstant ?? 0
         let constraint: NSLayoutConstraint
 
         if let anchor = anchor as? NSLayoutDimension, let toAnchor = toAnchor as? NSLayoutDimension? {
-            if let toAnchor = toAnchor {
-                let multiplier: CGFloat
-
-                if let parameter = parameter as? MultiplierParameter<Parameter.Item> {
-                    multiplier = parameter.multiplier
-                } else {
-                    multiplier = 1
-                }
-
-                switch parameter.relation {
-                case .equal:
-                    constraint = anchor.constraint(equalTo: toAnchor, multiplier: multiplier, constant: constant)
-                case .greaterThanOrEqual:
-                    constraint = anchor.constraint(greaterThanOrEqualTo: toAnchor,
-                                                   multiplier: multiplier,
-                                                   constant: constant)
-                case .lessThanOrEqual:
-                    constraint = anchor.constraint(lessThanOrEqualTo: toAnchor,
-                                                   multiplier: multiplier,
-                                                   constant: constant)
-                }
-            } else {
-                switch parameter.relation {
-                case .equal:
-                    constraint = anchor.constraint(equalToConstant: constant)
-                case .greaterThanOrEqual:
-                    constraint = anchor.constraint(greaterThanOrEqualToConstant: constant)
-                case .lessThanOrEqual:
-                    constraint = anchor.constraint(lessThanOrEqualToConstant: constant)
-                }
-            }
+            constraint = constraintDimension(anchor, to: toAnchor,
+                                             relation: relation, multiplier: multiplier, constant: constant)
         } else if let toAnchor = toAnchor {
-            switch parameter.relation {
-            case .equal:
-                constraint = anchor.constraint(equalTo: toAnchor, constant: constant)
-            case .greaterThanOrEqual:
-                constraint = anchor.constraint(greaterThanOrEqualTo: toAnchor, constant: constant)
-            case .lessThanOrEqual:
-                constraint = anchor.constraint(lessThanOrEqualTo: toAnchor, constant: constant)
+            if #available(iOS 11.0, tvOS 11.0, *), parameter is SystemSpacingParameterProtocol {
+                constraint = constraintSystemSpacing(anchor, to: toAnchor, relation: relation, multiplier: multiplier)
+            } else {
+                constraint = constraintAxis(anchor, to: toAnchor, relation: relation, constant: constant)
             }
         } else {
             fatalError("Axis anchor without second anchor.")
         }
 
         return constraint
+    }
+
+    private func constraintAxis<AnchorType>(_ anchor: NSLayoutAnchor<AnchorType>,
+                                            to toAnchor: NSLayoutAnchor<AnchorType>,
+                                            relation: LayoutRelation,
+                                            constant: CGFloat) -> NSLayoutConstraint {
+        switch relation {
+        case .equal:
+            return anchor.constraint(equalTo: toAnchor, constant: constant)
+        case .greaterThanOrEqual:
+            return anchor.constraint(greaterThanOrEqualTo: toAnchor, constant: constant)
+        case .lessThanOrEqual:
+            return anchor.constraint(lessThanOrEqualTo: toAnchor, constant: constant)
+        }
+    }
+
+    private func constraintDimension(_ anchor: NSLayoutDimension,
+                                     to toAnchor: NSLayoutDimension?,
+                                     relation: LayoutRelation,
+                                     multiplier: CGFloat,
+                                     constant: CGFloat) -> NSLayoutConstraint {
+        if let toAnchor = toAnchor {
+            switch relation {
+            case .equal:
+                return anchor.constraint(equalTo: toAnchor, multiplier: multiplier, constant: constant)
+            case .greaterThanOrEqual:
+                return anchor.constraint(greaterThanOrEqualTo: toAnchor, multiplier: multiplier, constant: constant)
+            case .lessThanOrEqual:
+                return anchor.constraint(lessThanOrEqualTo: toAnchor, multiplier: multiplier, constant: constant)
+            }
+        } else {
+            switch relation {
+            case .equal:
+                return anchor.constraint(equalToConstant: constant)
+            case .greaterThanOrEqual:
+                return anchor.constraint(greaterThanOrEqualToConstant: constant)
+            case .lessThanOrEqual:
+                return anchor.constraint(lessThanOrEqualToConstant: constant)
+            }
+        }
+    }
+
+    @available(iOS 11.0, tvOS 11.0, *)
+    private func constraintSystemSpacing<AnchorType>(_ anchor: NSLayoutAnchor<AnchorType>,
+                                                     to toAnchor: NSLayoutAnchor<AnchorType>,
+                                                     relation: LayoutRelation,
+                                                     multiplier: CGFloat) -> NSLayoutConstraint {
+        #if os(iOS) || os(tvOS)
+        if let anchor = anchor as? NSLayoutXAxisAnchor, let toAnchor = toAnchor as? NSLayoutXAxisAnchor {
+            switch relation {
+            case .equal:
+                return anchor.constraintEqualToSystemSpacingAfter(toAnchor, multiplier: multiplier)
+            case .greaterThanOrEqual:
+                return anchor.constraintGreaterThanOrEqualToSystemSpacingAfter(toAnchor, multiplier: multiplier)
+            case .lessThanOrEqual:
+                return anchor.constraintLessThanOrEqualToSystemSpacingAfter(toAnchor, multiplier: multiplier)
+            }
+        } else if let anchor = anchor as? NSLayoutYAxisAnchor, let toAnchor = toAnchor as? NSLayoutYAxisAnchor {
+            switch relation {
+            case .equal:
+                return anchor.constraintEqualToSystemSpacingBelow(toAnchor, multiplier: multiplier)
+            case .greaterThanOrEqual:
+                return anchor.constraintGreaterThanOrEqualToSystemSpacingBelow(toAnchor, multiplier: multiplier)
+            case .lessThanOrEqual:
+                return anchor.constraintLessThanOrEqualToSystemSpacingBelow(toAnchor, multiplier: multiplier)
+            }
+        } else {
+            fatalError("System spacing not supported on dimensions.")
+        }
+        #else
+        fatalError("System spacing not supported on current platform.")
+        #endif
     }
 
     private func activate(_ constraint: NSLayoutConstraint, priority: LayoutPriority) {

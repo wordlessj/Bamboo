@@ -37,7 +37,7 @@ extension ConstraintChain {
     /// - parameter expression: Expression with optional `UIView` or `UILayoutGuide`, no multiplier.
     @discardableResult
     public func center<Expression: ParameterExpression>(_ expression: Expression) -> MultipleChain<Item>
-        where Expression.Parameter.Item: XAxisItem & YAxisItem, Expression.Parameter: BasicParameterProtocol {
+        where Expression.Parameter.Item: XAxisItem & YAxisItem, Expression.Parameter: AxisParameterProtocol {
             return toMultipleChain.centerX(expression).centerY(expression)
     }
 
@@ -53,7 +53,7 @@ extension ConstraintChain {
     ///     optional multiplier.
     @discardableResult
     public func size<Expression: ParameterExpression>(_ expression: Expression) -> MultipleChain<Item>
-        where Expression.Parameter.Item: DimensionItem {
+        where Expression.Parameter.Item: DimensionItem, Expression.Parameter: DimensionParameterProtocol {
             return toMultipleChain.width(expression).height(expression)
     }
 

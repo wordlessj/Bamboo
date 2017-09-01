@@ -32,117 +32,134 @@ class ExpressionTests: XCTestCase {
 
     func testInt() {
         let constant = 3
-        let p = parameter(constant)
+        let p: ConstantParameter = parameter(constant)
         XCTAssertEqual(p.constant, CGFloat(constant))
     }
 
     func testDouble() {
         let constant = 3.0
-        let p = parameter(constant)
+        let p: ConstantParameter = parameter(constant)
         XCTAssertEqual(p.constant, CGFloat(constant))
     }
 
     func testCGFloat() {
-        let p = parameter(value)
+        let p: ConstantParameter = parameter(value)
         XCTAssertEqual(p.constant, value)
     }
 
     func testView() {
-        let p = parameter(view)
+        let p: BasicParameter = parameter(view)
         XCTAssertEqual(p.item, view)
     }
 
     #if os(iOS) || os(tvOS)
-        func testLayoutGuide() {
-            let guide = UILayoutGuide()
-            let p = parameter(guide)
-            XCTAssertEqual(p.item, guide)
-        }
+    func testLayoutGuide() {
+        let guide = UILayoutGuide()
+        let p: BasicParameter = parameter(guide)
+        XCTAssertEqual(p.item, guide)
+    }
     #endif
 
     func testLayoutXAxisAnchor() {
         let anchor = NSLayoutXAxisAnchor()
-        let p = parameter(anchor)
+        let p: BasicParameter = parameter(anchor)
         XCTAssertEqual(p.item, anchor)
     }
 
     func testLayoutYAxisAnchor() {
         let anchor = NSLayoutYAxisAnchor()
-        let p = parameter(anchor)
+        let p: BasicParameter = parameter(anchor)
         XCTAssertEqual(p.item, anchor)
     }
 
     func testLayoutDimension() {
         let anchor = NSLayoutDimension()
-        let p = parameter(anchor)
+        let p: BasicParameter = parameter(anchor)
         XCTAssertEqual(p.item, anchor)
     }
 
     func testPlus() {
-        let p = parameter(view + value)
+        let p: ConstantParameter = parameter(view + value)
         XCTAssertEqual(p.item, view)
         XCTAssertEqual(p.constant, value)
     }
 
     func testReversedPlus() {
-        let p = parameter(value + view)
+        let p: ConstantParameter = parameter(value + view)
         XCTAssertEqual(p.item, view)
         XCTAssertEqual(p.constant, value)
     }
 
     func testMinus() {
-        let p = parameter(view - value)
+        let p: ConstantParameter = parameter(view - value)
         XCTAssertEqual(p.item, view)
         XCTAssertEqual(p.constant, -value)
     }
 
     func testMultiply() {
-        let p = parameter(value * view)
+        let p: MultiplierParameter = parameter(value * view)
         XCTAssertEqual(p.item, view)
         XCTAssertEqual(p.multiplier, value)
     }
 
     func testReversedMultiply() {
-        let p = parameter(view * value)
+        let p: MultiplierParameter = parameter(view * value)
         XCTAssertEqual(p.item, view)
         XCTAssertEqual(p.multiplier, value)
     }
 
     func testDivide() {
-        let p = parameter(view / value)
+        let p: MultiplierParameter = parameter(view / value)
         XCTAssertEqual(p.item, view)
         XCTAssertEqual(p.multiplier, 1 / value)
     }
 
     func testGreaterThanOrEqual() {
-        let p = parameter(>=view)
+        let p: BasicParameter = parameter(>=view)
         XCTAssertEqual(p.item, view)
         XCTAssertEqual(p.relation, .greaterThanOrEqual)
     }
 
     func testLessThanOrEqual() {
-        let p = parameter(<=view)
+        let p: BasicParameter = parameter(<=view)
         XCTAssertEqual(p.item, view)
         XCTAssertEqual(p.relation, .lessThanOrEqual)
     }
 
     func testPriority() {
         let priority = LayoutPriority.defaultHigh
-        let p = parameter(view ~ priority)
+        let p: BasicParameter = parameter(view ~ priority)
         XCTAssertEqual(p.item, view)
         XCTAssertEqual(p.priority, priority)
+    }
+
+    func testPriorityValue() {
+        let priority: Float = 800
+        let p: BasicParameter = parameter(view ~ priority)
+        XCTAssertEqual(p.item, view)
+        XCTAssertEqual(p.priority.rawValue, priority)
     }
 
     func testFull() {
         let multiplier: CGFloat = 2
         let priority = LayoutPriority.defaultHigh
-        let p = parameter(>=view * multiplier + value ~ priority)
+        let p: FullParameter = parameter(>=view * multiplier + value ~ priority)
         XCTAssertEqual(p.item, view)
         XCTAssertEqual(p.multiplier, multiplier)
         XCTAssertEqual(p.constant, value)
         XCTAssertEqual(p.relation, .greaterThanOrEqual)
         XCTAssertEqual(p.priority, priority)
     }
+
+    #if os(iOS) || os(tvOS)
+    @available(iOS 11.0, tvOS 11.0, *)
+    func testSystemSpacing() {
+        let multiplier: CGFloat = 2
+        let p: SystemSpacingParameter = parameter(view + SystemSpacing(multiplier))
+        XCTAssertEqual(p.item, view)
+        XCTAssertEqual(p.multiplier, multiplier)
+    }
+    #endif
 
     private func parameter<Expression: ParameterExpression>(_ expression: Expression) -> Expression.Parameter {
         return expression.constraintParameter

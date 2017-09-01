@@ -123,6 +123,16 @@ class AttributesTests: BaseTestCase {
         XCTAssertTrue(constraint.isActive)
     }
 
+    #if os(iOS) || os(tvOS)
+    @available(iOS 11.0, tvOS 11.0, *)
+    func testAxisWithSystemSpacing() {
+        let multiplier: CGFloat = 2
+        let constraint = view1.constrain.left(view2 + SystemSpacing(multiplier)).constraint
+        let testConstraint = NSLayoutConstraint(item: view1, attribute: .left, toItem: view2, constant: 16)
+        XCTAssertEqual(constraint, testConstraint)
+    }
+    #endif
+
     func testDimensionWithValue() {
         let constraint = view1.constrain.width(value).constraint
         let testConstraint = NSLayoutConstraint(item: view1, dimension: .width, constant: value)
