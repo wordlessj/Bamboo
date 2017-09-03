@@ -54,4 +54,15 @@ extension ItemsConstraintChain {
         let chains = zip(items, items.dropFirst()).map { constrain($0, $1) }
         return add(chains)
     }
+
+    /// Create constraints between every three items.
+    @discardableResult
+    public func triple<Chain: ConstraintChain>(
+        constrain: (_ first: Item, _ second: Item, _ third: Item) -> Chain
+    ) -> ItemsChain<Item> {
+        let chains = (min(2, items.count)..<items.count).map { index in
+            constrain(items[index - 2], items[index - 1], items[index])
+        }
+        return add(chains)
+    }
 }

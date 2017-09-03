@@ -218,6 +218,20 @@ extension ConstraintChain {
             return solve(expression) { $0.lastBaselineAnchor }
     }
 
+    /// Constrain between offset anchors. For example:
+    ///
+    /// `offset(view2.leftAnchor - view1.rightAnchor, view3.leftAnchor - view2.rightAnchor)`
+    ///
+    /// - parameters:
+    ///   - dimension: Offset anchor created by `-` operator.
+    ///   - expression: Expression with `NSLayoutDimension`, optional multiplier.
+    @discardableResult
+    public func offset<Expression: ParameterExpression>
+        (_ dimension: NSLayoutDimension, _ expression: Expression) -> NextChain
+        where Expression.Parameter.Item: NSLayoutDimension, Expression.Parameter: DimensionParameterProtocol {
+            return solve(expression) { _ in dimension }
+    }
+
     /// Set aspect ratio.
     ///
     /// - parameter ratio: Aspect ratio, defaults to 1.

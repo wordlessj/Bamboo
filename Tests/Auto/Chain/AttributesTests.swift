@@ -99,6 +99,12 @@ class AttributesTests: BaseTestCase {
         XCTAssertEqual(constraint, testConstraint)
     }
 
+    func testOffset() {
+        let constraint = view1.constrain.offset(view1.widthAnchor, view2.widthAnchor).constraint
+        let testConstraint = NSLayoutConstraint(item: view1, attribute: .width, toItem: view2)
+        XCTAssertEqual(constraint, testConstraint)
+    }
+
     func testAspectRatio() {
         let constraint = view1.constrain.aspectRatio(value).constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .width,

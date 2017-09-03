@@ -100,3 +100,13 @@ public func ~ <Expression: ParameterExpression>
     (expression: Expression, priority: LayoutPriority) -> Expression.Parameter {
     return expression.constraintParameter.modified { $0.priority = priority }
 }
+
+@available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
+public func - (anchor1: NSLayoutXAxisAnchor, anchor2: NSLayoutXAxisAnchor) -> NSLayoutDimension {
+    return anchor2.anchorWithOffset(to: anchor1)
+}
+
+@available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
+public func - (anchor1: NSLayoutYAxisAnchor, anchor2: NSLayoutYAxisAnchor) -> NSLayoutDimension {
+    return anchor2.anchorWithOffset(to: anchor1)
+}

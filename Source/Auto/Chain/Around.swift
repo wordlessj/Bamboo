@@ -26,26 +26,26 @@
 import Foundation
 
 extension ConstraintChain {
-    /// Pin right to `item`'s left with `spacing`.
+    /// Pin trailing to `item`'s leading with `spacing`.
     ///
     /// - parameters:
     ///     - item: `UIView` or `UILayoutGuide`, if `nil`, it'll be superview.
     ///     - spacing: Spacing between `self` and `item`.
     @discardableResult
     public func before(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> NextChain {
-        let p = parameter(item) { $0.leftAnchor }
-        return right(p - spacing)
+        let p = parameter(item) { $0.leadingAnchor }
+        return trailing(p - spacing)
     }
 
-    /// Pin left to `item`'s right with `spacing`.
+    /// Pin leading to `item`'s trailing with `spacing`.
     ///
     /// - parameters:
     ///     - item: `UIView` or `UILayoutGuide`, if `nil`, it'll be superview.
     ///     - spacing: Spacing between `self` and `item`.
     @discardableResult
     public func after(_ item: ConstraintItem? = nil, spacing: CGFloat = 0) -> NextChain {
-        let p = parameter(item) { $0.rightAnchor }
-        return left(p + spacing)
+        let p = parameter(item) { $0.trailingAnchor }
+        return leading(p + spacing)
     }
 
     /// Pin bottom to `item`'s top with `spacing`.

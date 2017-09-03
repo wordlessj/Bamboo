@@ -28,16 +28,16 @@ import XCTest
 class AroundTests: BaseTestCase {
     func testBefore() {
         let constraint = view1.constrain.before(view2, spacing: value).constraint
-        let testConstraint = NSLayoutConstraint(item: view1, attribute: .right,
-                                                toItem: view2, toAttribute: .left,
+        let testConstraint = NSLayoutConstraint(item: view1, attribute: .trailing,
+                                                toItem: view2, toAttribute: .leading,
                                                 constant: -value)
         XCTAssertEqual(constraint, testConstraint)
     }
 
     func testAfter() {
         let constraint = view1.constrain.after(view2, spacing: value).constraint
-        let testConstraint = NSLayoutConstraint(item: view1, attribute: .left,
-                                                toItem: view2, toAttribute: .right,
+        let testConstraint = NSLayoutConstraint(item: view1, attribute: .leading,
+                                                toItem: view2, toAttribute: .trailing,
                                                 constant: value)
         XCTAssertEqual(constraint, testConstraint)
     }
