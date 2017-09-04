@@ -27,7 +27,7 @@ import Foundation
 
 extension LayoutChain {
     /// Size of superview/layer.
-    public var superSize: CGSize { return item.superItem?.size ?? .zero }
+    public var superSize: CGSize { return item.bbm_superItem?.size ?? .zero }
 
     /// Center in superview/layer's coordinate, equals to half of its size.
     public var superCenter: CGPoint { return CGPoint(x: superSize.width / 2, y: superSize.height / 2) }

@@ -27,7 +27,7 @@ import XCTest
 
 class AroundTests: BaseTestCase {
     func testBefore() {
-        let constraint = view1.constrain.before(view2, spacing: value).constraint
+        let constraint = view1.bb.before(view2, spacing: value).constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .trailing,
                                                 toItem: view2, toAttribute: .leading,
                                                 constant: -value)
@@ -35,7 +35,7 @@ class AroundTests: BaseTestCase {
     }
 
     func testAfter() {
-        let constraint = view1.constrain.after(view2, spacing: value).constraint
+        let constraint = view1.bb.after(view2, spacing: value).constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .leading,
                                                 toItem: view2, toAttribute: .trailing,
                                                 constant: value)
@@ -43,7 +43,7 @@ class AroundTests: BaseTestCase {
     }
 
     func testAbove() {
-        let constraint = view1.constrain.above(view2, spacing: value).constraint
+        let constraint = view1.bb.above(view2, spacing: value).constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .bottom,
                                                 toItem: view2, toAttribute: .top,
                                                 constant: -value)
@@ -51,7 +51,7 @@ class AroundTests: BaseTestCase {
     }
 
     func testBelow() {
-        let constraint = view1.constrain.below(view2, spacing: value).constraint
+        let constraint = view1.bb.below(view2, spacing: value).constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .top,
                                                 toItem: view2, toAttribute: .bottom,
                                                 constant: value)

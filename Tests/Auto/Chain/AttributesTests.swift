@@ -28,85 +28,85 @@ import Bamboo
 
 class AttributesTests: BaseTestCase {
     func testLeft() {
-        let constraint = view1.constrain.left().constraint
+        let constraint = view1.bb.left().constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .left, toItem: superview)
         XCTAssertEqual(constraint, testConstraint)
     }
 
     func testRight() {
-        let constraint = view1.constrain.right().constraint
+        let constraint = view1.bb.right().constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .right, toItem: superview)
         XCTAssertEqual(constraint, testConstraint)
     }
 
     func testTop() {
-        let constraint = view1.constrain.top().constraint
+        let constraint = view1.bb.top().constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .top, toItem: superview)
         XCTAssertEqual(constraint, testConstraint)
     }
 
     func testBottom() {
-        let constraint = view1.constrain.bottom().constraint
+        let constraint = view1.bb.bottom().constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .bottom, toItem: superview)
         XCTAssertEqual(constraint, testConstraint)
     }
 
     func testLeading() {
-        let constraint = view1.constrain.leading().constraint
+        let constraint = view1.bb.leading().constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .leading, toItem: superview)
         XCTAssertEqual(constraint, testConstraint)
     }
 
     func testTrailing() {
-        let constraint = view1.constrain.trailing().constraint
+        let constraint = view1.bb.trailing().constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .trailing, toItem: superview)
         XCTAssertEqual(constraint, testConstraint)
     }
 
     func testWidth() {
-        let constraint = view1.constrain.width().constraint
+        let constraint = view1.bb.width().constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .width, toItem: superview)
         XCTAssertEqual(constraint, testConstraint)
     }
 
     func testHeight() {
-        let constraint = view1.constrain.height().constraint
+        let constraint = view1.bb.height().constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .height, toItem: superview)
         XCTAssertEqual(constraint, testConstraint)
     }
 
     func testCenterX() {
-        let constraint = view1.constrain.centerX().constraint
+        let constraint = view1.bb.centerX().constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .centerX, toItem: superview)
         XCTAssertEqual(constraint, testConstraint)
     }
 
     func testCenterY() {
-        let constraint = view1.constrain.centerY().constraint
+        let constraint = view1.bb.centerY().constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .centerY, toItem: superview)
         XCTAssertEqual(constraint, testConstraint)
     }
 
     func testFirstBaseline() {
-        let constraint = view1.constrain.firstBaseline().constraint
+        let constraint = view1.bb.firstBaseline().constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .firstBaseline, toItem: superview)
         XCTAssertEqual(constraint, testConstraint)
     }
 
     func testLastBaseline() {
-        let constraint = view1.constrain.lastBaseline().constraint
+        let constraint = view1.bb.lastBaseline().constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .lastBaseline, toItem: superview)
         XCTAssertEqual(constraint, testConstraint)
     }
 
     func testOffset() {
-        let constraint = view1.constrain.offset(view1.widthAnchor, view2.widthAnchor).constraint
+        let constraint = view1.bb.offset(view1.widthAnchor, view2.widthAnchor).constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .width, toItem: view2)
         XCTAssertEqual(constraint, testConstraint)
     }
 
     func testAspectRatio() {
-        let constraint = view1.constrain.aspectRatio(value).constraint
+        let constraint = view1.bb.aspectRatio(value).constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .width,
                                                 toItem: view1, toAttribute: .height,
                                                 multiplier: value)
@@ -114,14 +114,14 @@ class AttributesTests: BaseTestCase {
     }
 
     func testDifferentAxis() {
-        let constraint = view1.constrain.left(view2.rightAnchor).constraint
+        let constraint = view1.bb.left(view2.rightAnchor).constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .left, toItem: view2, toAttribute: .right)
         XCTAssertEqual(constraint, testConstraint)
     }
 
     func testAxisWithFullExpression() {
         let priority = LayoutPriority.defaultHigh
-        let constraint = view1.constrain.left(>=view2 + value ~ priority).constraint
+        let constraint = view1.bb.left(>=view2 + value ~ priority).constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .left,
                                                 toItem: view2, toAttribute: .left,
                                                 constant: value, relation: .greaterThanOrEqual, priority: priority)
@@ -133,14 +133,14 @@ class AttributesTests: BaseTestCase {
     @available(iOS 11.0, tvOS 11.0, *)
     func testAxisWithSystemSpacing() {
         let multiplier: CGFloat = 2
-        let constraint = view1.constrain.left(view2 + SystemSpacing(multiplier)).constraint
+        let constraint = view1.bb.left(view2 + SystemSpacing(multiplier)).constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .left, toItem: view2, constant: 16)
         XCTAssertEqual(constraint, testConstraint)
     }
     #endif
 
     func testDimensionWithValue() {
-        let constraint = view1.constrain.width(value).constraint
+        let constraint = view1.bb.width(value).constraint
         let testConstraint = NSLayoutConstraint(item: view1, dimension: .width, constant: value)
         XCTAssertEqual(constraint, testConstraint)
     }
@@ -148,7 +148,7 @@ class AttributesTests: BaseTestCase {
     func testDimensionWithFullExpression() {
         let multiplier: CGFloat = 2
         let priority = LayoutPriority.defaultHigh
-        let constraint = view1.constrain.width(>=view2 * multiplier + value ~ priority).constraint
+        let constraint = view1.bb.width(>=view2 * multiplier + value ~ priority).constraint
         let testConstraint = NSLayoutConstraint(item: view1, attribute: .width,
                                                 toItem: view2, toAttribute: .width,
                                                 multiplier: multiplier, constant: value,
@@ -158,7 +158,7 @@ class AttributesTests: BaseTestCase {
     }
 
     func testChains() {
-        let constraints = view1.constrain.left().right().constraints
+        let constraints = view1.bb.left().right().constraints
         let testConstraints = [NSLayoutConstraint(item: view1, attribute: .left, toItem: superview),
                                NSLayoutConstraint(item: view1, attribute: .right, toItem: superview)]
         XCTAssertEqual(constraints, testConstraints)

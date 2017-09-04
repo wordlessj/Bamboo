@@ -26,31 +26,31 @@
 import Foundation
 
 public protocol FittingSizeContainer {
-    var fittingSize: CGSize { get }
+    var bbm_fittingSize: CGSize { get }
 }
 
 #if os(iOS) || os(tvOS)
-    extension UIView: FittingSizeContainer {
-        public var fittingSize: CGSize { return sizeThatFits(layout.superSize) }
-    }
+extension UIView: FittingSizeContainer {
+    public var bbm_fittingSize: CGSize { return sizeThatFits(bbm.superSize) }
+}
 #endif
 
 extension LayoutChain where Item: FittingSizeContainer {
     /// Set size to the result of `sizeThatFits()`.
     @discardableResult
     public func fitSize() -> LayoutChain {
-        return size(item.fittingSize)
+        return size(item.bbm_fittingSize)
     }
 
     /// Set width to the result of `sizeThatFits()`.
     @discardableResult
     public func fitWidth() -> LayoutChain {
-        return width(item.fittingSize.width)
+        return width(item.bbm_fittingSize.width)
     }
 
     /// Set height to the result of `sizeThatFits()`.
     @discardableResult
     public func fitHeight() -> LayoutChain {
-        return height(item.fittingSize.height)
+        return height(item.bbm_fittingSize.height)
     }
 }

@@ -25,16 +25,16 @@
 
 import Foundation
 
-/// Item which has `layout` extensions, namely `UIView` and `CALayer`.
+/// Item which has `bbm` extensions, namely `UIView` and `CALayer`.
 public protocol LayoutItem: class {
     var bounds: CGRect { get set }
     var center: CGPoint { get set }
-    var superItem: LayoutItem? { get }
+    var bbm_superItem: LayoutItem? { get }
 }
 
 extension LayoutItem {
-    /// Start a layout chain for manual layout.
-    public var layout: LayoutChain<Self> { return LayoutChain(item: self) }
+    /// Start a manual layout chain.
+    public var bbm: LayoutChain<Self> { return LayoutChain(item: self) }
 
     /// Equals to `bounds.size`.
     public var size: CGSize {
@@ -67,17 +67,22 @@ extension LayoutItem {
     }
 }
 
+extension LayoutItem {
+    @available(*, deprecated, renamed: "bbm")
+    public var layout: LayoutChain<Self> { return bbm }
+}
+
 extension CALayer: LayoutItem {
     public var center: CGPoint {
         get { return position }
         set { position = newValue }
     }
 
-    public var superItem: LayoutItem? { return superlayer }
+    public var bbm_superItem: LayoutItem? { return superlayer }
 }
 
 extension View: LayoutItem {
-    public var superItem: LayoutItem? { return superview }
+    public var bbm_superItem: LayoutItem? { return superview }
 
     #if os(macOS)
         public var center: CGPoint {

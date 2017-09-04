@@ -96,8 +96,8 @@ extension ItemsConstraintChain {
     private func distribute(axis: DistributeAxis, spacing: CGFloat, inset: DistributeInset) -> ItemsChain<Item> {
         var chain = between { first, second -> SingleChain<Item> in
             switch axis {
-            case .x: return second.constrain.after(first, spacing: spacing)
-            case .y: return second.constrain.below(first, spacing: spacing)
+            case .x: return second.bb.after(first, spacing: spacing)
+            case .y: return second.bb.below(first, spacing: spacing)
             }
         }
 
@@ -118,10 +118,10 @@ extension ItemsConstraintChain {
     private func distributeEqualSpacing(axis: DistributeAxis, inset: DistributeInset) -> ItemsChain<Item> {
         var chain = triple { first, second, third -> SingleChain<Item> in
             switch axis {
-            case .x: return first.constrain.offset(second.leadingAnchor - first.trailingAnchor,
-                                                   third.leadingAnchor - second.trailingAnchor)
-            case .y: return first.constrain.offset(second.topAnchor - first.bottomAnchor,
-                                                   third.topAnchor - second.bottomAnchor)
+            case .x: return first.bb.offset(second.leadingAnchor - first.trailingAnchor,
+                                            third.leadingAnchor - second.trailingAnchor)
+            case .y: return first.bb.offset(second.topAnchor - first.bottomAnchor,
+                                            third.topAnchor - second.bottomAnchor)
             }
         }
 
@@ -137,10 +137,10 @@ extension ItemsConstraintChain {
                 let newChain: SingleChain<Item>
 
                 switch axis {
-                case .x: newChain = first.constrain.offset(first.leadingAnchor - first.superview!.leadingAnchor,
-                                                           second.leadingAnchor - first.trailingAnchor)
-                case .y: newChain = first.constrain.offset(first.topAnchor - first.superview!.topAnchor,
-                                                           second.topAnchor - first.bottomAnchor)
+                case .x: newChain = first.bb.offset(first.leadingAnchor - first.bb_superview!.leadingAnchor,
+                                                    second.leadingAnchor - first.trailingAnchor)
+                case .y: newChain = first.bb.offset(first.topAnchor - first.bb_superview!.topAnchor,
+                                                    second.topAnchor - first.bottomAnchor)
                 }
 
                 chain = chain.add([newChain])
@@ -156,15 +156,15 @@ extension ItemsConstraintChain {
 
         if let first = items.first {
             switch axis {
-            case .x: chains.append(first.constrain.leading(spacing))
-            case .y: chains.append(first.constrain.top(spacing))
+            case .x: chains.append(first.bb.leading(spacing))
+            case .y: chains.append(first.bb.top(spacing))
             }
         }
 
         if let last = items.last {
             switch axis {
-            case .x: chains.append(last.constrain.trailing(-spacing))
-            case .y: chains.append(last.constrain.bottom(-spacing))
+            case .x: chains.append(last.bb.trailing(-spacing))
+            case .y: chains.append(last.bb.bottom(-spacing))
             }
         }
 
@@ -179,10 +179,10 @@ extension ItemsConstraintChain {
             let chain: SingleChain<Item>
 
             switch axis {
-            case .x: chain = first.constrain.offset(first.leadingAnchor - first.superview!.leadingAnchor,
-                                                    last.superview!.trailingAnchor - last.trailingAnchor)
-            case .y: chain = first.constrain.offset(first.topAnchor - first.superview!.topAnchor,
-                                                    last.superview!.bottomAnchor - last.bottomAnchor)
+            case .x: chain = first.bb.offset(first.leadingAnchor - first.bb_superview!.leadingAnchor,
+                                             last.bb_superview!.trailingAnchor - last.trailingAnchor)
+            case .y: chain = first.bb.offset(first.topAnchor - first.bb_superview!.topAnchor,
+                                             last.bb_superview!.bottomAnchor - last.bottomAnchor)
             }
 
             chains.append(chain)

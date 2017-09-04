@@ -28,14 +28,14 @@ import Bamboo
 
 class CompoundTests: BaseTestCase {
     func testCenter() {
-        let constraints = view1.constrain.center().constraints
+        let constraints = view1.bb.center().constraints
         let testConstraints = [NSLayoutConstraint(item: view1, attribute: .centerX, toItem: superview),
                                NSLayoutConstraint(item: view1, attribute: .centerY, toItem: superview)]
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testSize() {
-        let constraints = view1.constrain.size().constraints
+        let constraints = view1.bb.size().constraints
         let testConstraints = [NSLayoutConstraint(item: view1, attribute: .width, toItem: superview),
                                NSLayoutConstraint(item: view1, attribute: .height, toItem: superview)]
         XCTAssertEqual(constraints, testConstraints)
@@ -43,7 +43,7 @@ class CompoundTests: BaseTestCase {
 
     func testSizeWithCGSize() {
         let size = CGSize(width: 2, height: 3)
-        let constraints = view1.constrain.size(size).constraints
+        let constraints = view1.bb.size(size).constraints
         let testConstraints = [NSLayoutConstraint(item: view1, dimension: .width, constant: size.width),
                                NSLayoutConstraint(item: view1, dimension: .height, constant: size.height)]
         XCTAssertEqual(constraints, testConstraints)
@@ -52,14 +52,14 @@ class CompoundTests: BaseTestCase {
     func testSizeWithValues() {
         let width: CGFloat = 2
         let height: CGFloat = 3
-        let constraints = view1.constrain.size(width: width, height: height).constraints
+        let constraints = view1.bb.size(width: width, height: height).constraints
         let testConstraints = [NSLayoutConstraint(item: view1, dimension: .width, constant: width),
                                NSLayoutConstraint(item: view1, dimension: .height, constant: height)]
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testChains() {
-        let constraints = view1.constrain.center().size().constraints
+        let constraints = view1.bb.center().size().constraints
         let testConstraints = [NSLayoutConstraint(item: view1, attribute: .centerX, toItem: superview),
                                NSLayoutConstraint(item: view1, attribute: .centerY, toItem: superview),
                                NSLayoutConstraint(item: view1, attribute: .width, toItem: superview),

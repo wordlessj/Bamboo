@@ -101,6 +101,6 @@ extension ItemsConstraintChain {
     private func attribute(
         _ closure: (InitialChain<Item>, BasicParameter<Item>) -> InitialChain<Item>.NextChain
     ) -> ItemsChain<Item> {
-        return between { closure($0.constrain, BasicParameter(item: $1)) }
+        return between { closure($0.bb, BasicParameter(item: $1)) }
     }
 }

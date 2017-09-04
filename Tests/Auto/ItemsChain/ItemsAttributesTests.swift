@@ -28,79 +28,79 @@ import Bamboo
 
 class ItemsAttributesTests: BaseTestCase {
     func testLeft() {
-        let constraints = subviews.constrain.left().constraints
+        let constraints = subviews.bb.left().constraints
         let testConstraints = betweenConstraints(.left)
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testRight() {
-        let constraints = subviews.constrain.right().constraints
+        let constraints = subviews.bb.right().constraints
         let testConstraints = betweenConstraints(.right)
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testTop() {
-        let constraints = subviews.constrain.top().constraints
+        let constraints = subviews.bb.top().constraints
         let testConstraints = betweenConstraints(.top)
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testBottom() {
-        let constraints = subviews.constrain.bottom().constraints
+        let constraints = subviews.bb.bottom().constraints
         let testConstraints = betweenConstraints(.bottom)
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testLeading() {
-        let constraints = subviews.constrain.leading().constraints
+        let constraints = subviews.bb.leading().constraints
         let testConstraints = betweenConstraints(.leading)
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testTrailing() {
-        let constraints = subviews.constrain.trailing().constraints
+        let constraints = subviews.bb.trailing().constraints
         let testConstraints = betweenConstraints(.trailing)
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testWidth() {
-        let constraints = subviews.constrain.width().constraints
+        let constraints = subviews.bb.width().constraints
         let testConstraints = betweenConstraints(.width)
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testHeight() {
-        let constraints = subviews.constrain.height().constraints
+        let constraints = subviews.bb.height().constraints
         let testConstraints = betweenConstraints(.height)
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testCenterX() {
-        let constraints = subviews.constrain.centerX().constraints
+        let constraints = subviews.bb.centerX().constraints
         let testConstraints = betweenConstraints(.centerX)
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testCenterY() {
-        let constraints = subviews.constrain.centerY().constraints
+        let constraints = subviews.bb.centerY().constraints
         let testConstraints = betweenConstraints(.centerY)
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testFirstBaseline() {
-        let constraints = subviews.constrain.firstBaseline().constraints
+        let constraints = subviews.bb.firstBaseline().constraints
         let testConstraints = betweenConstraints(.firstBaseline)
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testLastBaseline() {
-        let constraints = subviews.constrain.lastBaseline().constraints
+        let constraints = subviews.bb.lastBaseline().constraints
         let testConstraints = betweenConstraints(.lastBaseline)
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testChains() {
-        let constraints = subviews.constrain.left().right().constraints
+        let constraints = subviews.bb.left().right().constraints
         let testConstraints = betweenConstraints(.left) + betweenConstraints(.right)
         XCTAssertEqual(constraints, testConstraints)
     }

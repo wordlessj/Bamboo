@@ -125,7 +125,7 @@ extension ConstraintChain {
     /// Match width to superview.
     @discardableResult
     public func width() -> NextChain {
-        return width(BasicParameter<View>(item: item.superview!))
+        return width(BasicParameter<View>(item: item.bb_superview!))
     }
 
     /// Match width to `expression`.
@@ -141,7 +141,7 @@ extension ConstraintChain {
     /// Match height to superview.
     @discardableResult
     public func height() -> NextChain {
-        return height(BasicParameter<View>(item: item.superview!))
+        return height(BasicParameter<View>(item: item.bb_superview!))
     }
 
     /// Match height to `expression`.
@@ -199,7 +199,7 @@ extension ConstraintChain {
     @discardableResult
     public func firstBaseline<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
         where Expression.Parameter.Item: YAxisItem, Expression.Parameter: AxisParameterProtocol {
-            return solve(expression) { $0.firstBaselineAnchor }
+            return solve(expression) { $0.bb_firstBaselineAnchor }
     }
 
     /// Pin lastBaseline to superview.
@@ -215,7 +215,7 @@ extension ConstraintChain {
     @discardableResult
     public func lastBaseline<Expression: ParameterExpression>(_ expression: Expression) -> NextChain
         where Expression.Parameter.Item: YAxisItem, Expression.Parameter: AxisParameterProtocol {
-            return solve(expression) { $0.lastBaselineAnchor }
+            return solve(expression) { $0.bb_lastBaselineAnchor }
     }
 
     /// Constrain between offset anchors. For example:
@@ -244,7 +244,7 @@ extension ConstraintChain {
         _ expression: Expression,
         anchorOf: (ConstraintItem) -> NSLayoutAnchor<AnchorType>
     ) -> NextChain {
-        let parameter = expression.constraintParameter
+        let parameter = expression.bb_parameter
         let anchor = anchorOf(item)
         let toAnchor: NSLayoutAnchor<AnchorType>?
 
@@ -254,7 +254,7 @@ extension ConstraintChain {
             if anchor is NSLayoutDimension && parameterItem == nil {
                 toAnchor = nil
             } else {
-                let toItem = parameterItem ?? item.superview!
+                let toItem = parameterItem ?? item.bb_superview!
                 toAnchor = anchorOf(toItem)
             }
         } else {

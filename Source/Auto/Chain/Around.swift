@@ -74,6 +74,6 @@ extension ConstraintChain {
         _ parameterItem: ConstraintItem?,
         anchorOf: (ConstraintItem) -> Anchor
     ) -> BasicParameter<Anchor> {
-        return BasicParameter(item: anchorOf(parameterItem ?? item.superview!))
+        return BasicParameter(item: anchorOf(parameterItem ?? item.bb_superview!))
     }
 }

@@ -25,9 +25,9 @@
 
 import Foundation
 
-/// Item which has `constrain` extensions, namely `UIView` and `UILayoutGuide`.
+/// Item which has `bb` extensions, namely `UIView` and `UILayoutGuide`.
 public protocol ConstraintItem: XAxisItem, YAxisItem, DimensionItem {
-    var superview: View? { get }
+    var bb_superview: View? { get }
 
     var leftAnchor: NSLayoutXAxisAnchor { get }
     var rightAnchor: NSLayoutXAxisAnchor { get }
@@ -39,24 +39,35 @@ public protocol ConstraintItem: XAxisItem, YAxisItem, DimensionItem {
     var heightAnchor: NSLayoutDimension { get }
     var centerXAnchor: NSLayoutXAxisAnchor { get }
     var centerYAnchor: NSLayoutYAxisAnchor { get }
-    var firstBaselineAnchor: NSLayoutYAxisAnchor { get }
-    var lastBaselineAnchor: NSLayoutYAxisAnchor { get }
+
+    var bb_firstBaselineAnchor: NSLayoutYAxisAnchor { get }
+    var bb_lastBaselineAnchor: NSLayoutYAxisAnchor { get }
 }
 
 extension ConstraintItem {
-    /// Start a constraint chain for auto layout.
-    public var constrain: InitialChain<Self> {
+    /// Start an auto layout chain.
+    public var bb: InitialChain<Self> {
         return InitialChain(item: self)
+    }
+
+    @available(*, deprecated, renamed: "bb")
+    public var constrain: InitialChain<Self> {
+        return bb
     }
 }
 
-extension View: ConstraintItem {}
+extension View: ConstraintItem {
+    public var bb_superview: View? { return superview }
+
+    public var bb_firstBaselineAnchor: NSLayoutYAxisAnchor { return firstBaselineAnchor }
+    public var bb_lastBaselineAnchor: NSLayoutYAxisAnchor { return lastBaselineAnchor }
+}
 
 #if os(iOS) || os(tvOS)
-    extension UILayoutGuide: ConstraintItem {
-        public var superview: View? { return owningView }
+extension UILayoutGuide: ConstraintItem {
+    public var bb_superview: View? { return owningView }
 
-        public var firstBaselineAnchor: NSLayoutYAxisAnchor { return topAnchor }
-        public var lastBaselineAnchor: NSLayoutYAxisAnchor { return bottomAnchor }
-    }
+    public var bb_firstBaselineAnchor: NSLayoutYAxisAnchor { return topAnchor }
+    public var bb_lastBaselineAnchor: NSLayoutYAxisAnchor { return bottomAnchor }
+}
 #endif

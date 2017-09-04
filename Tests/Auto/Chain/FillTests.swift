@@ -54,55 +54,55 @@ class FillTests: BaseTestCase {
     }
 
     func testFill() {
-        let constraints = view1.constrain.fill(insets: insets).constraints
+        let constraints = view1.bb.fill(insets: insets).constraints
         let testConstraints = [topConstraint, bottomConstraint, leadingConstraint, trailingConstraint]
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testFillLeft() {
-        let constraints = view1.constrain.fillLeft(insets: insets).constraints
+        let constraints = view1.bb.fillLeft(insets: insets).constraints
         let testConstraints = [leftConstraint, topConstraint, bottomConstraint]
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testFillRight() {
-        let constraints = view1.constrain.fillRight(insets: insets).constraints
+        let constraints = view1.bb.fillRight(insets: insets).constraints
         let testConstraints = [rightConstraint, topConstraint, bottomConstraint]
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testFillTop() {
-        let constraints = view1.constrain.fillTop(insets: insets).constraints
+        let constraints = view1.bb.fillTop(insets: insets).constraints
         let testConstraints = [topConstraint, leadingConstraint, trailingConstraint]
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testFillBottom() {
-        let constraints = view1.constrain.fillBottom(insets: insets).constraints
+        let constraints = view1.bb.fillBottom(insets: insets).constraints
         let testConstraints = [bottomConstraint, leadingConstraint, trailingConstraint]
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testFillLeading() {
-        let constraints = view1.constrain.fillLeading(insets: insets).constraints
+        let constraints = view1.bb.fillLeading(insets: insets).constraints
         let testConstraints = [topConstraint, bottomConstraint, leadingConstraint]
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testFillTrailing() {
-        let constraints = view1.constrain.fillTrailing(insets: insets).constraints
+        let constraints = view1.bb.fillTrailing(insets: insets).constraints
         let testConstraints = [topConstraint, bottomConstraint, trailingConstraint]
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testFillWidth() {
-        let constraints = view1.constrain.fillWidth(insets: insets).constraints
+        let constraints = view1.bb.fillWidth(insets: insets).constraints
         let testConstraints = [leadingConstraint, trailingConstraint]
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testFillHeight() {
-        let constraints = view1.constrain.fillHeight(insets: insets).constraints
+        let constraints = view1.bb.fillHeight(insets: insets).constraints
         let testConstraints = [topConstraint, bottomConstraint]
         XCTAssertEqual(constraints, testConstraints)
     }

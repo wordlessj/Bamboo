@@ -229,74 +229,74 @@ extension SystemSpacingParameter: AxisParameterProtocol, SystemSpacingParameterP
 /// Instead of using `*` and `+`, you can use `/` and `-`.
 public protocol ParameterExpression {
     associatedtype Parameter: ParameterProtocol
-    var constraintParameter: Parameter { get }
+    var bb_parameter: Parameter { get }
 }
 
 extension BasicParameter: ParameterExpression {
-    public var constraintParameter: BasicParameter { return self }
+    public var bb_parameter: BasicParameter { return self }
 }
 
 extension MultiplierParameter: ParameterExpression {
-    public var constraintParameter: MultiplierParameter { return self }
+    public var bb_parameter: MultiplierParameter { return self }
 }
 
 extension ConstantParameter: ParameterExpression {
-    public var constraintParameter: ConstantParameter { return self }
+    public var bb_parameter: ConstantParameter { return self }
 }
 
 extension FullParameter: ParameterExpression {
-    public var constraintParameter: FullParameter { return self }
+    public var bb_parameter: FullParameter { return self }
 }
 
 extension SystemSpacingParameter: ParameterExpression {
-    public var constraintParameter: SystemSpacingParameter { return self }
+    public var bb_parameter: SystemSpacingParameter { return self }
 }
 
 extension Int: ParameterExpression {
-    public var constraintParameter: ConstantParameter<View> {
+    public var bb_parameter: ConstantParameter<View> {
         return ConstantParameter(constant: CGFloat(self))
     }
 }
 
 extension Double: ParameterExpression {
-    public var constraintParameter: ConstantParameter<View> {
+    public var bb_parameter: ConstantParameter<View> {
         return ConstantParameter(constant: CGFloat(self))
     }
 }
 
 extension CGFloat: ParameterExpression {
-    public var constraintParameter: ConstantParameter<View> {
+    public var bb_parameter: ConstantParameter<View> {
         return ConstantParameter(constant: self)
     }
 }
 
 extension View: ParameterExpression {
-    public var constraintParameter: BasicParameter<View> {
+    public var bb_parameter: BasicParameter<View> {
         return BasicParameter(item: self)
     }
 }
 
 extension NSLayoutXAxisAnchor: ParameterExpression {
-    public var constraintParameter: BasicParameter<NSLayoutXAxisAnchor> {
+    public var bb_parameter: BasicParameter<NSLayoutXAxisAnchor> {
         return BasicParameter(item: self)
     }
 }
 
 extension NSLayoutYAxisAnchor: ParameterExpression {
-    public var constraintParameter: BasicParameter<NSLayoutYAxisAnchor> {
+    public var bb_parameter: BasicParameter<NSLayoutYAxisAnchor> {
         return BasicParameter(item: self)
     }
 }
 
 extension NSLayoutDimension: ParameterExpression {
-    public var constraintParameter: BasicParameter<NSLayoutDimension> {
+    public var bb_parameter: BasicParameter<NSLayoutDimension> {
         return BasicParameter(item: self)
     }
 }
 
 #if os(iOS) || os(tvOS)
     extension UILayoutGuide: ParameterExpression {
-        public var constraintParameter: BasicParameter<UILayoutGuide> {
+        public var bb_parameter: BasicParameter<UILayoutGuide> {
             return BasicParameter(item: self)
         }
     }

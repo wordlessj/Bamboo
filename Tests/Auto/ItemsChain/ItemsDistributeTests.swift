@@ -62,36 +62,36 @@ class ItemsDistributeTests: BaseTestCase {
     }
 
     func testDistributeX() {
-        let constraints = subviews.constrain.distributeX(spacing: value).constraints
+        let constraints = subviews.bb.distributeX(spacing: value).constraints
         XCTAssertEqual(constraints, distributeXConstraints)
     }
 
     func testDistributeXWithInsetSpacing() {
-        let constraints = subviews.constrain.distributeX(spacing: value, inset: .fixed(inset)).constraints
+        let constraints = subviews.bb.distributeX(spacing: value, inset: .fixed(inset)).constraints
         XCTAssertEqual(constraints, distributeXConstraints + insetXConstraints)
     }
 
     @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
     func testDistributeXWithEqualInset() {
-        let constraints = subviews.constrain.distributeX(spacing: value, inset: .equal).constraints
+        let constraints = subviews.bb.distributeX(spacing: value, inset: .equal).constraints
         XCTAssertEqual(constraints.count, 3)
         XCTAssertEqual(Array(constraints[0..<2]), distributeXConstraints)
         XCTAssertNil(constraints[2].firstItem)
     }
 
     func testDistributeY() {
-        let constraints = subviews.constrain.distributeY(spacing: value).constraints
+        let constraints = subviews.bb.distributeY(spacing: value).constraints
         XCTAssertEqual(constraints, distributeYConstraints)
     }
 
     func testDistributeYWithInsetSpacing() {
-        let constraints = subviews.constrain.distributeY(spacing: value, inset: .fixed(inset)).constraints
+        let constraints = subviews.bb.distributeY(spacing: value, inset: .fixed(inset)).constraints
         XCTAssertEqual(constraints, distributeYConstraints + insetYConstraints)
     }
 
     @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
     func testDistributeYWithEqualInset() {
-        let constraints = subviews.constrain.distributeY(spacing: value, inset: .equal).constraints
+        let constraints = subviews.bb.distributeY(spacing: value, inset: .equal).constraints
         XCTAssertEqual(constraints.count, 3)
         XCTAssertEqual(Array(constraints[0..<2]), distributeYConstraints)
         XCTAssertNil(constraints[2].firstItem)
@@ -99,14 +99,14 @@ class ItemsDistributeTests: BaseTestCase {
 
     @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
     func testDistributeXEqualSpacing() {
-        let constraints = subviews.constrain.distributeXEqualSpacing().constraints
+        let constraints = subviews.bb.distributeXEqualSpacing().constraints
         XCTAssertEqual(constraints.count, 1)
         XCTAssertNil(constraints[0].firstItem)
     }
 
     @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
     func testDistributeXEqualSpacingWithInsetSpacing() {
-        let constraints = subviews.constrain.distributeXEqualSpacing(inset: .fixed(inset)).constraints
+        let constraints = subviews.bb.distributeXEqualSpacing(inset: .fixed(inset)).constraints
         XCTAssertEqual(constraints.count, 3)
         XCTAssertNil(constraints[0].firstItem)
         XCTAssertEqual(Array(constraints[1..<3]), insetXConstraints)
@@ -114,20 +114,20 @@ class ItemsDistributeTests: BaseTestCase {
 
     @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
     func testDistributeXEqualSpacingWithEqualInset() {
-        let constraints = subviews.constrain.distributeXEqualSpacing(inset: .equal).constraints
+        let constraints = subviews.bb.distributeXEqualSpacing(inset: .equal).constraints
         XCTAssertEqual(constraints.count, 3)
     }
 
     @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
     func testDistributeYEqualSpacing() {
-        let constraints = subviews.constrain.distributeYEqualSpacing().constraints
+        let constraints = subviews.bb.distributeYEqualSpacing().constraints
         XCTAssertEqual(constraints.count, 1)
         XCTAssertNil(constraints[0].firstItem)
     }
 
     @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
     func testDistributeYEqualSpacingWithInsetSpacing() {
-        let constraints = subviews.constrain.distributeYEqualSpacing(inset: .fixed(inset)).constraints
+        let constraints = subviews.bb.distributeYEqualSpacing(inset: .fixed(inset)).constraints
         XCTAssertEqual(constraints.count, 3)
         XCTAssertNil(constraints[0].firstItem)
         XCTAssertEqual(Array(constraints[1..<3]), insetYConstraints)
@@ -135,7 +135,7 @@ class ItemsDistributeTests: BaseTestCase {
 
     @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
     func testDistributeYEqualSpacingWithEqualInset() {
-        let constraints = subviews.constrain.distributeYEqualSpacing(inset: .equal).constraints
+        let constraints = subviews.bb.distributeYEqualSpacing(inset: .equal).constraints
         XCTAssertEqual(constraints.count, 3)
     }
 }

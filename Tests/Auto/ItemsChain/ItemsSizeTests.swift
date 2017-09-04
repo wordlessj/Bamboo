@@ -28,19 +28,19 @@ import Bamboo
 
 class ItemsSizeTests: BaseTestCase {
     func testWidth() {
-        let constraints = subviews.constrain.width(value).constraints
+        let constraints = subviews.bb.width(value).constraints
         let testConstraints = subviews.map { NSLayoutConstraint(item: $0, dimension: .width, constant: value) }
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testHeight() {
-        let constraints = subviews.constrain.height(value).constraints
+        let constraints = subviews.bb.height(value).constraints
         let testConstraints = subviews.map { NSLayoutConstraint(item: $0, dimension: .height, constant: value) }
         XCTAssertEqual(constraints, testConstraints)
     }
 
     func testSize() {
-        let constraints = subviews.constrain.size().constraints
+        let constraints = subviews.bb.size().constraints
         let testConstraints = betweenConstraints(.width) + betweenConstraints(.height)
         XCTAssertEqual(constraints, testConstraints)
     }
@@ -48,7 +48,7 @@ class ItemsSizeTests: BaseTestCase {
     func testSizeWithValues() {
         let width: CGFloat = 2
         let height: CGFloat = 3
-        let constraints = subviews.constrain.size(width: width, height: height).constraints
+        let constraints = subviews.bb.size(width: width, height: height).constraints
         let testConstraints = subviews.flatMap {
             [NSLayoutConstraint(item: $0, dimension: .width, constant: width),
              NSLayoutConstraint(item: $0, dimension: .height, constant: height)]

@@ -52,15 +52,10 @@ extension ConstraintChain {
     }
 }
 
-/// Chain created from `constrain` with no constraints.
+/// Chain created from `bb` with no constraints.
 public struct InitialChain<Item: ConstraintItem>: ConstraintChain {
     public var item: Item
-    public var constraints: [NSLayoutConstraint]
-
-    init(item: Item) {
-        self.item = item
-        constraints = []
-    }
+    public var constraints: [NSLayoutConstraint] { return [] }
 
     public func nextChain(_ c: NSLayoutConstraint) -> SingleChain<Item> {
         return SingleChain(item: item, constraint: c)

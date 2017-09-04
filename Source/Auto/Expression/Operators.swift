@@ -36,7 +36,7 @@ public struct SystemSpacing {
 
 public func + <Expression: ParameterExpression>(constant: CGFloat, expression: Expression)
     -> Expression.Parameter.AddedParameter {
-        return expression.constraintParameter.added(constant)
+        return expression.bb_parameter.added(constant)
 }
 
 public func + <Expression: ParameterExpression>(expression: Expression, constant: CGFloat)
@@ -49,7 +49,7 @@ public func + <Expression: ParameterExpression>(expression: Expression, constant
 public func + <Expression: ParameterExpression>(expression: Expression, spacing: SystemSpacing)
     -> SystemSpacingParameter<Expression.Parameter.Item>
     where Expression.Parameter: SystemSpacingParameterConvertible {
-        return SystemSpacingParameter(expression.constraintParameter, multiplier: spacing.multiplier)
+        return SystemSpacingParameter(expression.bb_parameter, multiplier: spacing.multiplier)
 }
 #endif
 
@@ -60,7 +60,7 @@ public func - <Expression: ParameterExpression>(expression: Expression, constant
 
 public func * <Expression: ParameterExpression>(multiplier: CGFloat, expression: Expression)
     -> Expression.Parameter.MultipliedParameter {
-        return expression.constraintParameter.multiplied(multiplier)
+        return expression.bb_parameter.multiplied(multiplier)
 }
 
 public func * <Expression: ParameterExpression>(expression: Expression, multiplier: CGFloat)
@@ -76,13 +76,13 @@ public func / <Expression: ParameterExpression>(expression: Expression, multipli
 prefix operator >=
 
 public prefix func >= <Expression: ParameterExpression>(expression: Expression) -> Expression.Parameter {
-    return expression.constraintParameter.modified { $0.relation = .greaterThanOrEqual }
+    return expression.bb_parameter.modified { $0.relation = .greaterThanOrEqual }
 }
 
 prefix operator <=
 
 public prefix func <= <Expression: ParameterExpression>(expression: Expression) -> Expression.Parameter {
-    return expression.constraintParameter.modified { $0.relation = .lessThanOrEqual }
+    return expression.bb_parameter.modified { $0.relation = .lessThanOrEqual }
 }
 
 infix operator ~ : PriorityPrecedence
@@ -98,7 +98,7 @@ public func ~ <Expression: ParameterExpression>
 
 public func ~ <Expression: ParameterExpression>
     (expression: Expression, priority: LayoutPriority) -> Expression.Parameter {
-    return expression.constraintParameter.modified { $0.priority = priority }
+    return expression.bb_parameter.modified { $0.priority = priority }
 }
 
 @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)

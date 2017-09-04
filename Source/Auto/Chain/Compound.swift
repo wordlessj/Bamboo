@@ -44,7 +44,7 @@ extension ConstraintChain {
     /// Match size to superview.
     @discardableResult
     public func size() -> MultipleChain<Item> {
-        return size(BasicParameter<View>(item: item.superview!))
+        return size(BasicParameter<View>(item: item.bb_superview!))
     }
 
     /// Match size to `expression`.

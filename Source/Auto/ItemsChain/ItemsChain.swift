@@ -55,8 +55,13 @@ public struct ItemsChain<Item: ConstraintItem>: ItemsConstraintChain {
 }
 
 extension Array where Element: ConstraintItem {
-    /// Start a constraint chain.
-    public var constrain: ItemsChain<Element> {
+    /// Start an auto layout chain.
+    public var bb: ItemsChain<Element> {
         return ItemsChain(items: self)
+    }
+
+    @available(*, deprecated, renamed: "bb")
+    public var constrain: ItemsChain<Element> {
+        return bb
     }
 }

@@ -162,6 +162,6 @@ class ExpressionTests: XCTestCase {
     #endif
 
     private func parameter<Expression: ParameterExpression>(_ expression: Expression) -> Expression.Parameter {
-        return expression.constraintParameter
+        return expression.bb_parameter
     }
 }

@@ -29,8 +29,8 @@ extension ItemsConstraintChain {
     /// Create constraints for each item. For example:
     ///
     /// ```
-    /// [a, b, c].constrain.each {
-    ///     $0.constrain.width(10)
+    /// [a, b, c].bb.each {
+    ///     $0.bb.width(10)
     /// }
     /// ```
     @discardableResult
@@ -41,8 +41,8 @@ extension ItemsConstraintChain {
     /// Create constraints between every two items. For example:
     ///
     /// ```
-    /// [a, b, c].constrain.between {
-    ///     $0.constrain.left($1)
+    /// [a, b, c].bb.between {
+    ///     $0.bb.left($1)
     /// }
     /// ```
     ///

@@ -29,13 +29,13 @@ extension ItemsConstraintChain {
     /// Set all items' width.
     @discardableResult
     public func width(_ w: CGFloat) -> ItemsChain<Item> {
-        return each { $0.constrain.width(w) }
+        return each { $0.bb.width(w) }
     }
 
     /// Set all items' height.
     @discardableResult
     public func height(_ h: CGFloat) -> ItemsChain<Item> {
-        return each { $0.constrain.height(h) }
+        return each { $0.bb.height(h) }
     }
 
     /// Match all items' size.
@@ -59,6 +59,6 @@ extension ItemsConstraintChain {
     /// Set all items' size with width and height.
     @discardableResult
     public func size(width w: CGFloat, height h: CGFloat) -> ItemsChain<Item> {
-        return each { $0.constrain.size(width: w, height: h) }
+        return each { $0.bb.size(width: w, height: h) }
     }
 }
