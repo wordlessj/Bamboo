@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = 'Bamboo'
-  s.version          = '1.0.0'
-  s.summary          = 'Bamboo makes Auto Layout (and manual layout) elegant and concise.'
+  s.version          = '1.1.0'
+  s.summary          = 'Auto Layout (and manual layout) in one line.'
   s.homepage         = 'https://github.com/wordlessj/Bamboo'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = 'Javier Zhang'
