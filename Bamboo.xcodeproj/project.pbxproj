@@ -43,6 +43,12 @@
 		3B8054911DC2465000815533 /* Compound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8054901DC2465000815533 /* Compound.swift */; };
 		3B8054921DC2465000815533 /* Compound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8054901DC2465000815533 /* Compound.swift */; };
 		3BB2EEA31DC9D6D7001D7AAB /* Bamboo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BCB1B391D6AAE570027E7D8 /* Bamboo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3BBAFDF41FBABD0900B4CA96 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBAFDF31FBABD0900B4CA96 /* Group.swift */; };
+		3BBAFDF51FBABD0900B4CA96 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBAFDF31FBABD0900B4CA96 /* Group.swift */; };
+		3BBAFDF61FBABD0900B4CA96 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBAFDF31FBABD0900B4CA96 /* Group.swift */; };
+		3BBAFDF81FBAC27A00B4CA96 /* GroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBAFDF71FBAC27A00B4CA96 /* GroupTests.swift */; };
+		3BBAFDF91FBAC27A00B4CA96 /* GroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBAFDF71FBAC27A00B4CA96 /* GroupTests.swift */; };
+		3BBAFDFA1FBAC27A00B4CA96 /* GroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBAFDF71FBAC27A00B4CA96 /* GroupTests.swift */; };
 		3BC05C291EF3C7A8009F2295 /* Bamboo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BCB1B391D6AAE570027E7D8 /* Bamboo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3BC05C2A1EF3C7B8009F2295 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCB1B801D6AEAD20027E7D8 /* Types.swift */; };
 		3BC05C2B1EF3C7B8009F2295 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8054811DC1AB0100815533 /* Expression.swift */; };
@@ -149,6 +155,8 @@
 		3B80548A1DC1D55600815533 /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
 		3B80548D1DC1E21C00815533 /* Fill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fill.swift; sourceTree = "<group>"; };
 		3B8054901DC2465000815533 /* Compound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Compound.swift; sourceTree = "<group>"; };
+		3BBAFDF31FBABD0900B4CA96 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		3BBAFDF71FBAC27A00B4CA96 /* GroupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTests.swift; sourceTree = "<group>"; };
 		3BC05C211EF3C6E5009F2295 /* Bamboo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bamboo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BC05C451EF3E0D6009F2295 /* Bamboo iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bamboo iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BC05C471EF3E0D6009F2295 /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
@@ -242,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				3BCBDD4B1EF4213E00503D15 /* ExpressionTests.swift */,
+				3BBAFDF71FBAC27A00B4CA96 /* GroupTests.swift */,
 			);
 			path = Expression;
 			sourceTree = "<group>";
@@ -358,6 +367,7 @@
 				3B8054811DC1AB0100815533 /* Expression.swift */,
 				3B8054841DC1CCFB00815533 /* Operators.swift */,
 				3BEDF7131DC35639003AC731 /* ConstraintItem.swift */,
+				3BBAFDF31FBABD0900B4CA96 /* Group.swift */,
 			);
 			path = Expression;
 			sourceTree = "<group>";
@@ -659,6 +669,7 @@
 				3BC05C3A1EF3C7B8009F2295 /* LayoutItem.swift in Sources */,
 				3BC05C3B1EF3C7B8009F2295 /* LayoutChain.swift in Sources */,
 				3BC05C3C1EF3C7B8009F2295 /* LayoutSuper.swift in Sources */,
+				3BBAFDF61FBABD0900B4CA96 /* Group.swift in Sources */,
 				3BC05C3D1EF3C7B8009F2295 /* LayoutFill.swift in Sources */,
 				3BC05C3E1EF3C7B8009F2295 /* LayoutAround.swift in Sources */,
 				3BC05C3F1EF3C7B8009F2295 /* LayoutFit.swift in Sources */,
@@ -671,6 +682,7 @@
 			files = (
 				3B33B7AB1EF6BCE600466452 /* FillTests.swift in Sources */,
 				3B33B7B41EF76EC600466452 /* ItemsAttributesTests.swift in Sources */,
+				3BBAFDF81FBAC27A00B4CA96 /* GroupTests.swift in Sources */,
 				3BCBDD481EF4207800503D15 /* AttributesTests.swift in Sources */,
 				3BC05C481EF3E0D6009F2295 /* BaseTestCase.swift in Sources */,
 				3B33B7B81EF7724500466452 /* ItemsSizeTests.swift in Sources */,
@@ -688,6 +700,7 @@
 			files = (
 				3B33B7AC1EF6BCE600466452 /* FillTests.swift in Sources */,
 				3B33B7B51EF76EC700466452 /* ItemsAttributesTests.swift in Sources */,
+				3BBAFDF91FBAC27A00B4CA96 /* GroupTests.swift in Sources */,
 				3B33B7A41EF4E75E00466452 /* BaseTestCase.swift in Sources */,
 				3B33B7A21EF4E75800466452 /* CompoundTests.swift in Sources */,
 				3B33B7B91EF7724500466452 /* ItemsSizeTests.swift in Sources */,
@@ -705,6 +718,7 @@
 			files = (
 				3B33B7AD1EF6BCE600466452 /* FillTests.swift in Sources */,
 				3B33B7B61EF76EC700466452 /* ItemsAttributesTests.swift in Sources */,
+				3BBAFDFA1FBAC27A00B4CA96 /* GroupTests.swift in Sources */,
 				3B33B7A51EF4E75E00466452 /* BaseTestCase.swift in Sources */,
 				3B33B7A31EF4E75800466452 /* CompoundTests.swift in Sources */,
 				3B33B7BA1EF7724500466452 /* ItemsSizeTests.swift in Sources */,
@@ -739,6 +753,7 @@
 				3BEDF7251DC3A114003AC731 /* ItemsSize.swift in Sources */,
 				3BEDF7281DC3A9A2003AC731 /* ItemsDistribute.swift in Sources */,
 				3B79F72C1DA7AB41004FD44B /* ItemsChain.swift in Sources */,
+				3BBAFDF41FBABD0900B4CA96 /* Group.swift in Sources */,
 				3B8054821DC1AB0100815533 /* Expression.swift in Sources */,
 				3BEDF7171DC3586B003AC731 /* EdgeInsetsExtensions.swift in Sources */,
 				3BCB1B7B1D6AE8D10027E7D8 /* LayoutItem.swift in Sources */,
@@ -768,6 +783,7 @@
 				3B79F72D1DA7AB41004FD44B /* ItemsChain.swift in Sources */,
 				3BEDF7201DC39586003AC731 /* ItemsBasic.swift in Sources */,
 				3BEDF70F1DC3406B003AC731 /* Around.swift in Sources */,
+				3BBAFDF51FBABD0900B4CA96 /* Group.swift in Sources */,
 				3B8054831DC1AB0100815533 /* Expression.swift in Sources */,
 				3BCB1B7C1D6AE8D10027E7D8 /* LayoutItem.swift in Sources */,
 				3BEDF7291DC3A9A2003AC731 /* ItemsDistribute.swift in Sources */,

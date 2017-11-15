@@ -367,6 +367,7 @@ extension ConstraintChain {
     private func activate(_ constraint: NSLayoutConstraint, priority: LayoutPriority) {
         if let view = item as? View { view.translatesAutoresizingMaskIntoConstraints = false }
         constraint.priority = priority
-        constraint.isActive = true
+        constraint.isActive = shouldActivate
+        ConstraintStack.shared.append(constraint)
     }
 }
