@@ -26,14 +26,14 @@
 import Bamboo
 
 extension NSLayoutConstraint {
-    convenience init(item: Any, dimension: LayoutAttribute, constant: CGFloat) {
+    convenience init(item: Any, dimension: NSLayoutConstraint.Attribute, constant: CGFloat) {
         self.init(item: item, attribute: dimension, toItem: nil, toAttribute: .notAnAttribute, constant: constant)
     }
 
-    convenience init(item: Any, attribute: LayoutAttribute,
-                     toItem: Any?, toAttribute: LayoutAttribute? = nil,
+    convenience init(item: Any, attribute: NSLayoutConstraint.Attribute,
+                     toItem: Any?, toAttribute: NSLayoutConstraint.Attribute? = nil,
                      multiplier: CGFloat = 1, constant: CGFloat = 0,
-                     relation: LayoutRelation = .equal, priority: LayoutPriority = .required) {
+                     relation: NSLayoutConstraint.Relation = .equal, priority: LayoutPriority = .required) {
         self.init(item: item, attribute: attribute,
                   relatedBy: relation,
                   toItem: toItem, attribute: toAttribute ?? attribute,

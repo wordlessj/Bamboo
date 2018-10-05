@@ -25,14 +25,10 @@
 
 #if os(iOS) || os(tvOS)
     public typealias View = UIView
-    public typealias LayoutAttribute = NSLayoutAttribute
-    public typealias LayoutRelation = NSLayoutRelation
     public typealias LayoutPriority = UILayoutPriority
     public typealias EdgeInsets = UIEdgeInsets
 #elseif os(macOS)
     public typealias View = NSView
-    public typealias LayoutAttribute = NSLayoutConstraint.Attribute
-    public typealias LayoutRelation = NSLayoutConstraint.Relation
     public typealias LayoutPriority = NSLayoutConstraint.Priority
     public typealias EdgeInsets = NSEdgeInsets
 #endif

@@ -45,7 +45,7 @@ public protocol ParameterProtocol {
     associatedtype AddedParameter
 
     var item: Item? { get set }
-    var relation: LayoutRelation { get set }
+    var relation: NSLayoutConstraint.Relation { get set }
     var priority: LayoutPriority { get set }
     var optionalMultiplier: CGFloat? { get }
     var optionalConstant: CGFloat? { get }
@@ -65,7 +65,7 @@ extension ParameterProtocol {
 /// Parameters without multiplier or constant.
 public struct BasicParameter<Item>: ParameterProtocol {
     public var item: Item?
-    public var relation: LayoutRelation = .equal
+    public var relation: NSLayoutConstraint.Relation = .equal
     public var priority: LayoutPriority = .required
 
     public var optionalMultiplier: CGFloat? { return nil }
@@ -86,7 +86,7 @@ public struct BasicParameter<Item>: ParameterProtocol {
 /// Parameters with multiplier.
 public struct MultiplierParameter<Item>: ParameterProtocol {
     public var item: Item?
-    public var relation: LayoutRelation = .equal
+    public var relation: NSLayoutConstraint.Relation = .equal
     public var priority: LayoutPriority = .required
     public var multiplier: CGFloat = 1
 
@@ -112,7 +112,7 @@ public struct MultiplierParameter<Item>: ParameterProtocol {
 /// Parameters with constant.
 public struct ConstantParameter<Item>: ParameterProtocol {
     public var item: Item?
-    public var relation: LayoutRelation = .equal
+    public var relation: NSLayoutConstraint.Relation = .equal
     public var priority: LayoutPriority = .required
     public var constant: CGFloat = 0
 
@@ -140,7 +140,7 @@ public struct ConstantParameter<Item>: ParameterProtocol {
 /// Parameters with multiplier and constant.
 public struct FullParameter<Item>: ParameterProtocol {
     public var item: Item?
-    public var relation: LayoutRelation = .equal
+    public var relation: NSLayoutConstraint.Relation = .equal
     public var priority: LayoutPriority = .required
     public var multiplier: CGFloat = 1
     public var constant: CGFloat = 0
@@ -179,7 +179,7 @@ public struct FullParameter<Item>: ParameterProtocol {
 /// Parameters with system spacing.
 public struct SystemSpacingParameter<Item>: ParameterProtocol {
     public var item: Item?
-    public var relation: LayoutRelation = .equal
+    public var relation: NSLayoutConstraint.Relation = .equal
     public var priority: LayoutPriority = .required
     public var multiplier: CGFloat = 1
 

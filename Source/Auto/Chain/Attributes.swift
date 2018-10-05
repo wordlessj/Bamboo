@@ -294,7 +294,7 @@ extension ConstraintChain {
 
     private func constraintAxis<AnchorType>(_ anchor: NSLayoutAnchor<AnchorType>,
                                             to toAnchor: NSLayoutAnchor<AnchorType>,
-                                            relation: LayoutRelation,
+                                            relation: NSLayoutConstraint.Relation,
                                             constant: CGFloat) -> NSLayoutConstraint {
         switch relation {
         case .equal:
@@ -308,7 +308,7 @@ extension ConstraintChain {
 
     private func constraintDimension(_ anchor: NSLayoutDimension,
                                      to toAnchor: NSLayoutDimension?,
-                                     relation: LayoutRelation,
+                                     relation: NSLayoutConstraint.Relation,
                                      multiplier: CGFloat,
                                      constant: CGFloat) -> NSLayoutConstraint {
         if let toAnchor = toAnchor {
@@ -335,26 +335,26 @@ extension ConstraintChain {
     @available(iOS 11.0, tvOS 11.0, *)
     private func constraintSystemSpacing<AnchorType>(_ anchor: NSLayoutAnchor<AnchorType>,
                                                      to toAnchor: NSLayoutAnchor<AnchorType>,
-                                                     relation: LayoutRelation,
+                                                     relation: NSLayoutConstraint.Relation,
                                                      multiplier: CGFloat) -> NSLayoutConstraint {
         #if os(iOS) || os(tvOS)
         if let anchor = anchor as? NSLayoutXAxisAnchor, let toAnchor = toAnchor as? NSLayoutXAxisAnchor {
             switch relation {
             case .equal:
-                return anchor.constraintEqualToSystemSpacingAfter(toAnchor, multiplier: multiplier)
+                return anchor.constraint(equalToSystemSpacingAfter: toAnchor, multiplier: multiplier)
             case .greaterThanOrEqual:
-                return anchor.constraintGreaterThanOrEqualToSystemSpacingAfter(toAnchor, multiplier: multiplier)
+                return anchor.constraint(greaterThanOrEqualToSystemSpacingAfter: toAnchor, multiplier: multiplier)
             case .lessThanOrEqual:
-                return anchor.constraintLessThanOrEqualToSystemSpacingAfter(toAnchor, multiplier: multiplier)
+                return anchor.constraint(lessThanOrEqualToSystemSpacingAfter: toAnchor, multiplier: multiplier)
             }
         } else if let anchor = anchor as? NSLayoutYAxisAnchor, let toAnchor = toAnchor as? NSLayoutYAxisAnchor {
             switch relation {
             case .equal:
-                return anchor.constraintEqualToSystemSpacingBelow(toAnchor, multiplier: multiplier)
+                return anchor.constraint(equalToSystemSpacingBelow: toAnchor, multiplier: multiplier)
             case .greaterThanOrEqual:
-                return anchor.constraintGreaterThanOrEqualToSystemSpacingBelow(toAnchor, multiplier: multiplier)
+                return anchor.constraint(greaterThanOrEqualToSystemSpacingBelow: toAnchor, multiplier: multiplier)
             case .lessThanOrEqual:
-                return anchor.constraintLessThanOrEqualToSystemSpacingBelow(toAnchor, multiplier: multiplier)
+                return anchor.constraint(lessThanOrEqualToSystemSpacingBelow: toAnchor, multiplier: multiplier)
             }
         } else {
             fatalError("System spacing not supported on dimensions.")
