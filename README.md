@@ -4,7 +4,7 @@
 
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](#carthage)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Bamboo.svg)](#cocoapods)
-![Swift 4](https://img.shields.io/badge/Swift-4-orange.svg)
+![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg)
 ![Platform](https://img.shields.io/badge/platform-iOS%209.0%2B%20%7C%20macOS%2010.11%2B%20%7C%20tvOS%209.0%2B-lightgrey.svg)
 [![Build Status](https://travis-ci.org/wordlessj/Bamboo.svg?branch=master)](https://travis-ci.org/wordlessj/Bamboo)
 
@@ -286,6 +286,18 @@ All `distribute` methods come with an optional `inset` parameter, you can specif
 ```swift
 // |-[view1]-[view2]-[view3]-|, spacings are all equal.
 [view1, view2, view3].bb.distributeXEqualSpacing(inset: .equal)
+```
+
+### Group
+
+If you want to activate/deactivate a set of constraints in response to some events, you can use `group()` to collect constraints into an array.
+
+```swift
+let constraints: [NSLayoutConstraint] = group {
+    view1.bb.fill()
+    view2.bb.left().top().size(100)
+    view3.bb.fillBottom().height(100)
+}
 ```
 
 ## Manual Layout

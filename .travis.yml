@@ -1,9 +1,9 @@
 language: objective-c
-osx_image: xcode9
+osx_image: xcode10
 env:
-  - SCHEME="Bamboo iOS"   DESTINATION="platform=iOS Simulator,name=iPhone 7"
+  - SCHEME="Bamboo iOS"   DESTINATION="platform=iOS Simulator,name=iPhone XS"
   - SCHEME="Bamboo macOS" DESTINATION="platform=macOS"
-  - SCHEME="Bamboo tvOS"  DESTINATION="platform=tvOS Simulator,name=Apple TV 1080p"
+  - SCHEME="Bamboo tvOS"  DESTINATION="platform=tvOS Simulator,name=Apple TV 4K"
 script:
   - set -o pipefail
   - xcodebuild -scheme "$SCHEME" -destination "$DESTINATION" test | xcpretty
